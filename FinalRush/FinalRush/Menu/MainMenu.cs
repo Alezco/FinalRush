@@ -1289,14 +1289,11 @@ namespace FinalRush
             if (element == @"Sprites\Menu\Create")
             {
                 gameState = GameState.Multi;
-                Global.Multi.Connect();
-                Global.Multi.CreateLobby();
             }
 
             if (element == @"Sprites\Menu\Join")
             {
                 gameState = GameState.Multi;
-                Global.Multi.Connect();
             }
         }
         #endregion
