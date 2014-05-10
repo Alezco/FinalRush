@@ -82,6 +82,9 @@
     <Compile Include="Collisions\Wall.cs" />
     <Compile Include="Game\Levels\GameMain3.cs" />
     <Compile Include="Game\Levels\GameMain2.cs" />
+    <Compile Include="Game\Levels\GameMain4.cs" />
+    <Compile Include="Game\Levels\GameMain5.cs" />
+    <Compile Include="Game\Levels\GameMain6.cs" />
     <Compile Include="IA\Enemy.cs" />
     <Compile Include="Game\Levels\GameMain.cs" />
     <Compile Include="Game\Global.cs" />

@@ -11,6 +11,9 @@ namespace FinalRush
         public static GameMain GameMain;
         public static GameMain2 GameMain2;
         public static GameMain3 GameMain3;
+        public static GameMain4 GameMain4;
+        public static GameMain5 GameMain5;
+        public static GameMain6 GameMain6;
         public static MainMenu MainMenu;
         public static Bonus Bonus;
         public static Collisions Collisions;

@@ -24,6 +24,9 @@ namespace FinalRush
             InGame,
             InGame2,
             InGame3,
+            InGame4,
+            InGame5,
+            InGame6,
             InOptions,
             InClose,
             InPause,
@@ -35,6 +38,9 @@ namespace FinalRush
             Chapitre1,
             Chapitre2,
             Chapitre3,
+            Chapitre4,
+            Chapitre5,
+            Chapitre6,
             Intro,
             Scenario,
             GameOver,
@@ -46,7 +52,10 @@ namespace FinalRush
         GameMain Main;
         GameMain2 Main2;
         GameMain3 Main3;
-        public Player player, player2, player3;
+        GameMain4 Main4;
+        GameMain5 Main5;
+        GameMain6 Main6;
+        public Player player, player2, player3, player4, player5, player6;
         bool HasPlayed;
         public int comptlevel = 0;
         int compt = 0;
@@ -88,13 +97,16 @@ namespace FinalRush
         List<GUIElement> Chapitre1 = new List<GUIElement>();
         List<GUIElement> Chapitre2 = new List<GUIElement>();
         List<GUIElement> Chapitre3 = new List<GUIElement>();
+        List<GUIElement> Chapitre4 = new List<GUIElement>();
+        List<GUIElement> Chapitre5 = new List<GUIElement>();
+        List<GUIElement> Chapitre6 = new List<GUIElement>();
         List<GUIElement> Multi = new List<GUIElement>();
 
         #endregion
 
         #region Constructeur (Add)
 
-        public MainMenu(Game game, float startTime)
+        public MainMenu(Game1 game, float startTime)
             : base(game)
         {
             // Constructeur:
@@ -160,7 +172,22 @@ namespace FinalRush
 
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\Level3"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_droite3"));
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_gauche2"));
+
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Level4"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_droite4"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_gauche3"));
+
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Level5"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_droite5"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_gauche4"));
+
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Level6"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\fleche_gauche5"));
 
             Multi.Add(new GUIElement(@"Sprites\Menu\Join"));
             Multi.Add(new GUIElement(@"Sprites\Menu\Create"));
@@ -169,9 +196,15 @@ namespace FinalRush
             player = Global.Player;
             player2 = Global.Player;
             player3 = Global.Player;
+            player4 = Global.Player;
+            player5 = Global.Player;
+            player6 = Global.Player;
             Main = Global.GameMain;
             Main2 = Global.GameMain2;
             Main3 = Global.GameMain3;
+            Main4 = Global.GameMain4;
+            Main5 = Global.GameMain5;
+            Main6 = Global.GameMain6;
             Global.MainMenu = this;
         }
 
@@ -367,7 +400,40 @@ namespace FinalRush
             }
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(-70, 0);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite3").MoveElement(0, 140);
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche2").MoveElement(-139, 140);
+
+            foreach (GUIElement element in Chapitre4)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(-70, 0);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite4").MoveElement(0, 140);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche3").MoveElement(-139, 140);
+
+            foreach (GUIElement element in Chapitre5)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(-70, 0);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite5").MoveElement(0, 140);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche4").MoveElement(-139, 140);
+
+            foreach (GUIElement element in Chapitre6)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70, 0);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-139, 140);
 
             foreach (GUIElement element in Multi)
             {
@@ -687,6 +753,219 @@ namespace FinalRush
                         MediaPlayer.IsRepeating = false;
                     }
                     break;
+                case GameState.InGame4:
+                    comptlevel = 4;
+                    Main4.Update(Mouse.GetState(), Keyboard.GetState());
+                    player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
+
+                    #region Timer
+                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
+                    {
+                        nb_pieces++;
+                        piece_sound_instance.Play();
+                    }
+
+                    if (Global.Collisions.CollisionEnemy(player4.Hitbox, Main4.enemies))
+                    {
+                    }
+
+                    if (Global.Collisions.CollisionEnemy2(player4.Hitbox, Main4.enemies2))
+                    {
+                    }
+
+                    //if (Global.Collisions.CollisionPiques(player4.Hitbox, Main4.piques))
+                    //{
+                    //}
+
+                    if (started)
+                    {
+                        if (!paused)
+                        {
+                            if (time >= 0)
+                                time += deltaTime;
+                            else
+                                finished = true;
+                        }
+                    }
+
+                    Text = ((int)time).ToString();
+                    score = (nb_pieces * 10) + 300 - ((int)time);
+
+                    if (time == 300)
+                    {
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    #endregion
+
+                    if (player4.Hitbox.X > 4600)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueVictory);
+                        MediaPlayer.IsRepeating = false;
+                        gameState = GameState.Won;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        gameState = GameState.InPause;
+                        MediaPlayer.Volume = 0.2f;
+                    }
+                    enjeu = true;
+                    if (Global.Player.health == 0 || player4.dead)
+                    {
+                        enjeu = false;
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    break;
+                case GameState.InGame5:
+                    comptlevel = 5;
+                    Main5.Update(Mouse.GetState(), Keyboard.GetState());
+                    player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
+
+                    #region Timer
+                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
+                    {
+                        nb_pieces++;
+                        piece_sound_instance.Play();
+                    }
+
+                    if (Global.Collisions.CollisionEnemy(player5.Hitbox, Main5.enemies))
+                    {
+                    }
+
+                    if (Global.Collisions.CollisionEnemy2(player5.Hitbox, Main5.enemies2))
+                    {
+                    }
+
+                    //if (Global.Collisions.CollisionPiques(player5.Hitbox, Main5.piques))
+                    //{
+                    //}
+
+                    if (started)
+                    {
+                        if (!paused)
+                        {
+                            if (time >= 0)
+                                time += deltaTime;
+                            else
+                                finished = true;
+                        }
+                    }
+
+                    Text = ((int)time).ToString();
+                    score = (nb_pieces * 10) + 300 - ((int)time);
+
+                    if (time == 300)
+                    {
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    #endregion
+
+                    if (player5.Hitbox.X > 4600)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueVictory);
+                        MediaPlayer.IsRepeating = false;
+                        gameState = GameState.Won;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        gameState = GameState.InPause;
+                        MediaPlayer.Volume = 0.2f;
+                    }
+                    enjeu = true;
+                    if (Global.Player.health == 0 || player5.dead)
+                    {
+                        enjeu = false;
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    break;
+                case GameState.InGame6:
+                    comptlevel = 6;
+                    Main6.Update(Mouse.GetState(), Keyboard.GetState());
+                    player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+
+                    #region Timer
+                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                    if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
+                    {
+                        nb_pieces++;
+                        piece_sound_instance.Play();
+                    }
+
+                    if (Global.Collisions.CollisionEnemy(player6.Hitbox, Main6.enemies))
+                    {
+                    }
+
+                    if (Global.Collisions.CollisionEnemy2(player6.Hitbox, Main6.enemies2))
+                    {
+                    }
+
+                    //if (Global.Collisions.CollisionPiques(player6.Hitbox, Main6.piques))
+                    //{
+                    //}
+
+                    if (started)
+                    {
+                        if (!paused)
+                        {
+                            if (time >= 0)
+                                time += deltaTime;
+                            else
+                                finished = true;
+                        }
+                    }
+
+                    Text = ((int)time).ToString();
+                    score = (nb_pieces * 10) + 300 - ((int)time);
+
+                    if (time == 300)
+                    {
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    #endregion
+
+                    if (player6.Hitbox.X > 4600)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueVictory);
+                        MediaPlayer.IsRepeating = false;
+                        gameState = GameState.Won;
+                    }
+                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        gameState = GameState.InPause;
+                        MediaPlayer.Volume = 0.2f;
+                    }
+                    enjeu = true;
+                    if (Global.Player.health == 0 || player6.dead)
+                    {
+                        enjeu = false;
+                        gameState = GameState.GameOver;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueGameOver);
+                        MediaPlayer.IsRepeating = false;
+                    }
+                    break;
                 case GameState.InOptions:
                     foreach (GUIElement element in InOptions)
                     {
@@ -776,6 +1055,27 @@ namespace FinalRush
                     }
                     enjeu = false;
                     break;
+                case GameState.Chapitre4:
+                    foreach (GUIElement element in Chapitre4)
+                    {
+                        element.Update();
+                    }
+                    enjeu = false;
+                    break;
+                case GameState.Chapitre5:
+                    foreach (GUIElement element in Chapitre5)
+                    {
+                        element.Update();
+                    }
+                    enjeu = false;
+                    break;
+                case GameState.Chapitre6:
+                    foreach (GUIElement element in Chapitre6)
+                    {
+                        element.Update();
+                    }
+                    enjeu = false;
+                    break;
                 case GameState.Scenario:
                     if (colourScenario.R < 10) downcolor = false;
 
@@ -856,6 +1156,15 @@ namespace FinalRush
                 case GameState.InGame3:
                     Main3.Draw(spriteBatch);
                     break;
+                case GameState.InGame4:
+                    Main4.Draw(spriteBatch);
+                    break;
+                case GameState.InGame5:
+                    Main5.Draw(spriteBatch);
+                    break;
+                case GameState.InGame6:
+                    Main6.Draw(spriteBatch);
+                    break;
                 case GameState.InOptions:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
 
@@ -924,6 +1233,27 @@ namespace FinalRush
                 case GameState.Chapitre3:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre3)
+                    {
+                        element.Draw(spriteBatch);
+                    }
+                    break;
+                case GameState.Chapitre4:
+                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    foreach (GUIElement element in Chapitre4)
+                    {
+                        element.Draw(spriteBatch);
+                    }
+                    break;
+                case GameState.Chapitre5:
+                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    foreach (GUIElement element in Chapitre5)
+                    {
+                        element.Draw(spriteBatch);
+                    }
+                    break;
+                case GameState.Chapitre6:
+                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    foreach (GUIElement element in Chapitre6)
                     {
                         element.Draw(spriteBatch);
                     }
@@ -1012,6 +1342,12 @@ namespace FinalRush
                     gameState = GameState.InGame2;
                 else if (comptlevel == 3)
                     gameState = GameState.InGame3;
+                else if (comptlevel == 4)
+                    gameState = GameState.InGame4;
+                else if (comptlevel == 5)
+                    gameState = GameState.InGame5;
+                else if (comptlevel == 6)
+                    gameState = GameState.InGame6;
             }
             if (element == @"Sprites\Menu\Boutton_Rejouer")
             {
@@ -1050,6 +1386,39 @@ namespace FinalRush
                         Main3 = new GameMain3();
                         player3 = new Player();
                         gameState = GameState.InGame3;
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.Musique3);
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.IsRepeating = true;
+                    }
+                    else if (comptlevel == 4)
+                    {
+                        Main4 = new GameMain4();
+                        player4 = new Player();
+                        gameState = GameState.InGame4;
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.Musique3);
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.IsRepeating = true;
+                    }
+                    else if (comptlevel == 5)
+                    {
+                        Main5 = new GameMain5();
+                        player5 = new Player();
+                        gameState = GameState.InGame5;
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.Musique3);
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.IsRepeating = true;
+                    }
+                    else if (comptlevel == 6)
+                    {
+                        Main6 = new GameMain6();
+                        player6 = new Player();
+                        gameState = GameState.InGame6;
                         MediaPlayer.Volume = MediaPlayer.Volume;
                         MediaPlayer.Stop();
                         MediaPlayer.Play(Resources.Musique3);
@@ -1143,6 +1512,33 @@ namespace FinalRush
                     MediaPlayer.Play(Resources.Musique3);
                     MediaPlayer.Volume = MediaPlayer.Volume;
                 }
+                else if (comptlevel == 4)
+                {
+                    Main4 = new GameMain4();
+                    player4 = new Player();
+                    gameState = GameState.InGame4;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.Volume = MediaPlayer.Volume;
+                }
+                else if (comptlevel == 5)
+                {
+                    Main5 = new GameMain5();
+                    player5 = new Player();
+                    gameState = GameState.InGame5;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.Volume = MediaPlayer.Volume;
+                }
+                else if (comptlevel == 6)
+                {
+                    Main6 = new GameMain6();
+                    player6 = new Player();
+                    gameState = GameState.InGame6;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.Volume = MediaPlayer.Volume;
+                }
                 MediaPlayer.Volume = MediaPlayer.Volume;
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueMain);
@@ -1223,6 +1619,66 @@ namespace FinalRush
                 MediaPlayer.IsRepeating = true;
             }
 
+            if (element == @"Sprites\Menu\Level4")
+            {
+                enjeu = true;
+                time = 0f;
+                score = 300;
+                nb_pieces = 0;
+                Global.Handler.recharge_left = 5;
+                Global.Handler.ammo_left = 6;
+                HasPlayed = true;
+                comptlevel = 4;
+                Main4 = new GameMain4();
+                player4 = new Player();
+                gameState = GameState.InGame4;
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.Musique3);
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.IsRepeating = true;
+            }
+
+            if (element == @"Sprites\Menu\Level5")
+            {
+                enjeu = true;
+                time = 0f;
+                score = 300;
+                nb_pieces = 0;
+                Global.Handler.recharge_left = 5;
+                Global.Handler.ammo_left = 6;
+                HasPlayed = true;
+                comptlevel = 5;
+                Main5 = new GameMain5();
+                player5 = new Player();
+                gameState = GameState.InGame5;
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.Musique3);
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.IsRepeating = true;
+            }
+
+            if (element == @"Sprites\Menu\Level6")
+            {
+                enjeu = true;
+                time = 0f;
+                score = 300;
+                nb_pieces = 0;
+                Global.Handler.recharge_left = 5;
+                Global.Handler.ammo_left = 6;
+                HasPlayed = true;
+                comptlevel = 6;
+                Main6 = new GameMain6();
+                player6 = new Player();
+                gameState = GameState.InGame6;
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.Musique3);
+                MediaPlayer.Volume = MediaPlayer.Volume;
+                MediaPlayer.IsRepeating = true;
+            }
+
             if (element == @"Sprites\Menu\Bouton_NiveauSuivant")
             {
                 enjeu = true;
@@ -1244,16 +1700,52 @@ namespace FinalRush
                 }
                 //Sinon on était au level 2 donc on passe au 3
                 else
-                {
-                    Main3 = new GameMain3();
-                    player3 = new Player();
-                    gameState = GameState.InGame3;
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique3);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                    MediaPlayer.IsRepeating = true;
-                }
+                    if (comptlevel == 2)
+                    {
+                        Main3 = new GameMain3();
+                        player3 = new Player();
+                        gameState = GameState.InGame3;
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.Musique3);
+                        MediaPlayer.Volume = MediaPlayer.Volume;
+                        MediaPlayer.IsRepeating = true;
+                    }
+                    else
+                        if (comptlevel == 3)
+                        {
+                            Main4 = new GameMain4();
+                            player4 = new Player();
+                            gameState = GameState.InGame4;
+                            MediaPlayer.Volume = MediaPlayer.Volume;
+                            MediaPlayer.Stop();
+                            MediaPlayer.Play(Resources.Musique3);
+                            MediaPlayer.Volume = MediaPlayer.Volume;
+                            MediaPlayer.IsRepeating = true;
+                        }
+                        else
+                            if (comptlevel == 4)
+                            {
+                                Main5 = new GameMain5();
+                                player5 = new Player();
+                                gameState = GameState.InGame5;
+                                MediaPlayer.Volume = MediaPlayer.Volume;
+                                MediaPlayer.Stop();
+                                MediaPlayer.Play(Resources.Musique3);
+                                MediaPlayer.Volume = MediaPlayer.Volume;
+                                MediaPlayer.IsRepeating = true;
+                            }
+                            else
+                            {
+                                Main6 = new GameMain6();
+                                player6 = new Player();
+                                gameState = GameState.InGame6;
+                                MediaPlayer.Volume = MediaPlayer.Volume;
+                                MediaPlayer.Stop();
+                                MediaPlayer.Play(Resources.Musique3);
+                                MediaPlayer.Volume = MediaPlayer.Volume;
+                                MediaPlayer.IsRepeating = true;
+                            }
             }
 
             if (element == @"Sprites\Menu\Bouton_PleinEcran")
@@ -1271,6 +1763,21 @@ namespace FinalRush
                 gameState = GameState.Chapitre3;
             }
 
+            if (element == @"Sprites\Menu\fleche_droite3")
+            {
+                gameState = GameState.Chapitre4;
+            }
+
+            if (element == @"Sprites\Menu\fleche_droite4")
+            {
+                gameState = GameState.Chapitre5;
+            }
+
+            if (element == @"Sprites\Menu\fleche_droite5")
+            {
+                gameState = GameState.Chapitre6;
+            }
+
             if (element == @"Sprites\Menu\fleche_gauche")
             {
                 gameState = GameState.Chapitre1;
@@ -1279,6 +1786,21 @@ namespace FinalRush
             if (element == @"Sprites\Menu\fleche_gauche2")
             {
                 gameState = GameState.Chapitre2;
+            }
+
+            if (element == @"Sprites\Menu\fleche_gauche3")
+            {
+                gameState = GameState.Chapitre3;
+            }
+
+            if (element == @"Sprites\Menu\fleche_gauche4")
+            {
+                gameState = GameState.Chapitre4;
+            }
+
+            if (element == @"Sprites\Menu\fleche_gauche5")
+            {
+                gameState = GameState.Chapitre5;
             }
 
             if (element == @"Sprites\Menu\Bouton_Multijoueur")
