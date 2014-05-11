@@ -45,12 +45,12 @@ namespace FinalRush
             #endregion
 
             #region Piques
-            piques.Add(new Piques(2112, 268, Resources.bullet, 64, 20, Color.White));
-            piques.Add(new Piques(2240, 268, Resources.bullet, 64, 20, Color.White));
-            piques.Add(new Piques(2368, 268, Resources.bullet, 64, 20, Color.White));
-            piques.Add(new Piques(2496, 268, Resources.bullet, 64, 20, Color.White));
-            piques.Add(new Piques(2624, 268, Resources.bullet, 64, 20, Color.White));
-            piques.Add(new Piques(2752, 268, Resources.bullet, 64, 20, Color.White));
+            piques.Add(new Piques(2112, 228, Resources.Piques, 64, 60, Color.White));
+            piques.Add(new Piques(2240, 228, Resources.Piques, 64, 60, Color.White));
+            piques.Add(new Piques(2368, 228, Resources.Piques, 64, 60, Color.White));
+            piques.Add(new Piques(2496, 228, Resources.Piques, 64, 60, Color.White));
+            piques.Add(new Piques(2624, 228, Resources.Piques, 64, 60, Color.White));
+            piques.Add(new Piques(2752, 228, Resources.Piques, 64, 60, Color.White));
             #endregion
 
             #region Plateformes

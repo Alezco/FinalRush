@@ -16,8 +16,8 @@ namespace FinalRush
 
         public static Texture2D Marco, MarcoSaut,MarcoSquat,MarcoTir, MarcoCut;
         public static Texture2D Zombie, Elite;
-        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top;
-        public static Texture2D Menu_fond, Button_jouer, Button_options, Bouton_multijoueur, Button_quitter, Bouton_retour, Bouton_Commandes, HowToPlayPage1, Scenario, GameOver, Boutton_Rejouer, Won, MarcoWon;
+        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Piques, Environnment4, /*Environnment5, Environnment6,*/ Roche, Roche_top;
+        public static Texture2D Menu_fond, Button_jouer, Button_options, Bouton_multijoueur, Button_quitter, Bouton_retour, HowToPlayPage1, Scenario, GameOver, Boutton_Rejouer, Won, MarcoWon;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
         public static Texture2D HealthBar, bullet;
@@ -55,6 +55,18 @@ namespace FinalRush
             Terre_neige = Content.Load<Texture2D>(@"Sprites\Environnment\terre_neige");
             Ice = Content.Load<Texture2D>(@"Sprites\Environnment\ice");
             Ice_top = Content.Load<Texture2D>(@"Sprites\Environnment\ice_top");
+            Piques = Content.Load<Texture2D>(@"Sprites\Environnment\piques");
+            Environnment4 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment4");
+            Roche = Content.Load<Texture2D>(@"Sprites\Environnment\roche");
+            Roche_top = Content.Load<Texture2D>(@"Sprites\Environnment\roche_top");
+
+            /*Environnment5 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment5");
+            Sand = Content.Load<Texture2D>(@"Sprites\Environnment\sand");
+            Sand_top = Content.Load<Texture2D>(@"Sprites\Environnment\sand_top");
+            Environnment6 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment6");
+            Rock = Content.Load<Texture2D>(@"Sprites\Environnment\rock");
+            Rock_top = Content.Load<Texture2D>(@"Sprites\Environnment\rock_top");*/
+
 
             //Menu
 

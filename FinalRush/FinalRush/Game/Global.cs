@@ -26,5 +26,6 @@ namespace FinalRush
         public static Bullets Bullets;
         public static Multi Multi;
         public static Piques Piques;
+        public static MovingHorizontallyWall MovingHorizontallyWall;
     }
 }
