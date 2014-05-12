@@ -1002,9 +1002,14 @@ namespace FinalRush
                             gameState = GameState.InGame;
                         else if (comptlevel == 2)
                             gameState = GameState.InGame2;
-
-                        else
+                        else if (comptlevel == 3)
                             gameState = GameState.InGame3;
+                        else if (comptlevel == 4)
+                            gameState = GameState.InGame4;
+                        else if (comptlevel == 5)
+                            gameState = GameState.InGame5;
+                        else
+                            gameState = GameState.InGame6;
                     }
                     pastkey = Keyboard.GetState();
                     foreach (GUIElement element in InPause)

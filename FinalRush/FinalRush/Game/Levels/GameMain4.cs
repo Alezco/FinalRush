@@ -42,7 +42,7 @@ namespace FinalRush
             //Ennemis
 
             //enemies.Add(new Enemy(1100, 350, Resources.Zombie));
-            movinghorizontallywalls.Add(new MovingHorizontallyWall(435, 345, Resources.Platform, 50, 16, 425, 445,Color.IndianRed));
+            movinghorizontallywalls.Add(new MovingHorizontallyWall(435, 345, Resources.Platform, 50, 16, 425, 445, Color.IndianRed));
 
             #endregion
 
@@ -54,12 +54,12 @@ namespace FinalRush
             #endregion
 
             #region Terrain
-                  
+
             //Sol
 
             for (int i = 0; i < 80; i++)
                 //if (i != 2 )
-                    Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
+                Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus

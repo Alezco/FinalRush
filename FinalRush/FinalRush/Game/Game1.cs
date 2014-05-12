@@ -24,6 +24,9 @@ namespace FinalRush
         GameMain Main;
         GameMain2 Main2;
         GameMain3 Main3;
+        GameMain4 Main4;
+        GameMain5 Main5;
+        GameMain6 Main6;
         SpriteFont scoring, timer;
         //bool enjeu = false;
 
@@ -43,7 +46,7 @@ namespace FinalRush
 
         public Game1()
         {
-            
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             health = 100;
@@ -54,7 +57,7 @@ namespace FinalRush
             //graphics.IsFullScreen = true;
             Global.Handler = this;
             Global.Multi = new Multi();
-            
+
         }
 
         protected override void Initialize()
@@ -76,9 +79,12 @@ namespace FinalRush
             Main = new GameMain();
             Main2 = new GameMain2();
             Main3 = new GameMain3();
+            Main4 = new GameMain4();
+            Main5 = new GameMain5();
+            Main6 = new GameMain6();
             main = new MainMenu(this, 0f);
             reloading_instance = Resources.reload_sound.CreateInstance();
-            
+
             //Menu
             main.LoadContent(Content);
             //main.Font = Content.Load<SpriteFont>("TimerFont");
@@ -133,6 +139,21 @@ namespace FinalRush
             {
                 Main3.Update(Mouse.GetState(), Keyboard.GetState());
                 camera.Update(gameTime, main.player3);
+            }
+            else if (main.comptlevel == 4)
+            {
+                Main4.Update(Mouse.GetState(), Keyboard.GetState());
+                camera.Update(gameTime, main.player4);
+            }
+            else if (main.comptlevel == 5)
+            {
+                Main5.Update(Mouse.GetState(), Keyboard.GetState());
+                camera.Update(gameTime, main.player5);
+            }
+            else if (main.comptlevel == 6)
+            {
+                Main6.Update(Mouse.GetState(), Keyboard.GetState());
+                camera.Update(gameTime, main.player6);
             }
             else
                 camera.Update(gameTime, Main.LocalPlayer);
