@@ -59,6 +59,7 @@ namespace FinalRush
         bool HasPlayed;
         public int comptlevel = 0;
         int compt = 0;
+        int lvlcomplete = 0;
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -443,7 +444,6 @@ namespace FinalRush
             }
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Join").MoveElement(-70, 0);
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Create").MoveElement(-70, 100);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 400);
         }
 
         #endregion
@@ -586,6 +586,9 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        //pour debloquer les niveaux au fur et à mesure (pareil pour chaque InGame)
+                        if (lvlcomplete < 1)
+                            lvlcomplete = 1;
                     }
                     if (Global.Player.health <= 20 && gameState == GameState.InGame)
                     {
@@ -666,6 +669,8 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        if (lvlcomplete < 2)
+                            lvlcomplete = 2;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
@@ -737,6 +742,8 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        if (lvlcomplete < 3)
+                            lvlcomplete = 3;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
@@ -808,6 +815,8 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        if (lvlcomplete < 4)
+                            lvlcomplete = 4;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
@@ -879,6 +888,8 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        if (lvlcomplete < 5)
+                            lvlcomplete = 5;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
@@ -950,6 +961,8 @@ namespace FinalRush
                         MediaPlayer.Play(Resources.MusiqueVictory);
                         MediaPlayer.IsRepeating = false;
                         gameState = GameState.Won;
+                        if (lvlcomplete < 6)
+                            lvlcomplete = 6;
                     }
                     if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
@@ -1585,7 +1598,7 @@ namespace FinalRush
                 MediaPlayer.Volume = MediaPlayer.Volume;
                 MediaPlayer.IsRepeating = true;
             }
-            if (element == @"Sprites\Menu\Level2")
+            if (element == @"Sprites\Menu\Level2" && lvlcomplete >= 1) //retire deuxieme condition pour les tests
             {
                 enjeu = true;
                 time = 0f;
@@ -1604,7 +1617,7 @@ namespace FinalRush
                 MediaPlayer.Volume = MediaPlayer.Volume;
                 MediaPlayer.IsRepeating = true;
             }
-            if (element == @"Sprites\Menu\Level3")
+            if (element == @"Sprites\Menu\Level3" && lvlcomplete >= 2)
             {
                 enjeu = true;
                 time = 0f;
@@ -1624,7 +1637,7 @@ namespace FinalRush
                 MediaPlayer.IsRepeating = true;
             }
 
-            if (element == @"Sprites\Menu\Level4")
+            if (element == @"Sprites\Menu\Level4" && lvlcomplete >= 3)
             {
                 enjeu = true;
                 time = 0f;
@@ -1644,7 +1657,7 @@ namespace FinalRush
                 MediaPlayer.IsRepeating = true;
             }
 
-            if (element == @"Sprites\Menu\Level5")
+            if (element == @"Sprites\Menu\Level5" && lvlcomplete >= 4)
             {
                 enjeu = true;
                 time = 0f;
@@ -1664,7 +1677,7 @@ namespace FinalRush
                 MediaPlayer.IsRepeating = true;
             }
 
-            if (element == @"Sprites\Menu\Level6")
+            if (element == @"Sprites\Menu\Level6" && lvlcomplete >= 5)
             {
                 enjeu = true;
                 time = 0f;
