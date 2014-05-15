@@ -46,7 +46,6 @@ namespace FinalRush
 
         public Game1()
         {
-
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             health = 100;
@@ -54,10 +53,8 @@ namespace FinalRush
             graphics.PreferredBackBufferWidth = screenwidth;
             graphics.PreferredBackBufferHeight = screenheight;
             IsMouseVisible = true;
-            //graphics.IsFullScreen = true;
             Global.Handler = this;
             Global.Multi = new Multi();
-
         }
 
         protected override void Initialize()

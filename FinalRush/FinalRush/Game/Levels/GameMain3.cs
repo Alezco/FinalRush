@@ -72,8 +72,6 @@ namespace FinalRush
             Walls.Add(new Wall(3550, 140, Resources.Platform, 96, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3700, 80, Resources.Platform, 300, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3700, 190, Resources.Platform, 300, 12, Color.DodgerBlue));
-            Walls.Add(new Wall(3700, 189, Resources.Platform, 1, 1, Color.DodgerBlue));
-            Walls.Add(new Wall(4000, 189, Resources.Platform, 1, 1, Color.DodgerBlue));
             Walls.Add(new Wall(3880, 320, Resources.Platform, 80, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3880, 320, Resources.Platform, 80, 12, Color.DodgerBlue));
             Walls.Add(new Wall(4140, 416, Resources.Platform, 20, 12, Color.DodgerBlue));

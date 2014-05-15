@@ -17,7 +17,7 @@ namespace FinalRush
         public static Texture2D Marco, MarcoSaut,MarcoSquat,MarcoTir, MarcoCut;
         public static Texture2D Zombie, Elite;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Piques, Environnment4, /*Environnment5, Environnment6,*/ Roche, Roche_top;
-        public static Texture2D Menu_fond, Button_jouer, Button_options, Bouton_multijoueur, Button_quitter, Bouton_retour, HowToPlayPage1, Scenario, GameOver, Boutton_Rejouer, Won, MarcoWon;
+        public static Texture2D MarcoWon, Scenario;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
         public static Texture2D HealthBar, bullet;
@@ -70,16 +70,6 @@ namespace FinalRush
 
             //Menu
 
-            Menu_fond = Content.Load<Texture2D>(@"Sprites\Menu\Menu_fond");
-            Button_jouer = Content.Load<Texture2D>(@"Sprites\Menu\Button_jouer");
-            Button_options = Content.Load<Texture2D>(@"Sprites\Menu\Button_options");
-            Button_quitter = Content.Load<Texture2D>(@"Sprites\Menu\Button_quitter");
-            Bouton_retour = Content.Load<Texture2D>(@"Sprites\Menu\Bouton_retour");
-            Bouton_multijoueur = Content.Load<Texture2D>(@"Sprites\Menu\Bouton_Multijoueur");
-            HowToPlayPage1 = Content.Load<Texture2D>(@"Sprites\Menu\HowToPlayPage1");
-            GameOver = Content.Load<Texture2D>(@"Sprites\Menu\GameOver");
-            Boutton_Rejouer = Content.Load<Texture2D>(@"Sprites\Menu\Boutton_Rejouer");
-            Won = Content.Load<Texture2D>(@"Sprites\Menu\Won");
             MarcoWon = Content.Load<Texture2D>(@"Sprites\Menu\MarcoHappy");
             Scenario = Content.Load<Texture2D>(@"Sprites\Menu\Scenario");
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");

@@ -100,7 +100,7 @@ namespace FinalRush
 
             if (left)
             {
-                if (!collisions.CollisionRight(Hitbox, walls, this.speed) && collisions.CollisionDown(Hitbox, walls, speed))
+                if (!collisions.CollisionRight(Hitbox, walls, this.speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
                 {
                     this.Hitbox.X += speed;
                     this.Direction = Direction.Right;
@@ -114,7 +114,7 @@ namespace FinalRush
 
             if (!left)
             {
-                if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(Hitbox, walls, speed))
+                if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
                 {
                     this.Hitbox.X -= speed;
                     this.Direction = Direction.Left;

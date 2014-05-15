@@ -14,7 +14,6 @@ namespace FinalRush
 
         public Vector2 position;
         public int velocity;
-        public Vector2 origin;
         public bool isVisible;
 
 
@@ -27,7 +26,7 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, 0f, origin, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position, null, Color.White, 0f, new Vector2(), 1f, SpriteEffects.None, 0);
         }
     }
 }

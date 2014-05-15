@@ -23,7 +23,7 @@ namespace FinalRush
         int distance2player = 2000;
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
-        public bool enemy_shot, isdead, a_portee;
+        public bool isdead, a_portee;
         SoundEffectInstance shot_sound_instance;
 
         Random rand = new Random();
