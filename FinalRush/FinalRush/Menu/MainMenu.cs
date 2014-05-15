@@ -1557,11 +1557,6 @@ namespace FinalRush
                     MediaPlayer.Play(Resources.Musique3);
                     MediaPlayer.Volume = MediaPlayer.Volume;
                 }
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.MusiqueMain);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
             }
             if (element == @"Sprites\Menu\Bouton_Credits")
             {
