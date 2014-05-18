@@ -18,7 +18,7 @@ namespace FinalRush
         public static Texture2D Zombie, Elite;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Piques, Environnment4, /*Environnment5, Environnment6,*/ Roche, Roche_top;
         public static Texture2D MarcoWon, Scenario;
-        public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3;
+        public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
         public static Texture2D HealthBar, bullet;
         public static SpriteFont ammo_font, piece_font;
@@ -85,6 +85,7 @@ namespace FinalRush
             MusiqueIntro = Content.Load<Song>(@"Sons\Musiques\Musique_Intro");
             Musique2 = Content.Load<Song>(@"Sons\Musiques\Musique2");
             Musique3 = Content.Load<Song>(@"Sons\Musiques\Musique3");
+            MusiqueBoutique = Content.Load<Song>(@"Sons\Musiques\MusiqueBoutique");
 
             // Bruitages
 

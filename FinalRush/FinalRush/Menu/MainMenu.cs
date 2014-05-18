@@ -41,6 +41,7 @@ namespace FinalRush
             Chapitre4,
             Chapitre5,
             Chapitre6,
+            Shop,
             Intro,
             Scenario,
             GameOver,
@@ -55,9 +56,11 @@ namespace FinalRush
         GameMain4 Main4;
         GameMain5 Main5;
         GameMain6 Main6;
+        SpriteFont piece_font;
         public Player player, player2, player3, player4, player5, player6;
         bool HasPlayed;
         public int comptlevel = 0;
+        public int total_piece = 0;
         int compt = 0;
         int lvlcomplete = 0;
         bool downcolor = true;
@@ -71,7 +74,7 @@ namespace FinalRush
         Texture2D fond_menu, fond_win, fond_gameover, fond_how2play;
 
         public SpriteFont font;
-        public string text;
+        public string text, piece_text;
         public float time;
         public int score = 0;
         private Vector2 position;
@@ -79,6 +82,7 @@ namespace FinalRush
         public bool paused;
         KeyboardState pastkey;
         public bool finished;
+        public bool total_piece_updated;
         float deltaTime;
         public int nb_pieces;
         SoundEffectInstance piece_sound_instance;
@@ -102,6 +106,7 @@ namespace FinalRush
         List<GUIElement> Chapitre5 = new List<GUIElement>();
         List<GUIElement> Chapitre6 = new List<GUIElement>();
         List<GUIElement> Multi = new List<GUIElement>();
+        List<GUIElement> Shop = new List<GUIElement>();
 
         #endregion
 
@@ -115,10 +120,14 @@ namespace FinalRush
             started = false;
             paused = false;
             finished = false;
+            total_piece_updated = false;
             Text = "0";
             coeur_sound_instance = Resources.CoeurRapide.CreateInstance();
             piece_sound_instance = Resources.piece.CreateInstance();
             nb_pieces = 0;
+
+            piece_font = Resources.piece_font;
+            piece_text = " 0";
 
             //Ajout des boutons nécessaires
 
@@ -160,6 +169,7 @@ namespace FinalRush
             Won.Add(new GUIElement(@"Sprites\Menu\Bouton_NiveauSuivant"));
             Won.Add(new GUIElement(@"Sprites\Menu\Boutton_Rejouer"));
             Won.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
+            Won.Add(new GUIElement(@"Sprites\Menu\Bouton_Boutique"));
 
             Chapitre1.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre1.Add(new GUIElement(@"Sprites\Menu\Level1"));
@@ -193,6 +203,8 @@ namespace FinalRush
             Multi.Add(new GUIElement(@"Sprites\Menu\Join"));
             Multi.Add(new GUIElement(@"Sprites\Menu\Create"));
             Multi.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
+
+            Shop.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToHasWon"));
 
             player = Global.Player;
             player2 = Global.Player;
@@ -371,6 +383,7 @@ namespace FinalRush
             Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(-320, 210);
             Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_NiveauSuivant").MoveElement(260, 210);
             Won.Find(x => x.AssetName == @"Sprites\Menu\Boutton_Rejouer").MoveElement(-60, 210);
+            Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Boutique").MoveElement(210, 160);
 
             foreach (GUIElement element in Chapitre1)
             {
@@ -445,6 +458,14 @@ namespace FinalRush
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Join").MoveElement(-70, 0);
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Create").MoveElement(-70, 100);
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
+
+            foreach (GUIElement element in Shop)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            Shop.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToHasWon").MoveElement(-70, 200);
         }
 
         #endregion
@@ -988,6 +1009,57 @@ namespace FinalRush
                     enjeu = false;
                     break;
                 case GameState.GameOver:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        score = 300;
+                        nb_pieces = 0;
+                        time = 0f;
+                        Global.Handler.ammo_left = 6;
+                        Global.Handler.recharge_left = 5;
+                        // Rajouter les musiques du lvl 4 5 et 6 quand on veut rejouer
+                        if (comptlevel == 1)
+                        {
+                            gameState = GameState.InGame;
+                            MediaPlayer.Play(Resources.MusiqueMain);
+                            Main = new GameMain();
+                            player = new Player();
+                        }
+                        else if (comptlevel == 2)
+                        {
+                            gameState = GameState.InGame2;
+                            MediaPlayer.Play(Resources.Musique2);
+                            Main2 = new GameMain2();
+                            player2 = new Player();
+                        }
+                        else if (comptlevel == 3)
+                        {
+                            gameState = GameState.InGame3;
+                            MediaPlayer.Play(Resources.Musique3);
+                            Main3 = new GameMain3();
+                            player3 = new Player();
+                        }
+                        else if (comptlevel == 4)
+                        {
+                            gameState = GameState.InGame4;
+                            MediaPlayer.Play(Resources.Musique3);
+                            Main4 = new GameMain4();
+                            player4 = new Player();
+                        }
+                        else if (comptlevel == 5)
+                        {
+                            gameState = GameState.InGame5;
+                            MediaPlayer.Play(Resources.Musique3);
+                            Main5 = new GameMain5();
+                            player5 = new Player();
+                        }
+                        else
+                        {
+                            gameState = GameState.InGame4;
+                            MediaPlayer.Play(Resources.Musique3);
+                            Main6 = new GameMain6();
+                            player6 = new Player();
+                        }
+                    }
                     foreach (GUIElement element in GameOver)
                     {
                         element.Update();
@@ -1134,6 +1206,13 @@ namespace FinalRush
                     break;
                 case GameState.Multi:
                     foreach (GUIElement element in Multi)
+                    {
+                        element.Update();
+                    }
+                    enjeu = false;
+                    break;
+                case GameState.Shop:
+                    foreach (GUIElement element in Shop)
                     {
                         element.Update();
                     }
@@ -1286,6 +1365,14 @@ namespace FinalRush
                     break;
                 case GameState.Scenario:
                     spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
+                    break;
+                case GameState.Shop:
+                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.DrawString(piece_font, " x " + total_piece, new Vector2(200, 0), Color.White);
+                    foreach (GUIElement element in Shop)
+                    {
+                        element.Draw(spriteBatch);
+                    }
                     break;
                 case GameState.InClose:
                     break;
@@ -1454,6 +1541,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Bouton_NouvellePartie")
             {
+                total_piece_updated = false;
                 score = 300;
                 time = 0f;
                 nb_pieces = 0;
@@ -1474,6 +1562,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Boutton_Rejouer")
             {
+                total_piece_updated = false;
                 nb_pieces = 0;
                 HasPlayed = true;
                 if (comptlevel == 1)
@@ -1534,14 +1623,15 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Bouton_RetourToOptions")
 
-            if (element == @"Sprites\Menu\Bouton_RetourToJouer")
-                gameState = GameState.SelectionMap;
+                if (element == @"Sprites\Menu\Bouton_RetourToJouer")
+                    gameState = GameState.SelectionMap;
 
             if (element == @"Sprites\Menu\Bouton_Chapitres")
                 gameState = GameState.Chapitre1;
-          
+
             if (element == @"Sprites\Menu\Level1")
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1561,6 +1651,7 @@ namespace FinalRush
             }
             if (element == @"Sprites\Menu\Level2" && lvlcomplete >= 1) //retire deuxieme condition pour les tests
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1580,6 +1671,7 @@ namespace FinalRush
             }
             if (element == @"Sprites\Menu\Level3" && lvlcomplete >= 2)
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1600,6 +1692,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Level4" && lvlcomplete >= 3)
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1620,6 +1713,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Level5" && lvlcomplete >= 4)
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1640,6 +1734,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Level6" && lvlcomplete >= 5)
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1660,6 +1755,7 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Bouton_NiveauSuivant")
             {
+                total_piece_updated = false;
                 enjeu = true;
                 time = 0f;
                 score = 300;
@@ -1689,14 +1785,14 @@ namespace FinalRush
                     Main4 = new GameMain4();
                     player4 = new Player();
                     gameState = GameState.InGame4;
-                    MediaPlayer.Play(Resources.Musique3);   
+                    MediaPlayer.Play(Resources.Musique3);
                 }
                 else if (comptlevel == 4)
                 {
                     Main5 = new GameMain5();
                     player5 = new Player();
                     gameState = GameState.InGame5;
-                    MediaPlayer.Play(Resources.Musique3);            
+                    MediaPlayer.Play(Resources.Musique3);
                 }
                 else
                 {
@@ -1751,6 +1847,24 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Join")
                 gameState = GameState.Multi;
+
+            if (element == @"Sprites\Menu\Bouton_Boutique" && !total_piece_updated)
+            {
+                total_piece = nb_pieces + total_piece;
+                gameState = GameState.Shop;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.MusiqueBoutique);
+                MediaPlayer.IsRepeating = true;
+                total_piece_updated = true;
+            }
+
+            if (element == @"Sprites\Menu\Bouton_RetourToHasWon")
+            {
+                gameState = GameState.Won;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.MusiqueVictory);
+                MediaPlayer.IsRepeating = false;
+            }
         }
         #endregion
     }
