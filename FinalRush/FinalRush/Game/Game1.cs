@@ -14,7 +14,6 @@ namespace FinalRush
 {
     class Game1 : Microsoft.Xna.Framework.Game
     {
-
         #region Variables
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
@@ -28,7 +27,6 @@ namespace FinalRush
         GameMain5 Main5;
         GameMain6 Main6;
         SpriteFont scoring, timer;
-        //bool enjeu = false;
 
         public List<Bullets> bullets;
         SoundEffect saut;
@@ -177,7 +175,8 @@ namespace FinalRush
                 if (health > 0)
                 {
                     spriteBatch.Begin();
-                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.White);
+                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
+                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();

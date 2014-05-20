@@ -5,6 +5,7 @@ using System.Text;
 
 using System.Net.Sockets;
 using System.Net;
+using System.IO;
 
 namespace FinalRush
 {
@@ -15,6 +16,9 @@ namespace FinalRush
         int port = 1490;
         int buffer_size = 2048;
         byte[] readBuffer;
+        MemoryStream readStream;
+        BinaryReader reader;
+        Player player, player2;
 
         public Multi()
         {
@@ -28,11 +32,68 @@ namespace FinalRush
             client.Connect(IP, port);
             readBuffer = new byte[buffer_size];
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
+            readStream = new MemoryStream();
+            reader = new BinaryReader(readStream);
         }
 
         private void StreamReceived(IAsyncResult ar)
         {
+            int bytesRead = 0;
+
+            try
+            {
+                lock (client.GetStream())
+                    bytesRead = client.GetStream().EndRead(ar);
+            }
+            catch (Exception){}
+
+            if (bytesRead == 0)
+            {
+                client.Close();
+                return;
+            }
+
+            byte[] data = new byte[bytesRead];
+
+            for (int i = 0; i < bytesRead; i++)
+                data[i] = readBuffer[i];
+
+            ProcessData(data);
+
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
+        }
+
+        public void ProcessData(byte[] data)
+        {
+            readStream.SetLength(0);
+            readStream.Position = 0;
+
+            readStream.Write(data, 0, data.Length);
+            readStream.Position = 0;
+
+            Protocol p;
+
+            try
+            {
+                p = (Protocol)reader.ReadByte();
+
+                if (p == Protocol.Connected)
+                {
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    Console.WriteLine(String.Format("Player has connected : {0} IP adress : {1}", id, ip));
+                }
+                else if (p == Protocol.Disconnected)
+                {
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    Console.WriteLine(String.Format("Player has disconnected : {0} IP adress : {1}", id, ip));
+                }
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

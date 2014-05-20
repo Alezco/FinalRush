@@ -33,7 +33,6 @@ namespace FinalRush
         Collisions collisions = new Collisions();
         SoundEffectInstance fire_sound_instance, vide_sound_instance, couteau_sound_instance;
         GameMain main;
-        GameMain2 main2;
         MainMenu Main;
 
         int compteur = 1;
@@ -48,7 +47,7 @@ namespace FinalRush
         float distanceX, distanceY;
         MouseState mouse;
         public bool dead;
-        public bool shot = false;
+        public bool shot;
         public string state = "standing"; // Définition de l'état de Marco, afin de choisir les sprites qui vont animer le perso
 
         SpriteFont Scoring;
@@ -60,7 +59,6 @@ namespace FinalRush
         #region Constructeur
         public Player()
         {
-
             bullets = new List<Bullets>();
             speed = 4;
             fallspeed = 5;
@@ -74,7 +72,6 @@ namespace FinalRush
             vide_sound_instance = Resources.ammo_vide.CreateInstance();
             couteau_sound_instance = Resources.couteau.CreateInstance();
             main = Global.GameMain;
-            main2 = Global.GameMain2;
             Main = new MainMenu(Global.Handler, 0f);
             distanceX = mouse.X - Hitbox.X;
             distanceY = mouse.Y - Hitbox.Y;

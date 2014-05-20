@@ -21,29 +21,17 @@ namespace FinalRush
         public enum GameState
         {
             MainMenu,
-            InGame,
-            InGame2,
-            InGame3,
-            InGame4,
-            InGame5,
-            InGame6,
+            InGame, InGame2, InGame3, InGame4, InGame5, InGame6,
             InOptions,
             InClose,
             InPause,
             HowToPlay,
-            HowToPlay2,
             SelectionMap,
             Credits,
             Won,
-            Chapitre1,
-            Chapitre2,
-            Chapitre3,
-            Chapitre4,
-            Chapitre5,
-            Chapitre6,
+            Chapitre1, Chapitre2, Chapitre3, Chapitre4, Chapitre5, Chapitre6,
             Shop,
-            Intro,
-            Scenario,
+            Intro, Scenario,
             GameOver,
             Multi
         }
@@ -658,9 +646,7 @@ namespace FinalRush
                     break;
                 case GameState.MainMenu:
                     foreach (GUIElement element in main)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.InGame:
@@ -810,20 +796,14 @@ namespace FinalRush
                     break;
                 case GameState.InOptions:
                     foreach (GUIElement element in InOptions)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.GameOver:
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    {
                         CreateGame(comptlevel);
-                    }
                     foreach (GUIElement element in GameOver)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Won:
@@ -859,72 +839,52 @@ namespace FinalRush
                     }
                     pastkey = Keyboard.GetState();
                     foreach (GUIElement element in InPause)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.HowToPlay:
                     foreach (GUIElement element in HowToPlay)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.SelectionMap:
                     foreach (GUIElement element in SelectionMap)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Credits:
                     foreach (GUIElement element in Credits)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre1:
                     foreach (GUIElement element in Chapitre1)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre2:
                     foreach (GUIElement element in Chapitre2)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre3:
                     foreach (GUIElement element in Chapitre3)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre4:
                     foreach (GUIElement element in Chapitre4)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre5:
                     foreach (GUIElement element in Chapitre5)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Chapitre6:
                     foreach (GUIElement element in Chapitre6)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Scenario:
@@ -966,16 +926,12 @@ namespace FinalRush
                     break;
                 case GameState.Multi:
                     foreach (GUIElement element in Multi)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 case GameState.Shop:
                     foreach (GUIElement element in Shop)
-                    {
                         element.Update();
-                    }
                     enjeu = false;
                     break;
                 default:
@@ -1001,9 +957,7 @@ namespace FinalRush
                 case GameState.MainMenu:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in main)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.InGame:
                     Main.Draw(spriteBatch);
@@ -1027,101 +981,73 @@ namespace FinalRush
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
 
                     foreach (GUIElement element in InOptions)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.GameOver:
                     spriteBatch.Draw(fond_gameover, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in GameOver)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Won:
                     spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
                     spriteBatch.Draw(coin, new Rectangle(250, 250, 30, 30), Color.White);
                     foreach (GUIElement element in Won)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in InPause)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.HowToPlay:
                     spriteBatch.Draw(fond_how2play, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in HowToPlay)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.SelectionMap:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in SelectionMap)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Credits:
                     foreach (GUIElement element in Credits)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre1:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre1)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre2:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre2)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre3:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre3)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre4:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre4)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre5:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre5)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Chapitre6:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre6)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Multi:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Multi)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.Scenario:
                     spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
@@ -1130,9 +1056,7 @@ namespace FinalRush
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     spriteBatch.DrawString(piece_font, " x " + total_piece, new Vector2(200, 0), Color.White);
                     foreach (GUIElement element in Shop)
-                    {
                         element.Draw(spriteBatch);
-                    }
                     break;
                 case GameState.InClose:
                     break;
@@ -1225,9 +1149,7 @@ namespace FinalRush
                 gameState = GameState.HowToPlay;
 
             if (element == @"Sprites\Menu\Bouton_NouvellePartie")
-            {
                 gameState = GameState.Scenario;
-            }
 
             if (element == @"Sprites\Menu\Boutton_Rejouer")
             {
@@ -1239,9 +1161,10 @@ namespace FinalRush
                 gameState = GameState.Credits;
 
             if (element == @"Sprites\Menu\Bouton_RetourToOptions")
+                gameState = GameState.InOptions;
 
-                if (element == @"Sprites\Menu\Bouton_RetourToJouer")
-                    gameState = GameState.SelectionMap;
+            if (element == @"Sprites\Menu\Bouton_RetourToJouer")
+                gameState = GameState.SelectionMap;
 
             if (element == @"Sprites\Menu\Bouton_Chapitres")
                 gameState = GameState.Chapitre1;
@@ -1256,9 +1179,7 @@ namespace FinalRush
                 CreateGame(3);
 
             if (element == @"Sprites\Menu\Level4" && lvlcomplete >= 3)
-            {
                 CreateGame(4);
-            }
 
             if (element == @"Sprites\Menu\Level5" && lvlcomplete >= 4)
                 CreateGame(5);
