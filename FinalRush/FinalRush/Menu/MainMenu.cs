@@ -62,7 +62,7 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         int compt = 0;
-        int lvlcomplete = 0;
+        int lvlcomplete = 10;
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -513,6 +513,114 @@ namespace FinalRush
 
         #endregion
 
+        #region Méthode CreateGame
+        public void CreateGame(int i)
+        {
+            total_piece_updated = false;
+            enjeu = true;
+            score = 300;
+            nb_pieces = 0;
+            time = 0f;
+            Global.Handler.ammo_left = 6;
+            Global.Handler.recharge_left = 5;
+            switch (i)
+            {
+                case 1:
+                    gameState = GameState.InGame;
+                    MediaPlayer.Play(Resources.MusiqueMain);
+                    Main = new GameMain();
+                    player = new Player();
+                    break;
+                case 2:
+                    gameState = GameState.InGame2;
+                    MediaPlayer.Play(Resources.Musique2);
+                    Main2 = new GameMain2();
+                    player2 = new Player();
+                    break;
+                case 3:
+                    gameState = GameState.InGame3;
+                    MediaPlayer.Play(Resources.Musique3);
+                    Main3 = new GameMain3();
+                    player3 = new Player();
+                    break;
+                case 4:
+                    gameState = GameState.InGame4;
+                    MediaPlayer.Play(Resources.Musique3);
+                    Main4 = new GameMain4();
+                    player4 = new Player();
+                    break;
+                case 5:
+                    gameState = GameState.InGame5;
+                    MediaPlayer.Play(Resources.Musique3);
+                    Main5 = new GameMain5();
+                    player5 = new Player();
+                    break;
+                case 6:
+                    gameState = GameState.InGame4;
+                    MediaPlayer.Play(Resources.Musique3);
+                    Main6 = new GameMain6();
+                    player6 = new Player();
+                    break;
+
+            }
+        }
+        #endregion
+
+        #region Méthode UpdateGame
+        public void UpdateGame(Player player, GameTime gameTime, int level, int distanceToWin, int timeToLoose)
+        {
+            #region Timer
+            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (started)
+            {
+                if (!paused)
+                {
+                    if (time >= 0)
+                        time += deltaTime;
+                    else
+                        finished = true;
+                }
+            }
+
+            Text = ((int)time).ToString();
+            score = (nb_pieces * 10) + timeToLoose - ((int)time);
+
+            if (time == timeToLoose)
+            {
+                gameState = GameState.GameOver;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.MusiqueGameOver);
+                MediaPlayer.IsRepeating = false;
+            }
+            #endregion
+
+            if (player.Hitbox.X > distanceToWin)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.MusiqueVictory);
+                MediaPlayer.IsRepeating = false;
+                gameState = GameState.Won;
+                if (lvlcomplete < level)
+                    lvlcomplete = level;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                gameState = GameState.InPause;
+                MediaPlayer.Volume = 0.2f;
+            }
+            enjeu = true;
+            if (player.health == 0 || player.dead)
+            {
+                enjeu = false;
+                gameState = GameState.GameOver;
+                MediaPlayer.Stop();
+                MediaPlayer.Play(Resources.MusiqueGameOver);
+                MediaPlayer.IsRepeating = false;
+            }
+        }
+        #endregion
+
         #region Update
 
         //Update va detecter le moindre changement d'état et appliquer les modifs' à faire
@@ -560,9 +668,6 @@ namespace FinalRush
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
 
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
                         nb_pieces++;
@@ -579,69 +684,12 @@ namespace FinalRush
                     {
                     }*/
 
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        //pour debloquer les niveaux au fur et à mesure (pareil pour chaque InGame)
-                        if (lvlcomplete < 1)
-                            lvlcomplete = 1;
-                    }
-                    if (Global.Player.health <= 20 && gameState == GameState.InGame)
-                    {
-                        coeur_sound_instance.Play();
-                    }
-                    else
-                        coeur_sound_instance.Stop();
-
-                    if ((Keyboard.GetState().IsKeyDown(Keys.P) && pastkey.IsKeyUp(Keys.P)) || (Keyboard.GetState().IsKeyDown(Keys.Escape) && pastkey.IsKeyUp(Keys.Escape)))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    pastkey = Keyboard.GetState();
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    UpdateGame(player, gameTime, 1, 4600, 300);
                     break;
                 case GameState.InGame2:
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
-
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -655,67 +703,15 @@ namespace FinalRush
                     if (Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2))
                     {
                     }
-                    /*     if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
-                         {
-                         }*/
-
-
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        time = 0f;
-                        score = 300;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player2.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        if (lvlcomplete < 2)
-                            lvlcomplete = 2;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player2.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    /*if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
+                      {
+                      }*/
+                    UpdateGame(player2, gameTime, 2, 4600, 30);
                     break;
                 case GameState.InGame3:
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
-
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
@@ -735,60 +731,12 @@ namespace FinalRush
                     {
                     }
 
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player3.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        if (lvlcomplete < 3)
-                            lvlcomplete = 3;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player3.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    UpdateGame(player3, gameTime, 3, 4600, 300);
                     break;
                 case GameState.InGame4:
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
-
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
@@ -808,60 +756,12 @@ namespace FinalRush
                     //{
                     //}
 
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player4.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        if (lvlcomplete < 4)
-                            lvlcomplete = 4;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player4.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    UpdateGame(player4, gameTime, 4, 4600, 300);
                     break;
                 case GameState.InGame5:
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
-
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
@@ -881,60 +781,12 @@ namespace FinalRush
                     //{
                     //}
 
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player5.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        if (lvlcomplete < 5)
-                            lvlcomplete = 5;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player5.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    UpdateGame(player5, gameTime, 5, 4600, 300);
                     break;
                 case GameState.InGame6:
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
-
-                    #region Timer
-                    deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {
@@ -954,52 +806,7 @@ namespace FinalRush
                     //{
                     //}
 
-                    if (started)
-                    {
-                        if (!paused)
-                        {
-                            if (time >= 0)
-                                time += deltaTime;
-                            else
-                                finished = true;
-                        }
-                    }
-
-                    Text = ((int)time).ToString();
-                    score = (nb_pieces * 10) + 300 - ((int)time);
-
-                    if (time == 300)
-                    {
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
-                    #endregion
-
-                    if (player6.Hitbox.X > 4600)
-                    {
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueVictory);
-                        MediaPlayer.IsRepeating = false;
-                        gameState = GameState.Won;
-                        if (lvlcomplete < 6)
-                            lvlcomplete = 6;
-                    }
-                    if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                    {
-                        gameState = GameState.InPause;
-                        MediaPlayer.Volume = 0.2f;
-                    }
-                    enjeu = true;
-                    if (Global.Player.health == 0 || player6.dead)
-                    {
-                        enjeu = false;
-                        gameState = GameState.GameOver;
-                        MediaPlayer.Stop();
-                        MediaPlayer.Play(Resources.MusiqueGameOver);
-                        MediaPlayer.IsRepeating = false;
-                    }
+                    UpdateGame(player6, gameTime, 6, 4600, 300);
                     break;
                 case GameState.InOptions:
                     foreach (GUIElement element in InOptions)
@@ -1011,54 +818,7 @@ namespace FinalRush
                 case GameState.GameOver:
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                     {
-                        score = 300;
-                        nb_pieces = 0;
-                        time = 0f;
-                        Global.Handler.ammo_left = 6;
-                        Global.Handler.recharge_left = 5;
-                        // Rajouter les musiques du lvl 4 5 et 6 quand on veut rejouer
-                        if (comptlevel == 1)
-                        {
-                            gameState = GameState.InGame;
-                            MediaPlayer.Play(Resources.MusiqueMain);
-                            Main = new GameMain();
-                            player = new Player();
-                        }
-                        else if (comptlevel == 2)
-                        {
-                            gameState = GameState.InGame2;
-                            MediaPlayer.Play(Resources.Musique2);
-                            Main2 = new GameMain2();
-                            player2 = new Player();
-                        }
-                        else if (comptlevel == 3)
-                        {
-                            gameState = GameState.InGame3;
-                            MediaPlayer.Play(Resources.Musique3);
-                            Main3 = new GameMain3();
-                            player3 = new Player();
-                        }
-                        else if (comptlevel == 4)
-                        {
-                            gameState = GameState.InGame4;
-                            MediaPlayer.Play(Resources.Musique3);
-                            Main4 = new GameMain4();
-                            player4 = new Player();
-                        }
-                        else if (comptlevel == 5)
-                        {
-                            gameState = GameState.InGame5;
-                            MediaPlayer.Play(Resources.Musique3);
-                            Main5 = new GameMain5();
-                            player5 = new Player();
-                        }
-                        else
-                        {
-                            gameState = GameState.InGame4;
-                            MediaPlayer.Play(Resources.Musique3);
-                            Main6 = new GameMain6();
-                            player6 = new Player();
-                        }
+                        CreateGame(comptlevel);
                     }
                     foreach (GUIElement element in GameOver)
                     {
@@ -1198,7 +958,7 @@ namespace FinalRush
                     }
                     if (colourScenario.R < 10 && goforgame)
                     {
-                        gameState = GameState.InGame;
+                        CreateGame(1);
                     }
                     break;
                 case GameState.InClose:
@@ -1448,71 +1208,10 @@ namespace FinalRush
                     gameState = GameState.InGame6;
             }
             if (element == @"Sprites\Menu\Boutton_Rejouer")
-            {
-                enjeu = true;
-                Global.Handler.ammo_left = 6;
-                Global.Handler.recharge_left = 5;
-                score = 300;
-                time = 0f;
-                MediaPlayer.Volume = 0.6f;
-                HasPlayed = true;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-                {
-                    if (comptlevel == 1)
-                    {
-                        Main = new GameMain();
-                        player = new Player();
-                        gameState = GameState.InGame;
-                        MediaPlayer.Play(Resources.MusiqueMain);
-                    }
-                    else if (comptlevel == 2)
-                    {
-                        Main2 = new GameMain2();
-                        player2 = new Player();
-                        gameState = GameState.InGame2;
-                        MediaPlayer.Play(Resources.Musique2);
-                    }
-                    else if (comptlevel == 3)
-                    {
-                        Main3 = new GameMain3();
-                        player3 = new Player();
-                        gameState = GameState.InGame3;
-                        MediaPlayer.Play(Resources.Musique3);
-                    }
-                    else if (comptlevel == 4)
-                    {
-                        Main4 = new GameMain4();
-                        player4 = new Player();
-                        gameState = GameState.InGame4;
-                        MediaPlayer.Play(Resources.Musique3);
-                    }
-                    else if (comptlevel == 5)
-                    {
-                        Main5 = new GameMain5();
-                        player5 = new Player();
-                        gameState = GameState.InGame5;
-                        MediaPlayer.Play(Resources.Musique3);
-                    }
-                    else if (comptlevel == 6)
-                    {
-                        Main6 = new GameMain6();
-                        player6 = new Player();
-                        gameState = GameState.InGame6;
-                        MediaPlayer.Play(Resources.Musique3);
-                    }
-                }
-            }
-            if (element == @"Sprites\Menu\Bouton_MenuPrincipal")
-            {
-                //On réinitialise le HUD
-                nb_pieces = 0;
-                score = 300;
-                time = 0f;
-                comptlevel = 0;
+                CreateGame(comptlevel);
 
+            if (element == @"Sprites\Menu\Bouton_MenuPrincipal" || element == @"Sprites\Menu\Bouton_MenuPrincipalGros")
+            {
                 gameState = GameState.MainMenu;
                 HasPlayed = false;
                 MediaPlayer.Volume = 0.6f;
@@ -1521,101 +1220,19 @@ namespace FinalRush
                 MediaPlayer.Volume = MediaPlayer.Volume;
                 MediaPlayer.IsRepeating = true;
             }
-            if (element == @"Sprites\Menu\Bouton_MenuPrincipalGros")
-            {
-                score = 300;
-                nb_pieces = 0;
-                time = 0f;
-                comptlevel = 0;
 
-                gameState = GameState.MainMenu;
-                HasPlayed = false;
-                MediaPlayer.Volume = 0.6f;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.MusiqueMenu);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
             if (element == @"Sprites\Menu\Bouton_Commandes")
                 gameState = GameState.HowToPlay;
 
             if (element == @"Sprites\Menu\Bouton_NouvellePartie")
             {
-                total_piece_updated = false;
-                score = 300;
-                time = 0f;
-                nb_pieces = 0;
-                enjeu = true;
-                Global.Handler.ammo_left = 6;
-                Global.Handler.recharge_left = 5;
-                HasPlayed = true;
-                comptlevel = 1;
-                Main = new GameMain();
-                player = new Player();
                 gameState = GameState.Scenario;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.MusiqueMain);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
             }
 
             if (element == @"Sprites\Menu\Boutton_Rejouer")
             {
                 total_piece_updated = false;
-                nb_pieces = 0;
-                HasPlayed = true;
-                if (comptlevel == 1)
-                {
-                    Main = new GameMain();
-                    player = new Player();
-                    gameState = GameState.InGame;
-                }
-                else if (comptlevel == 2)
-                {
-                    Main2 = new GameMain2();
-                    player2 = new Player();
-                    gameState = GameState.InGame2;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique2);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                }
-                else if (comptlevel == 3)
-                {
-                    Main3 = new GameMain3();
-                    player3 = new Player();
-                    gameState = GameState.InGame3;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique3);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                }
-                else if (comptlevel == 4)
-                {
-                    Main4 = new GameMain4();
-                    player4 = new Player();
-                    gameState = GameState.InGame4;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique3);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                }
-                else if (comptlevel == 5)
-                {
-                    Main5 = new GameMain5();
-                    player5 = new Player();
-                    gameState = GameState.InGame5;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique3);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                }
-                else if (comptlevel == 6)
-                {
-                    Main6 = new GameMain6();
-                    player6 = new Player();
-                    gameState = GameState.InGame6;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(Resources.Musique3);
-                    MediaPlayer.Volume = MediaPlayer.Volume;
-                }
+                CreateGame(comptlevel);
             }
 
             if (element == @"Sprites\Menu\Bouton_Credits")
@@ -1630,178 +1247,27 @@ namespace FinalRush
                 gameState = GameState.Chapitre1;
 
             if (element == @"Sprites\Menu\Level1")
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 1;
-                Main = new GameMain();
-                player = new Player();
-                gameState = GameState.InGame;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.MusiqueMain);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
+                CreateGame(1);
+
             if (element == @"Sprites\Menu\Level2" && lvlcomplete >= 1) //retire deuxieme condition pour les tests
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 2;
-                Main2 = new GameMain2();
-                player2 = new Player();
-                gameState = GameState.InGame2;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.Musique2);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
+                CreateGame(2);
+
             if (element == @"Sprites\Menu\Level3" && lvlcomplete >= 2)
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 3;
-                Main3 = new GameMain3();
-                player3 = new Player();
-                gameState = GameState.InGame3;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.Musique3);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
+                CreateGame(3);
 
             if (element == @"Sprites\Menu\Level4" && lvlcomplete >= 3)
             {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 4;
-                Main4 = new GameMain4();
-                player4 = new Player();
-                gameState = GameState.InGame4;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.Musique3);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
+                CreateGame(4);
             }
 
             if (element == @"Sprites\Menu\Level5" && lvlcomplete >= 4)
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 5;
-                Main5 = new GameMain5();
-                player5 = new Player();
-                gameState = GameState.InGame5;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.Musique3);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
+                CreateGame(5);
 
             if (element == @"Sprites\Menu\Level6" && lvlcomplete >= 5)
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                HasPlayed = true;
-                comptlevel = 6;
-                Main6 = new GameMain6();
-                player6 = new Player();
-                gameState = GameState.InGame6;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.Musique3);
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-            }
+                CreateGame(6);
 
             if (element == @"Sprites\Menu\Bouton_NiveauSuivant")
-            {
-                total_piece_updated = false;
-                enjeu = true;
-                time = 0f;
-                score = 300;
-                nb_pieces = 0;
-                Global.Handler.recharge_left = 5;
-                Global.Handler.ammo_left = 6;
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.Stop();
-                MediaPlayer.Volume = MediaPlayer.Volume;
-                MediaPlayer.IsRepeating = true;
-                if (comptlevel == 1)
-                {
-                    Main2 = new GameMain2();
-                    player2 = new Player();
-                    gameState = GameState.InGame2;
-                    MediaPlayer.Play(Resources.Musique2);
-                }
-                else if (comptlevel == 2)
-                {
-                    Main3 = new GameMain3();
-                    player3 = new Player();
-                    gameState = GameState.InGame3;
-                    MediaPlayer.Play(Resources.Musique3);
-                }
-                else if (comptlevel == 3)
-                {
-                    Main4 = new GameMain4();
-                    player4 = new Player();
-                    gameState = GameState.InGame4;
-                    MediaPlayer.Play(Resources.Musique3);
-                }
-                else if (comptlevel == 4)
-                {
-                    Main5 = new GameMain5();
-                    player5 = new Player();
-                    gameState = GameState.InGame5;
-                    MediaPlayer.Play(Resources.Musique3);
-                }
-                else
-                {
-                    Main6 = new GameMain6();
-                    player6 = new Player();
-                    gameState = GameState.InGame6;
-                    MediaPlayer.Play(Resources.Musique3);
-                }
-            }
+                CreateGame(comptlevel + 1);
 
             if (element == @"Sprites\Menu\Bouton_PleinEcran")
                 Global.Handler.graphics.ToggleFullScreen();
