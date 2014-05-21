@@ -45,7 +45,7 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         SpriteFont piece_font;
-        public Player player, player2, player3, player4, player5, player6 , p7, p8;
+        public Player player, player2, player3, player4, player5, player6, p7, p8;
         bool HasPlayed;
         public int comptlevel = 0;
         public int total_piece = 0;
@@ -73,7 +73,7 @@ namespace FinalRush
         public bool total_piece_updated;
         float deltaTime;
         public int nb_pieces;
-        
+
 
         //Liste qui contiendra tous les rectangles (donc les boutons) nécessaires
 
@@ -659,10 +659,21 @@ namespace FinalRush
                         element.Update();
                     enjeu = false;
                     break;
+                case GameState.InOptions:
+                    foreach (GUIElement element in InOptions)
+                        element.Update();
+                    enjeu = false;
+                    break;
+                case GameState.GameOver:
+                    foreach (GUIElement element in GameOver)
+                        element.Update();
+                    enjeu = false;
+                    break;
                 case GameState.InGame:
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
@@ -687,6 +698,7 @@ namespace FinalRush
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -710,6 +722,7 @@ namespace FinalRush
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
@@ -736,6 +749,7 @@ namespace FinalRush
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
@@ -762,6 +776,7 @@ namespace FinalRush
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
@@ -788,6 +803,7 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {
