@@ -514,6 +514,7 @@ namespace FinalRush
             time = 0f;
             Global.Handler.ammo_left = 6;
             Global.Handler.recharge_left = 5;
+            MediaPlayer.IsRepeating = true;
             switch (i)
             {
                 case 1:
@@ -602,11 +603,12 @@ namespace FinalRush
                 if (lvlcomplete < level)
                     lvlcomplete = level;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.P) || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if ((Keyboard.GetState().IsKeyDown(Keys.P) && pastkey.IsKeyUp(Keys.P)) || (Keyboard.GetState().IsKeyDown(Keys.Escape) && pastkey.IsKeyUp(Keys.Escape)))
             {
                 gameState = GameState.InPause;
                 MediaPlayer.Volume = 0.2f;
             }
+            pastkey = Keyboard.GetState();
             enjeu = true;
             if (player.health == 0 || player.dead)
             {
@@ -665,6 +667,8 @@ namespace FinalRush
                     enjeu = false;
                     break;
                 case GameState.GameOver:
+                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+                        CreateGame(comptlevel);
                     foreach (GUIElement element in GameOver)
                         element.Update();
                     enjeu = false;
@@ -673,7 +677,6 @@ namespace FinalRush
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
@@ -698,7 +701,6 @@ namespace FinalRush
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -722,7 +724,6 @@ namespace FinalRush
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
@@ -749,7 +750,6 @@ namespace FinalRush
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
@@ -776,7 +776,6 @@ namespace FinalRush
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
@@ -803,7 +802,6 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
-                    MediaPlayer.IsRepeating = true;
 
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {

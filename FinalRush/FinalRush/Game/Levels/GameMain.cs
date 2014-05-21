@@ -58,7 +58,7 @@ namespace FinalRush
             Walls.Add(new Wall(680, 365, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(520, 300, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(1160, 200, Resources.Platform, 92, 16, Color.IndianRed));
-            Walls.Add(new Wall(1266, 415, Resources.Platform, 1, 1, Color.IndianRed));
+            //Walls.Add(new Wall(1266, 415, Resources.Platform, 1, 1, Color.IndianRed));
             Walls.Add(new Wall(1664, 350, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(1828, 280, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(1828, 140, Resources.Platform, 92, 16, Color.IndianRed));
@@ -154,7 +154,7 @@ namespace FinalRush
             for (int i = 0; i < enemies2.Count; i++)
             {
                 for (int j = 0; j < Global.Player.bullets.Count; j++)
-                    if (Global.Enemy2.Hitbox.Intersects(new Rectangle((int)Global.Player.bullets[j].position.X,(int)Global.Player.bullets[j].position.Y,10,10)))
+                    if (Global.Enemy2.Hitbox.Intersects(new Rectangle((int)Global.Player.bullets[j].position.X, (int)Global.Player.bullets[j].position.Y, 10, 10)))
                     {
                         enemies2.RemoveAt(i);
                         i--;
