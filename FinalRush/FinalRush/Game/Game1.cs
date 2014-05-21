@@ -165,9 +165,7 @@ namespace FinalRush
             main.Draw(spriteBatch);
             spriteBatch.End();
             foreach (Bullets bullet in bullets)
-            {
                 bullet.Draw(spriteBatch);
-            }
 
             #region HUD
             if (main.enjeu)

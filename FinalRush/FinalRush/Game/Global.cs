@@ -25,6 +25,7 @@ namespace FinalRush
         public static Enemy2 Enemy2;
         public static Bullets Bullets;
         public static Multi Multi;
+        public static GameMainMulti GameMainMulti;
         public static Piques Piques;
         public static MovingHorizontallyWall MovingHorizontallyWall;
     }

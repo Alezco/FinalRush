@@ -6,6 +6,7 @@ using System.Text;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FinalRush
 {
@@ -18,7 +19,7 @@ namespace FinalRush
         byte[] readBuffer;
         MemoryStream readStream;
         BinaryReader reader;
-        Player player, player2;
+        public Player player, player2;
 
         public Multi()
         {
@@ -34,6 +35,7 @@ namespace FinalRush
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
             readStream = new MemoryStream();
             reader = new BinaryReader(readStream);
+            player = new Player();
         }
 
         private void StreamReceived(IAsyncResult ar)
@@ -45,7 +47,7 @@ namespace FinalRush
                 lock (client.GetStream())
                     bytesRead = client.GetStream().EndRead(ar);
             }
-            catch (Exception){}
+            catch (Exception) { }
 
             if (bytesRead == 0)
             {
@@ -94,6 +96,16 @@ namespace FinalRush
             {
 
             }
+        }
+
+        public void Draw(SpriteBatch sb)
+        {
+            sb.Begin();
+            if (player != null)
+            {
+                player.Draw(sb);
+            }
+            sb.End();
         }
     }
 }

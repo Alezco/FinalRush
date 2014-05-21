@@ -21,7 +21,7 @@ namespace FinalRush
         public enum GameState
         {
             MainMenu,
-            InGame, InGame2, InGame3, InGame4, InGame5, InGame6,
+            InGame, InGame2, InGame3, InGame4, InGame5, InGame6, InGameMulti,
             InOptions,
             InClose,
             InPause,
@@ -35,7 +35,6 @@ namespace FinalRush
             GameOver,
             Multi
         }
-        public SoundEffectInstance coeur_sound_instance;
 
         public GameState gameState;
         GameMain Main;
@@ -44,8 +43,9 @@ namespace FinalRush
         GameMain4 Main4;
         GameMain5 Main5;
         GameMain6 Main6;
+        GameMainMulti MainMulti;
         SpriteFont piece_font;
-        public Player player, player2, player3, player4, player5, player6;
+        public Player player, player2, player3, player4, player5, player6 , p7, p8;
         bool HasPlayed;
         public int comptlevel = 0;
         public int total_piece = 0;
@@ -73,7 +73,7 @@ namespace FinalRush
         public bool total_piece_updated;
         float deltaTime;
         public int nb_pieces;
-        SoundEffectInstance piece_sound_instance;
+        
 
         //Liste qui contiendra tous les rectangles (donc les boutons) nécessaires
 
@@ -110,10 +110,7 @@ namespace FinalRush
             finished = false;
             total_piece_updated = false;
             Text = "0";
-            coeur_sound_instance = Resources.CoeurRapide.CreateInstance();
-            piece_sound_instance = Resources.piece.CreateInstance();
             nb_pieces = 0;
-
             piece_font = Resources.piece_font;
             piece_text = " 0";
 
@@ -191,6 +188,8 @@ namespace FinalRush
             Multi.Add(new GUIElement(@"Sprites\Menu\Join"));
             Multi.Add(new GUIElement(@"Sprites\Menu\Create"));
             Multi.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
+            Multi.Add(new GUIElement(@"Sprites\Menu\ololol"));
+
 
             Shop.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToHasWon"));
 
@@ -200,12 +199,15 @@ namespace FinalRush
             player4 = Global.Player;
             player5 = Global.Player;
             player6 = Global.Player;
+            p7 = Global.Player;
+            p8 = Global.Player;
             Main = Global.GameMain;
             Main2 = Global.GameMain2;
             Main3 = Global.GameMain3;
             Main4 = Global.GameMain4;
             Main5 = Global.GameMain5;
             Main6 = Global.GameMain6;
+            MainMulti = Global.GameMainMulti;
             Global.MainMenu = this;
         }
 
@@ -446,6 +448,7 @@ namespace FinalRush
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Join").MoveElement(-70, 0);
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Create").MoveElement(-70, 100);
             Multi.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
+            Multi.Find(x => x.AssetName == @"Sprites\Menu\ololol").MoveElement(-70, -100);
 
             foreach (GUIElement element in Shop)
             {
@@ -548,6 +551,13 @@ namespace FinalRush
                     MediaPlayer.Play(Resources.Musique3);
                     Main6 = new GameMain6();
                     player6 = new Player();
+                    break;
+                case 7:
+                    gameState = GameState.InGameMulti;
+                    MediaPlayer.Play(Resources.Musique3);
+                    MainMulti = new GameMainMulti();
+                    p7 = new Player();
+                    p8 = new Player();
                     break;
 
             }
@@ -657,6 +667,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -680,6 +691,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -702,6 +714,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -727,6 +740,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -752,6 +766,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -777,6 +792,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {
                         nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
@@ -794,17 +810,29 @@ namespace FinalRush
 
                     UpdateGame(player6, gameTime, 6, 4600, 300);
                     break;
-                case GameState.InOptions:
-                    foreach (GUIElement element in InOptions)
-                        element.Update();
-                    enjeu = false;
-                    break;
-                case GameState.GameOver:
-                    if (Keyboard.GetState().IsKeyDown(Keys.Enter))
-                        CreateGame(comptlevel);
-                    foreach (GUIElement element in GameOver)
-                        element.Update();
-                    enjeu = false;
+                case GameState.InGameMulti:
+                    comptlevel = 7;
+                    p7.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
+                    p8.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
+                    MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
+
+                    if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
+                    {
+                        nb_pieces++;
+                        SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
+                        piece_sound_instance.Play();
+                    }
+
+                    if (Global.Collisions.CollisionEnemy(player2.Hitbox, Main2.enemies))
+                    {
+                    }
+                    if (Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2))
+                    {
+                    }
+                    /*if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
+                      {
+                      }*/
+                    UpdateGame(player2, gameTime, 2, 4600, 30);
                     break;
                 case GameState.Won:
                     foreach (GUIElement element in Won)
@@ -1234,6 +1262,9 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Join")
                 gameState = GameState.Multi;
+
+            if (element == @"Sprites\Menu\ololol")
+                CreateGame(7);
 
             if (element == @"Sprites\Menu\Bouton_Boutique" && !total_piece_updated)
             {

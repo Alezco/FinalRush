@@ -31,7 +31,6 @@ namespace FinalRush
         public Direction Direction;
         SpriteEffects effect;
         Collisions collisions = new Collisions();
-        SoundEffectInstance fire_sound_instance, vide_sound_instance, couteau_sound_instance;
         GameMain main;
         MainMenu Main;
 
@@ -68,9 +67,6 @@ namespace FinalRush
             framecolumn = 1;
             effect = SpriteEffects.None;
             Direction = Direction.Right;
-            fire_sound_instance = Resources.coup_de_feu.CreateInstance();
-            vide_sound_instance = Resources.ammo_vide.CreateInstance();
-            couteau_sound_instance = Resources.couteau.CreateInstance();
             main = Global.GameMain;
             Main = new MainMenu(Global.Handler, 0f);
             distanceX = mouse.X - Hitbox.X;
@@ -137,7 +133,7 @@ namespace FinalRush
                     bullet.position.X -= bullet.velocity; // va vers la gauche
 
                 // la balle disparait si elle parcourt la distance ou rencontre un obstacle
-                if (Vector2.Distance(bullet.position, new Vector2(Global.Player.Hitbox.X, Global.Player.Hitbox.Y)) > 150)
+                if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) > 150)
                     bullet.isVisible = false;
                 foreach (Wall wall in Global.GameMain.Walls)
                 {
@@ -214,6 +210,8 @@ namespace FinalRush
             }
             if (clavier.IsKeyDown(Keys.D) && state == "standing")
             {
+                
+                SoundEffectInstance couteau_sound_instance = Resources.couteau.CreateInstance();
                 couteau_sound_instance.Play();
                 framecolumn = 1;
                 compteur = 1;
@@ -234,11 +232,15 @@ namespace FinalRush
 
                 if (Global.Handler.ammo_left > 0)
                 {
+                    SoundEffectInstance fire_sound_instance = Resources.coup_de_feu.CreateInstance();
                     fire_sound_instance.Play();
                     state = "shoot";
                 }
                 else
+                {
+                    SoundEffectInstance vide_sound_instance = Resources.ammo_vide.CreateInstance();
                     vide_sound_instance.Play();
+                }
             }
             if (state == "cut")
             {
