@@ -210,7 +210,7 @@ namespace FinalRush
             }
             if (clavier.IsKeyDown(Keys.D) && state == "standing")
             {
-                
+
                 SoundEffectInstance couteau_sound_instance = Resources.couteau.CreateInstance();
                 couteau_sound_instance.Play();
                 framecolumn = 1;
@@ -239,7 +239,7 @@ namespace FinalRush
                 else
                 {
                     SoundEffectInstance vide_sound_instance = Resources.ammo_vide.CreateInstance();
-                    vide_sound_instance.Play();
+                        vide_sound_instance.Play();
                 }
             }
             if (state == "cut")

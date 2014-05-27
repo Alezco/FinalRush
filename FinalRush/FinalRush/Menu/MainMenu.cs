@@ -537,7 +537,7 @@ namespace FinalRush
                     break;
                 case 4:
                     gameState = GameState.InGame4;
-                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.Play(Resources.Musique4);
                     Main4 = new GameMain4();
                     player4 = new Player();
                     break;
