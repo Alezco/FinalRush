@@ -21,7 +21,7 @@ namespace FinalRush
         public List<Enemy2> enemies2;
         Random random = new Random();
         MainMenu menu;
-        Texture2D background = Resources.Environnment4;
+        Texture2D background = Resources.Environnment5;
 
 
         // CONSTRUCTOR
@@ -89,7 +89,7 @@ namespace FinalRush
 
             for (int i = 0; i < 80; i++)
                 //if (i != 2 )
-                Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
+                Walls.Add(new Wall(64 * i, 416, Resources.Sand_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus
