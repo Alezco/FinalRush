@@ -67,6 +67,7 @@ namespace FinalRush
             Roche_top = Content.Load<Texture2D>(@"Sprites\Environnment\roche_top");
 
             Environnment5 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment5");
+            Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
             Sand = Content.Load<Texture2D>(@"Sprites\Environnment\sand");
             Sand_top = Content.Load<Texture2D>(@"Sprites\Environnment\sand_top");
             /*Environnment6 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment6");
