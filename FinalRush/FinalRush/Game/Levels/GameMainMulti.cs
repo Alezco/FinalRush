@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using System.Net.Sockets;
+using System.IO;
 
 namespace FinalRush
 {
@@ -15,7 +17,7 @@ namespace FinalRush
         // FIELDS
 
         public Player LocalPlayer;
-        public Multi multi;
+        //public Multi multi;
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<Enemy> enemies;
@@ -35,7 +37,7 @@ namespace FinalRush
             bonus = new List<Bonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
-            multi = Global.Multi;
+            //multi = Global.Multi;
             Global.GameMainMulti = this;
 
             #region Ennemis
@@ -146,12 +148,142 @@ namespace FinalRush
             #endregion
         }
 
+        #region Multi
+
+        TcpClient client;
+        string IP = "127.0.0.1";
+        int port = 1490;
+        int buffer_size = 2048;
+        byte[] readBuffer;
+        MemoryStream readStream, writeStream;
+        BinaryReader reader;
+        BinaryWriter writer;
+        public Player player, player2;
+
+
+        public void Initialize()
+        {
+            client = new TcpClient();
+            client.NoDelay = true;
+            client.Connect(IP, port);
+            readBuffer = new byte[buffer_size];
+            client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
+            readStream = new MemoryStream();
+            writeStream = new MemoryStream();
+            reader = new BinaryReader(readStream);
+            writer = new BinaryWriter(writeStream);
+            player = new Player();
+        }
+
+        private void StreamReceived(IAsyncResult ar)
+        {
+            int bytesRead = 0;
+
+            try
+            {
+                lock (client.GetStream())
+                    bytesRead = client.GetStream().EndRead(ar);
+            }
+            catch (Exception) { }
+
+            if (bytesRead == 0)
+            {
+                client.Close();
+                return;
+            }
+
+            byte[] data = new byte[bytesRead];
+
+            for (int i = 0; i < bytesRead; i++)
+                data[i] = readBuffer[i];
+
+            ProcessData(data);
+
+            client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
+        }
+
+        public void ProcessData(byte[] data)
+        {
+            readStream.SetLength(0);
+            readStream.Position = 0;
+
+            readStream.Write(data, 0, data.Length);
+            readStream.Position = 0;
+
+            Protocol p;
+
+            try
+            {
+                p = (Protocol)reader.ReadByte();
+
+                if (p == Protocol.Connected)
+                {
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    if (player2 == null)
+                    {
+                        player2 = new Player();
+                        player2.Hitbox = new Rectangle(player2.Hitbox.X + 50, player2.Hitbox.Y + 50, player2.Hitbox.Width, player2.Hitbox.Height);
+                        player2.Marco = Resources.Player2;
+
+                        writeStream.Position = 0;
+                        writer.Write((byte)Protocol.Connected);
+                        SendData(GetDataFromMemoryStream(writeStream));
+                    }
+                }
+                else if (p == Protocol.Disconnected)
+                {
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    player2 = null;
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private byte[] GetDataFromMemoryStream(MemoryStream ms)
+        {
+            byte[] result;
+
+            lock (ms)
+            {
+                int bytesWritten = (int)ms.Position;
+                result = new byte[bytesWritten];
+
+                ms.Position = 0;
+                ms.Read(result, 0, bytesWritten);
+            }
+
+            return result;
+        }
+
+        public void SendData(byte[] b)
+        {
+            try
+            {
+                lock (client.GetStream())
+                {
+                    client.GetStream().BeginWrite(b, 0, b.Length, null, null);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Client {0}:  {1}", IP, e.ToString());
+            }
+        }
+
+        #endregion
+
         // UPDATE & DRAW
 
         public void Update(MouseState souris, KeyboardState clavier)
         {
             GameTime gametime = new GameTime();
-            LocalPlayer.Update(souris, clavier, Walls, bonus);
+            //LocalPlayer.Update(souris, clavier, Walls, bonus);
+
             menu.Update(gametime);
             for (int i = 0; i < enemies2.Count; i++)
             {
@@ -170,7 +302,6 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
-            multi.Draw(spritebatch);
             if (LocalPlayer.Hitbox.X <= 400)
                 spritebatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             else if (LocalPlayer.Hitbox.X >= 4200)
@@ -179,7 +310,7 @@ namespace FinalRush
                 spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
             for (int i = 0; i <= 2; i++)
                 spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
-            LocalPlayer.Draw(spritebatch);
+            //LocalPlayer.Draw(spritebatch);
 
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spritebatch);
@@ -192,6 +323,11 @@ namespace FinalRush
 
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
+
+            if (player != null)
+                player.Draw(spritebatch);
+            if (player2 != null)
+                player2.Draw(spritebatch);
         }
     }
 }

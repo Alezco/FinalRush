@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,8 +84,8 @@ namespace FinalRush
                 {
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
-                    //player2 = new Player();
-                    //player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Y);
+                    player2 = new Player();
+                    player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Y);
                 }
                 else if (p == Protocol.Disconnected)
                 {
@@ -108,4 +108,4 @@ namespace FinalRush
                 player2.Draw(sb);
         }
     }
-}
+}*/

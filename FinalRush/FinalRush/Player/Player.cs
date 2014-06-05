@@ -33,6 +33,7 @@ namespace FinalRush
         Collisions collisions = new Collisions();
         GameMain main;
         MainMenu Main;
+        public Texture2D Marco = Resources.Marco;
 
         int compteur = 1;
         public int speed;
@@ -63,7 +64,7 @@ namespace FinalRush
             fallspeed = 5;
             Hitbox.Width = 36;
             Hitbox.Height = 40;
-            Hitbox = new Rectangle(50, 350, Hitbox.Width, Hitbox.Height);
+            Hitbox = new Rectangle(50, 300, Hitbox.Width, Hitbox.Height);
             framecolumn = 1;
             effect = SpriteEffects.None;
             Direction = Direction.Right;
@@ -427,7 +428,7 @@ namespace FinalRush
             switch (state) // Affichage des bons sprites en fonction de l'état, ça va être utile pour le tir, la mort, la prise d'un coup, switch arme etc.. 
             {
                 case "standing":
-                    spritebatch.Draw(Resources.Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "squat":
                     spritebatch.Draw(Resources.MarcoSquat, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);

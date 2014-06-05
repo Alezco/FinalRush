@@ -44,6 +44,7 @@ namespace FinalRush
         GameMain5 Main5;
         GameMain6 Main6;
         GameMainMulti MainMulti;
+        //Multi multi;
         SpriteFont piece_font;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
         bool HasPlayed;
@@ -208,6 +209,7 @@ namespace FinalRush
             Main5 = Global.GameMain5;
             Main6 = Global.GameMain6;
             MainMulti = Global.GameMainMulti;
+            //multi = Global.Multi;
             Global.MainMenu = this;
         }
 
@@ -1253,14 +1255,17 @@ namespace FinalRush
             if (element == @"Sprites\Menu\Create")
             {
                 gameState = GameState.Multi;
-                Global.Multi.Initialize();
+                //Global.MainMulti.Initialize();
             }
 
             if (element == @"Sprites\Menu\Join")
                 gameState = GameState.Multi;
 
             if (element == @"Sprites\Menu\ololol")
+            {
                 CreateGame(7);
+                MainMulti.Initialize();
+            }
 
             if (element == @"Sprites\Menu\Bouton_Boutique" && !total_piece_updated)
             {
