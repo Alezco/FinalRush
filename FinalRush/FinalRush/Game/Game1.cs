@@ -26,6 +26,7 @@ namespace FinalRush
         GameMain4 Main4;
         GameMain5 Main5;
         GameMain6 Main6;
+        GameMainMulti MainMulti;
         SpriteFont scoring, timer;
 
         public List<Bullets> bullets;
@@ -77,6 +78,7 @@ namespace FinalRush
             Main4 = new GameMain4();
             Main5 = new GameMain5();
             Main6 = new GameMain6();
+            MainMulti = new GameMainMulti();
             main = new MainMenu(this, 0f);
             reloading_instance = Resources.reload_sound.CreateInstance();
 
@@ -149,6 +151,11 @@ namespace FinalRush
             {
                 Main6.Update(Mouse.GetState(), Keyboard.GetState());
                 camera.Update(gameTime, main.player6);
+            }
+            else if (main.comptlevel == 7)
+            {
+                MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
+                camera.Update(gameTime, main.p7);
             }
             else
                 camera.Update(gameTime, Main.LocalPlayer);

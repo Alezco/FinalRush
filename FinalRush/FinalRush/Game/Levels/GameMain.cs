@@ -22,6 +22,7 @@ namespace FinalRush
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment;
+        Texture2D foreground = Resources.Foreground;
 
 
         // CONSTRUCTOR
@@ -174,6 +175,8 @@ namespace FinalRush
                 spritebatch.Draw(background, new Rectangle(3800, 0, 800, 480), Color.White);
             else
                 spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
+            for (int i = 0; i <= 2; i++)
+                spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
             LocalPlayer.Draw(spritebatch);
 
             foreach (Enemy enemy in enemies)

@@ -17,8 +17,8 @@ namespace FinalRush
         public static Texture2D Marco, MarcoSaut, MarcoSquat, MarcoTir, MarcoCut;
         public static Texture2D Player2;
         public static Texture2D Zombie, Elite;
-        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, /*Rock, Rock_top,*/Piques, Environnment4, Environnment5, /*Environnment6,*/ Roche, Roche_top;
-        public static Texture2D /*Foreground, Foreground2, Foreground3, Foreground4,*/ Foreground5/*, Foreground6*/;
+        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top;
+        public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
@@ -65,15 +65,18 @@ namespace FinalRush
             Environnment4 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment4");
             Roche = Content.Load<Texture2D>(@"Sprites\Environnment\roche");
             Roche_top = Content.Load<Texture2D>(@"Sprites\Environnment\roche_top");
-
             Environnment5 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment5");
-            Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
             Sand = Content.Load<Texture2D>(@"Sprites\Environnment\sand");
             Sand_top = Content.Load<Texture2D>(@"Sprites\Environnment\sand_top");
-            /*Environnment6 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment6");
+            Environnment6 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment6");
             Rock = Content.Load<Texture2D>(@"Sprites\Environnment\rock");
-            Rock_top = Content.Load<Texture2D>(@"Sprites\Environnment\rock_top");*/
-
+            Rock_top = Content.Load<Texture2D>(@"Sprites\Environnment\rock_top");
+            Foreground = Content.Load<Texture2D>(@"Sprites\Environnment\foreground1");
+            Foreground2 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground2");
+            Foreground3 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground3");
+            Foreground4 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground4");
+            Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
+            Foreground6 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground6");
 
             //Menu
 

@@ -357,7 +357,7 @@ namespace FinalRush
                 }
             }
             else if (clavier.IsKeyDown(Keys.A))
-                Hitbox = new Rectangle(50, 380, Hitbox.Width, Hitbox.Height);
+                Hitbox = new Rectangle(50, 370, Hitbox.Width, Hitbox.Height);
 
             #endregion
 

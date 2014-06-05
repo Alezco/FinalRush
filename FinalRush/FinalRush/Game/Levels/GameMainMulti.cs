@@ -15,6 +15,7 @@ namespace FinalRush
         // FIELDS
 
         public Player LocalPlayer;
+        public Multi multi;
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<Enemy> enemies;
@@ -22,7 +23,7 @@ namespace FinalRush
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment;
-
+        Texture2D foreground = Resources.Foreground;
 
         // CONSTRUCTOR
 
@@ -34,6 +35,7 @@ namespace FinalRush
             bonus = new List<Bonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
+            multi = Global.Multi;
             Global.GameMainMulti = this;
 
             #region Ennemis
@@ -52,7 +54,7 @@ namespace FinalRush
             #region Plateformes
             //Plateformes
 
-            Walls.Add(new Wall(425, 245, Resources.Platform, 50, 16, Color.IndianRed));
+            Walls.Add(new Wall(425, 245, Resources.Platform, 50, 16, Color.Green));
             Walls.Add(new Wall(130, 360, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(280, 300, Resources.Platform, 92, 16, Color.IndianRed));
             Walls.Add(new Wall(680, 365, Resources.Platform, 92, 16, Color.IndianRed));
@@ -168,12 +170,15 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
+            multi.Draw(spritebatch);
             if (LocalPlayer.Hitbox.X <= 400)
                 spritebatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             else if (LocalPlayer.Hitbox.X >= 4200)
                 spritebatch.Draw(background, new Rectangle(3800, 0, 800, 480), Color.White);
             else
                 spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
+            for (int i = 0; i <= 2; i++)
+                spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
             LocalPlayer.Draw(spritebatch);
 
             foreach (Enemy enemy in enemies)

@@ -89,7 +89,7 @@ namespace FinalRush
             //Sol
 
             for (int i = 0; i < 80; i++)
-                //if (i != 2 )
+                if (i != 20 )
                 Walls.Add(new Wall(64 * i, 416, Resources.Sand_top, 64, 64, Color.White));
             #endregion
 

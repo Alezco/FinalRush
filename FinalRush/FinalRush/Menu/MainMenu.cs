@@ -471,29 +471,6 @@ namespace FinalRush
             MediaPlayer.Play(Resources.MusiqueIntro);
             MediaPlayer.Volume = 0.6f;
             MediaPlayer.IsRepeating = true;
-            switch (gameState)
-            {
-                case GameState.MainMenu:
-                    break;
-                case GameState.InGame:
-                    break;
-                case GameState.InGame2:
-                    break;
-                case GameState.InGame3:
-                    break;
-                case GameState.InOptions:
-                    break;
-                case GameState.InPause:
-                    break;
-                case GameState.InClose:
-                    break;
-                case GameState.Won:
-                    break;
-                case GameState.GameOver:
-                    break;
-                default:
-                    break;
-            }
         }
 
         public bool EnJeu(bool enjeu)
@@ -548,7 +525,7 @@ namespace FinalRush
                     player5 = new Player();
                     break;
                 case 6:
-                    gameState = GameState.InGame4;
+                    gameState = GameState.InGame6;
                     MediaPlayer.Play(Resources.Musique3);
                     Main6 = new GameMain6();
                     player6 = new Player();
@@ -830,23 +807,23 @@ namespace FinalRush
                     p8.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
                     MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
 
-                    if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
+                    if (Global.Collisions.CollisionBonus(p7.Hitbox, MainMulti.bonus))
                     {
                         nb_pieces++;
                         SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player2.Hitbox, Main2.enemies))
+                    if (Global.Collisions.CollisionEnemy(p7.Hitbox, MainMulti.enemies))
                     {
                     }
-                    if (Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2))
+                    if (Global.Collisions.CollisionEnemy2(p7.Hitbox, MainMulti.enemies2))
                     {
                     }
-                    /*if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
+                    /*if (Global.Collisions.CollisionPiques(p7.Hitbox, Main2.piques))
                       {
                       }*/
-                    UpdateGame(player2, gameTime, 2, 4600, 30);
+                    UpdateGame(p7, gameTime, 2, 4600, 30);
                     break;
                 case GameState.Won:
                     foreach (GUIElement element in Won)
@@ -876,8 +853,10 @@ namespace FinalRush
                             gameState = GameState.InGame4;
                         else if (comptlevel == 5)
                             gameState = GameState.InGame5;
-                        else
+                        else if (comptlevel == 6)
                             gameState = GameState.InGame6;
+                        else
+                            gameState = GameState.InGameMulti;
                     }
                     pastkey = Keyboard.GetState();
                     foreach (GUIElement element in InPause)
@@ -1018,6 +997,9 @@ namespace FinalRush
                     break;
                 case GameState.InGame6:
                     Main6.Draw(spriteBatch);
+                    break;
+                case GameState.InGameMulti:
+                    MainMulti.Draw(spriteBatch);
                     break;
                 case GameState.InOptions:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

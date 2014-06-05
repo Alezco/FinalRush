@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace FinalRush
 {
@@ -83,7 +84,8 @@ namespace FinalRush
                 {
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
-                    Console.WriteLine(String.Format("Player has connected : {0} IP adress : {1}", id, ip));
+                    //player2 = new Player();
+                    //player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Y);
                 }
                 else if (p == Protocol.Disconnected)
                 {
@@ -100,12 +102,10 @@ namespace FinalRush
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Begin();
             if (player != null)
-            {
                 player.Draw(sb);
-            }
-            sb.End();
+            if (player2 != null)
+                player2.Draw(sb);
         }
     }
 }

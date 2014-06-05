@@ -23,7 +23,7 @@ namespace FinalRush
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment4;
-
+        Texture2D foreground = Resources.Foreground4;
 
         // CONSTRUCTOR
 
@@ -58,7 +58,7 @@ namespace FinalRush
             //Sol
 
             for (int i = 0; i < 80; i++)
-                //if (i != 2 )
+                if (i != 2 & i != 3 & i != 5 & i != 6 & i != 16 & i != 20 & i != 21 & i != 30)
                 Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
             #endregion
 
@@ -93,6 +93,8 @@ namespace FinalRush
                 spritebatch.Draw(background, new Rectangle(3800, 0, 800, 480), Color.White);
             else
                 spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
+            for (int i = 0; i <= 2; i++)
+                spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
             LocalPlayer.Draw(spritebatch);
 
             foreach (Enemy enemy in enemies)
