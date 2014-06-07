@@ -94,10 +94,8 @@ namespace FinalRush
             {
                 if ((newHitbox.Intersects(b.Hitbox)))
                 {
-                    b.Hitbox = new Rectangle(0, 0, Hitbox.Width, Hitbox.Height);
-                    Global.GameMain.bonus.Remove(b);
-                    Global.GameMain2.bonus.Remove(b);
-                    Global.GameMain3.bonus.Remove(b);
+                    b.Hitbox = new Rectangle(0, 0, 0, 0);
+                    //Global.GameMain.bonus.Remove(b);
                     collision = true;
                     break;
                 }
@@ -134,22 +132,34 @@ namespace FinalRush
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }
-
             return collision;
         }
 
-        public bool CollisionPiques(Rectangle Hitbox, List<Piques> piques)
+        public void CollisionPiques(Rectangle Hitbox, List<Piques> piques)
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-            bool collision = false;
 
             foreach (Piques p in piques)
             {
                 if (newHitbox.Intersects(p.Hitbox))
-                    Global.Player.health = 0;
+                    Global.Player.dead = true;
             }
+        }
 
-            return collision;
+        public void CollisionHealthBonus(Rectangle Hitbox, List<HealthBonus> healthbonus)
+        {
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+
+            foreach (HealthBonus hb in healthbonus)
+            {
+                if ((newHitbox.Intersects(hb.Hitbox)))
+                {
+                    hb.Hitbox = new Rectangle(0, 0, 0, 0);
+                    Global.Player.health += 10;
+                    if (Global.Player.health > 100)
+                        Global.Player.health = 100;
+                }
+            }
         }
 
         #endregion

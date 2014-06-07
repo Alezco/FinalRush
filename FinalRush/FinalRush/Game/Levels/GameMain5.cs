@@ -17,6 +17,7 @@ namespace FinalRush
         public Player LocalPlayer;
         public List<Wall> Walls;
         public List<Bonus> bonus;
+        public List<HealthBonus> healthbonus;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
         Random random = new Random();
@@ -33,6 +34,7 @@ namespace FinalRush
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
+            healthbonus = new List<HealthBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
             Global.GameMain5 = this;
@@ -89,8 +91,8 @@ namespace FinalRush
             //Sol
 
             for (int i = 0; i < 80; i++)
-                if (i != 20 )
-                Walls.Add(new Wall(64 * i, 416, Resources.Sand_top, 64, 64, Color.White));
+                if (i != 20)
+                    Walls.Add(new Wall(64 * i, 416, Resources.Sand_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus
@@ -136,6 +138,9 @@ namespace FinalRush
 
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
+
+            foreach (HealthBonus hb in healthbonus)
+                hb.Draw(spritebatch);
         }
     }
 }

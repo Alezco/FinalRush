@@ -16,6 +16,7 @@ namespace FinalRush
         public static GameMain6 GameMain6;
         public static MainMenu MainMenu;
         public static Bonus Bonus;
+        public static HealthBonus HealthBonus;
         public static Collisions Collisions;
         public static Wall Wall;
         public static GUIElement GUIElement;

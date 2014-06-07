@@ -17,6 +17,7 @@ namespace FinalRush
         public Player LocalPlayer;
         public List<Wall> Walls;
         public List<Bonus> bonus;
+        public List<HealthBonus> healthbonus;
         public List<MovingHorizontallyWall> movinghorizontallywalls;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
@@ -33,6 +34,7 @@ namespace FinalRush
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
+            healthbonus = new List<HealthBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
             movinghorizontallywalls = new List<MovingHorizontallyWall>();
@@ -59,7 +61,7 @@ namespace FinalRush
 
             for (int i = 0; i < 80; i++)
                 if (i != 2 & i != 3 & i != 5 & i != 6 & i != 16 & i != 20 & i != 21 & i != 30)
-                Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
+                    Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus
@@ -111,6 +113,9 @@ namespace FinalRush
 
             foreach (MovingHorizontallyWall mhw in movinghorizontallywalls)
                 mhw.Draw(spritebatch);
+
+            foreach (HealthBonus hb in healthbonus)
+                hb.Draw(spritebatch);
         }
     }
 }

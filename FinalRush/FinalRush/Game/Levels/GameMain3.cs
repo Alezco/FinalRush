@@ -17,6 +17,7 @@ namespace FinalRush
         public Player LocalPlayer;
         public List<Wall> Walls;
         public List<Bonus> bonus;
+        public List<HealthBonus> healthbonus;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
         public List<Piques> piques;
@@ -33,6 +34,7 @@ namespace FinalRush
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
+            healthbonus = new List<HealthBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
             piques = new List<Piques>();
@@ -69,7 +71,7 @@ namespace FinalRush
             Walls.Add(new Wall(3490, 290, Resources.Platform, 96, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3400, 210, Resources.Platform, 96, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3640, 458, Resources.Platform, 40, 12, Color.DodgerBlue));
-            Walls.Add(new Wall(3775, 410, Resources.Platform, 96, 12, Color.DodgerBlue));       
+            Walls.Add(new Wall(3775, 410, Resources.Platform, 96, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3550, 140, Resources.Platform, 96, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3700, 80, Resources.Platform, 300, 12, Color.DodgerBlue));
             Walls.Add(new Wall(3700, 190, Resources.Platform, 300, 12, Color.DodgerBlue));
@@ -176,7 +178,7 @@ namespace FinalRush
             else
                 spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
             for (int i = 0; i <= 2; i++)
-                spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White); 
+                spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
             LocalPlayer.Draw(spritebatch);
 
             foreach (Wall wall in Walls)
@@ -193,6 +195,9 @@ namespace FinalRush
 
             foreach (Piques p in piques)
                 p.Draw(spritebatch);
+
+            foreach (HealthBonus hb in healthbonus)
+                hb.Draw(spritebatch);
         }
     }
 }

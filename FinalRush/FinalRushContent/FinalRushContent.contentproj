@@ -550,7 +550,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Environnment\coin.png">
+    <Compile Include="Sprites\Bonus\coin.png">
       <Name>coin</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -825,6 +825,13 @@
   <ItemGroup>
     <Compile Include="Sprites\Menu\level4_block.png">
       <Name>level4_block</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Bonus\HealthBonus.png">
+      <Name>HealthBonus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

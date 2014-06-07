@@ -17,12 +17,13 @@ namespace FinalRush
         public static Texture2D Marco, MarcoSaut, MarcoSquat, MarcoTir, MarcoCut;
         public static Texture2D Player2;
         public static Texture2D Zombie, Elite;
-        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Coin, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top;
+        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
         public static Texture2D HealthBar, bullet;
+        public static Texture2D Coin, Health;
         public static SpriteFont ammo_font, piece_font;
 
         // LOAD CONTENT
@@ -54,7 +55,6 @@ namespace FinalRush
             Herbe = Content.Load<Texture2D>(@"Sprites\Environnment\herbe");
             Ground = Content.Load<Texture2D>(@"Sprites\Environnment\ground");
             Platform = Content.Load<Texture2D>(@"Sprites\Environnment\platform");
-            Coin = Content.Load<Texture2D>(@"Sprites\Environnment\coin");
             Environnment2 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment2");
             Herbe_neige = Content.Load<Texture2D>(@"Sprites\Environnment\herbe_neige");
             Environnment3 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment3");
@@ -78,6 +78,10 @@ namespace FinalRush
             Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
             Foreground6 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground6");
 
+            //Bonus
+
+            Coin = Content.Load<Texture2D>(@"Sprites\Bonus\coin");
+            Health = Content.Load<Texture2D>(@"Sprites\Bonus\HealthBonus");
             //Menu
 
             MarcoWon = Content.Load<Texture2D>(@"Sprites\Menu\MarcoHappy");
