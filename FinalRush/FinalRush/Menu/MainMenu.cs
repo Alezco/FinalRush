@@ -51,7 +51,7 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         int compt = 0;
-        int lvlcomplete = 10;
+        int lvlcomplete = 0;
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -161,29 +161,33 @@ namespace FinalRush
             Chapitre1.Add(new GUIElement(@"Sprites\Menu\Level1"));
             Chapitre1.Add(new GUIElement(@"Sprites\Menu\fleche_droite"));
 
-
             Chapitre2.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre2.Add(new GUIElement(@"Sprites\Menu\Level2"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Level2_block"));
             Chapitre2.Add(new GUIElement(@"Sprites\Menu\fleche_droite2"));
             Chapitre2.Add(new GUIElement(@"Sprites\Menu\fleche_gauche"));
 
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\Level3"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Level3_block"));
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_droite3"));
             Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_gauche2"));
 
             Chapitre4.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre4.Add(new GUIElement(@"Sprites\Menu\Level4"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Level4_block"));
             Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_droite4"));
             Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_gauche3"));
 
             Chapitre5.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre5.Add(new GUIElement(@"Sprites\Menu\Level5"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Level5_block"));
             Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_droite5"));
             Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_gauche4"));
 
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\Level6"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Level6_block"));
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\fleche_gauche5"));
 
             Multi.Add(new GUIElement(@"Sprites\Menu\Join"));
@@ -394,7 +398,16 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(-70, 0);
+            if (lvlcomplete >= 1)
+            {
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2_block").MoveElement(-70000, 0);
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(-70, 0);
+            }
+            else
+            {
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2_block").MoveElement(-70, 0);
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(-70000, 0);
+            }
             Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite2").MoveElement(0, 140);
             Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche").MoveElement(-139, 140);
 
@@ -405,7 +418,16 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(-70, 0);
+            if (lvlcomplete >= 2)
+            {
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3_block").MoveElement(-70000, 0);
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(-70, 0);
+            }
+            else
+            {
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3_block").MoveElement(-70, 0);
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(-70000, 0);
+            }
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite3").MoveElement(0, 140);
             Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche2").MoveElement(-139, 140);
 
@@ -416,7 +438,16 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(-70, 0);
+            if (lvlcomplete >= 3)
+            {
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4_block").MoveElement(-70000, 0);
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(-70, 0);
+            }
+            else
+            {
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4_block").MoveElement(-70, 0);
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(-70000, 0);
+            }
             Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite4").MoveElement(0, 140);
             Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche3").MoveElement(-139, 140);
 
@@ -427,7 +458,16 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(-70, 0);
+            if (lvlcomplete >= 4)
+            {
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5_block").MoveElement(-70000, 0);
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(-70, 0);
+            }
+            else
+            {
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5_block").MoveElement(-70, 0);
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(-70000, 0);
+            }
             Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite5").MoveElement(0, 140);
             Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche4").MoveElement(-139, 140);
 
@@ -438,7 +478,16 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70, 0);
+            if (lvlcomplete >= 5)
+            {
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6_block").MoveElement(-70000, 0);
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70, 0);
+            }
+            else
+            {
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6_block").MoveElement(-70, 0);
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70000, 0);
+            }
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-139, 140);
 
             foreach (GUIElement element in Multi)
