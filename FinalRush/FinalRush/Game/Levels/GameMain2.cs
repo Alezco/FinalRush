@@ -142,7 +142,7 @@ namespace FinalRush
             #endregion
 
             #region Bonus
-
+            healthbonus.Add(new HealthBonus(1500, 320, Resources.Health, 20, 20, Color.White));
             #endregion
         }
 

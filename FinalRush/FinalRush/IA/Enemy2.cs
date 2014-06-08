@@ -67,15 +67,26 @@ namespace FinalRush
                     i--;
                 }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+            {
+                Hitbox.Width = 0;
+                Hitbox.Height = 0;
+            }
+
 
             #endregion
 
             #region Animation
 
-            if (framecolumn > 8)
-                framecolumn = 1;
-            else if (compt % 2 == 0)
-                framecolumn++;
+            if (distance2player != 0)
+            {
+                if (framecolumn > 8)
+                    framecolumn = 1;
+                else if (compt % 2 == 0)
+                    framecolumn++;
+            }
+            else
+                framecolumn = 9;
 
             #endregion
 

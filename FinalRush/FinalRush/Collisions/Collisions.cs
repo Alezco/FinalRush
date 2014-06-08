@@ -15,8 +15,7 @@ namespace FinalRush
             Global.Collisions = this;
         }
 
-        #region Collisions
-
+        #region Collisions Walls
         public bool CollisionRight(Rectangle Hitbox, List<Wall> walls, int speed) //Collision à droite du perso
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X + speed, Hitbox.Y, Hitbox.Width, Hitbox.Height); //représente la Hitbox du perso à l'instant suivant
@@ -84,6 +83,9 @@ namespace FinalRush
 
             return collision;
         }
+        #endregion
+
+        #region Collisions Bonus
 
         public bool CollisionBonus(Rectangle Hitbox, List<Bonus> bonus)
         {
@@ -100,10 +102,27 @@ namespace FinalRush
                     break;
                 }
             }
-
             return collision;
         }
 
+        public void CollisionHealthBonus(Rectangle Hitbox, List<HealthBonus> healthbonus)
+        {
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+
+            foreach (HealthBonus hb in healthbonus)
+            {
+                if ((newHitbox.Intersects(hb.Hitbox)))
+                {
+                    hb.Hitbox = new Rectangle(0, 0, 0, 0);
+                    Global.Player.health += 20;
+                    if (Global.Player.health > 100)
+                        Global.Player.health = 100;
+                }
+            }
+        }
+        #endregion
+
+        #region Collisions Ennemis
         public bool CollisionEnemy(Rectangle Hitbox, List<Enemy> enemy)
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
@@ -134,7 +153,9 @@ namespace FinalRush
             }
             return collision;
         }
+        #endregion
 
+        #region Collisions Piques
         public void CollisionPiques(Rectangle Hitbox, List<Piques> piques)
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
@@ -145,23 +166,6 @@ namespace FinalRush
                     Global.Player.dead = true;
             }
         }
-
-        public void CollisionHealthBonus(Rectangle Hitbox, List<HealthBonus> healthbonus)
-        {
-            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-
-            foreach (HealthBonus hb in healthbonus)
-            {
-                if ((newHitbox.Intersects(hb.Hitbox)))
-                {
-                    hb.Hitbox = new Rectangle(0, 0, 0, 0);
-                    Global.Player.health += 10;
-                    if (Global.Player.health > 100)
-                        Global.Player.health = 100;
-                }
-            }
-        }
-
         #endregion
     }
 }

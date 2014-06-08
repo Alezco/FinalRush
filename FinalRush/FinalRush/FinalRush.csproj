@@ -73,12 +73,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collisions\Bonus.cs" />
+    <Compile Include="Bonus\Bonus.cs" />
     <Compile Include="Collisions\Collisions.cs" />
     <Compile Include="Collisions\MovingHorizontallyWall.cs" />
     <Compile Include="Collisions\Wall.cs" />
     <Compile Include="Game\Levels\GameMainMulti.cs" />
-    <Compile Include="HealthBonus.cs" />
+    <Compile Include="Bonus\HealthBonus.cs" />
     <Compile Include="Multijoueur\Delegates.cs" />
     <Compile Include="Game\Levels\GameMain3.cs" />
     <Compile Include="Game\Levels\GameMain2.cs" />

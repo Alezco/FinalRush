@@ -55,6 +55,12 @@ namespace FinalRush
                     i--;
                 }
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+            {
+                Hitbox.Width = 0;
+                Hitbox.Height = 0;
+            }
             #endregion
 
             #region Animation

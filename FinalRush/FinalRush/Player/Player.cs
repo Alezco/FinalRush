@@ -102,7 +102,6 @@ namespace FinalRush
         }
         #endregion
 
-
         // UPDATE & DRAW
 
         public void Update(MouseState souris, KeyboardState clavier, List<Wall> walls, List<Bonus> bonus)
@@ -188,6 +187,23 @@ namespace FinalRush
 
             #endregion
 
+            #region Couteau
+
+            if (clavier.IsKeyDown(Keys.D) && state == "standing")
+            {
+
+                SoundEffectInstance couteau_sound_instance = Resources.couteau.CreateInstance();
+                couteau_sound_instance.Play();
+                framecolumn = 1;
+                compteur = 1;
+                state = "cut";
+                Hitbox.Width = 50;
+                Hitbox.Y -= 16;
+                Hitbox.Height = 55;
+            }
+
+            #endregion
+
             #region Déplacements
 
             //Le sprite et la hitbox accroupi quand le personnage est baissé ou coincé sous un mur
@@ -209,18 +225,7 @@ namespace FinalRush
                     Hitbox.Y = Hitbox.Y - 15;
                 }
             }
-            if (clavier.IsKeyDown(Keys.D) && state == "standing")
-            {
-
-                SoundEffectInstance couteau_sound_instance = Resources.couteau.CreateInstance();
-                couteau_sound_instance.Play();
-                framecolumn = 1;
-                compteur = 1;
-                state = "cut";
-                Hitbox.Width = 50;
-                Hitbox.Y -= 16;
-                Hitbox.Height = 55;
-            }
+          
 
             // Tir Marco
             if (clavier.IsKeyDown(Keys.Q) && state == "standing") //On tire avec "Q" et debout uniquement 
