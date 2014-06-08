@@ -366,9 +366,13 @@ namespace FinalRush
                     compteur = 1;
                 }
             }
+            #endregion
+
+            #region Déplacements test
             else if (clavier.IsKeyDown(Keys.A))
                 Hitbox = new Rectangle(50, 370, Hitbox.Width, Hitbox.Height);
-
+            else if (clavier.IsKeyDown(Keys.F))
+                Hitbox = new Rectangle(4500, 100, Hitbox.Width, Hitbox.Height);
             #endregion
 
             #region Saut

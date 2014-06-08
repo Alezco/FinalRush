@@ -14,6 +14,7 @@ namespace FinalRush
         public Rectangle Hitbox;
         Direction Direction;
         int speed;
+        int pv;
         int fallspeed;
         int speedjump = 1;
         int random;
@@ -23,8 +24,9 @@ namespace FinalRush
         int distance2player = 2000;
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
-        public bool isdead, a_portee;
+        public bool a_portee;
         SoundEffectInstance shot_sound_instance;
+        Color color;
 
         Random rand = new Random();
         SpriteEffects effect;
@@ -34,6 +36,7 @@ namespace FinalRush
         {
             framecolumn = 1;
             speed = 1;
+            pv = 3;
             fallspeed = 5;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
@@ -45,7 +48,6 @@ namespace FinalRush
             bullets = Global.Player.bullets;
             enemy_bullets = new List<Bullets>();
             Global.Enemy2 = this;
-            isdead = false;
             a_portee = false;
             shot_sound_instance = Resources.tir_rafale.CreateInstance();
         }
@@ -57,15 +59,21 @@ namespace FinalRush
 
             #region Mort Ennemi
             for (int i = 0; i < bullets.Count(); i++)
+            {
                 if (Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
                 {
-                    Hitbox.Width = 0;
-                    Hitbox.Height = 0;
-                    isdead = true;
                     bullets[i].isVisible = false;
                     bullets.RemoveAt(i);
                     i--;
+                    if (pv > 1)
+                        pv--;
+                    else
+                    {
+                        Hitbox.Width = 0;
+                        Hitbox.Height = 0;
+                    }
                 }
+            }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
             {
@@ -248,12 +256,24 @@ namespace FinalRush
                     effect = SpriteEffects.None;
                     break;
             }
+            switch (pv)
+            {
+                case 1:
+                    color.A = 100;
+                    break;
+                case 2:
+                    color.A = 200;
+                    break;
+                case 3:
+                    color = Color.White;
+                    break;
+            }
         }
 
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
+            spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
         }
     }
 }

@@ -150,7 +150,7 @@ namespace FinalRush
             healthbonus.Add(new HealthBonus(1800, 396, Resources.Health, 20, 20, Color.White));
 
             speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
-    
+
             #endregion
         }
 
@@ -161,15 +161,7 @@ namespace FinalRush
             GameTime gametime = new GameTime();
             LocalPlayer.Update(souris, clavier, Walls, bonus);
             menu.Update(gametime);
-            for (int i = 0; i < enemies2.Count; i++)
-            {
-                for (int j = 0; j < Global.Player.bullets.Count; j++)
-                    if (Global.Enemy2.Hitbox.Intersects(new Rectangle((int)Global.Player.bullets[j].position.X, (int)Global.Player.bullets[j].position.Y, 10, 10)))
-                    {
-                        enemies2.RemoveAt(i);
-                        i--;
-                    }
-            }
+
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)

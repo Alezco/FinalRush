@@ -156,9 +156,12 @@ namespace FinalRush
         {
             GameTime gametime = new GameTime();
             LocalPlayer.Update(souris, clavier, Walls, bonus);
+            menu.Update(gametime);
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
-            menu.Update(gametime);
+
+            foreach (Enemy2 enemy2 in enemies2)
+                enemy2.Update(Walls);
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -174,6 +177,9 @@ namespace FinalRush
             LocalPlayer.Draw(spritebatch);
             foreach (Enemy e in enemies)
                 e.Draw(spritebatch);
+
+            foreach (Enemy2 enemy2 in enemies2)
+                enemy2.Draw(spritebatch);
 
             foreach (Wall wall in Walls)
                 wall.Draw(spritebatch);
