@@ -19,7 +19,7 @@ namespace FinalRush
         public static Texture2D Zombie, Elite;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
-        public static Texture2D MarcoWon, Scenario;
+        public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
         public static Texture2D HealthBar, bullet;
@@ -87,6 +87,11 @@ namespace FinalRush
             //Menu
 
             MarcoWon = Content.Load<Texture2D>(@"Sprites\Menu\MarcoHappy");
+            lvl2_block = Content.Load<Texture2D>(@"Sprites\Menu\level2_block");
+            lvl3_block = Content.Load<Texture2D>(@"Sprites\Menu\level3_block");
+            lvl4_block = Content.Load<Texture2D>(@"Sprites\Menu\level4_block");
+            lvl5_block = Content.Load<Texture2D>(@"Sprites\Menu\level5_block");
+            lvl6_block = Content.Load<Texture2D>(@"Sprites\Menu\level6_block");
             Scenario = Content.Load<Texture2D>(@"Sprites\Menu\Scenario");
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");
 

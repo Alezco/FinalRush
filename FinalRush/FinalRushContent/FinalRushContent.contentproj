@@ -830,14 +830,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Bonus\HealthBonus.jpg">
+    <Compile Include="Sprites\Bonus\HealthBonus.png">
       <Name>HealthBonus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Bonus\SpeedBonus.jpg">
+    <Compile Include="Sprites\Bonus\SpeedBonus.png">
       <Name>SpeedBonus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
