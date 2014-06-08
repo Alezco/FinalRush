@@ -9,7 +9,7 @@ namespace FinalRush
 {
     class Collisions
     {
-
+        public bool collision_speed = false;
         public Collisions()
         {
             Global.Collisions = this;
@@ -117,6 +117,20 @@ namespace FinalRush
                     Global.Player.health += 20;
                     if (Global.Player.health > 100)
                         Global.Player.health = 100;
+                }
+            }
+        }
+
+        public void CollisionSpeedBonus(Rectangle Hitbox, List<VitesseBonus> speedbonus, GameTime gameTime)
+        {
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+
+            foreach (VitesseBonus sb in speedbonus)
+            {
+                if ((newHitbox.Intersects(sb.Hitbox)))
+                {
+                    sb.Hitbox = new Rectangle(0, 0, 0, 0);
+                    collision_speed = true;
                 }
             }
         }

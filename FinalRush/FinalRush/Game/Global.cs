@@ -29,5 +29,6 @@ namespace FinalRush
         public static GameMainMulti GameMainMulti;
         public static Piques Piques;
         public static MovingHorizontallyWall MovingHorizontallyWall;
+        public static VitesseBonus SpeedBonus;
     }
 }

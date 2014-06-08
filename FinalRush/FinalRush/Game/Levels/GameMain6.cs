@@ -18,6 +18,7 @@ namespace FinalRush
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
+        public List<VitesseBonus> speedbonus;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
         Random random = new Random();
@@ -35,6 +36,7 @@ namespace FinalRush
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
             healthbonus = new List<HealthBonus>();
+            speedbonus = new List<VitesseBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
             Global.GameMain6 = this;
@@ -78,6 +80,7 @@ namespace FinalRush
             //bonus.Add(new Bonus(2816, 332, Resources.Coin, 20, 20, Color.White));
             //bonus.Add(new Bonus(3200, 140, Resources.Coin, 20, 20, Color.White));
             //bonus.Add(new Bonus(4020, 320, Resources.Coin, 20, 20, Color.White));
+            speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
             #endregion
         }
 
@@ -120,6 +123,9 @@ namespace FinalRush
 
             foreach (HealthBonus hb in healthbonus)
                 hb.Draw(spritebatch);
+
+            foreach (VitesseBonus sb in speedbonus)
+                sb.Draw(spritebatch);
         }
     }
 }

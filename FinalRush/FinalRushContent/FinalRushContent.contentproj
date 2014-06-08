@@ -830,8 +830,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Bonus\HealthBonus.png">
+    <Compile Include="Sprites\Bonus\HealthBonus.jpg">
       <Name>HealthBonus</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Bonus\SpeedBonus.jpg">
+      <Name>SpeedBonus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

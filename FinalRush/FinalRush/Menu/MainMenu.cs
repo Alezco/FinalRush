@@ -64,7 +64,7 @@ namespace FinalRush
 
         public SpriteFont font;
         public string text, piece_text;
-        public float time;
+        public float time, timer_bonus;
         public int score = 0;
         private Vector2 position;
         public bool started;
@@ -558,6 +558,13 @@ namespace FinalRush
         public void UpdateGame(Player player, GameTime gameTime, int level, int distanceToWin, int timeToLoose)
         {
             #region Timer
+            if (Global.Collisions.collision_speed)
+            {
+                GameTime timer_b = new GameTime();
+                timer_bonus += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (timer_bonus > 10)
+                    Global.Collisions.collision_speed = false;
+            }
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (started)
@@ -666,7 +673,9 @@ namespace FinalRush
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
+
                     Global.Collisions.CollisionHealthBonus(player.Hitbox, Main.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player.Hitbox, Main.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
@@ -692,6 +701,7 @@ namespace FinalRush
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus,gameTime);
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -715,8 +725,10 @@ namespace FinalRush
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
+
                     Global.Collisions.CollisionPiques(player3.Hitbox, Main3.piques);
                     Global.Collisions.CollisionHealthBonus(player3.Hitbox, Main3.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player3.Hitbox, Main3.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
@@ -739,7 +751,9 @@ namespace FinalRush
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
+
                     Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
@@ -766,7 +780,9 @@ namespace FinalRush
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
+
                     Global.Collisions.CollisionHealthBonus(player5.Hitbox, Main5.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player5.Hitbox, Main5.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
@@ -793,7 +809,9 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {

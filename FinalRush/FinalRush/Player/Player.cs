@@ -106,6 +106,10 @@ namespace FinalRush
 
         public void Update(MouseState souris, KeyboardState clavier, List<Wall> walls, List<Bonus> bonus)
         {
+            if (Global.Collisions.collision_speed)
+                speed = 6;
+            else
+                speed = 4;
             GameTime gametime;
             gametime = new GameTime();
             Main.Update(gametime);
@@ -298,11 +302,11 @@ namespace FinalRush
                     if (clavier.IsKeyDown(Keys.Right) && state != "squat")          // Permet de bouger à droite
                     {
                         // Droite si pas de collisions et si le perso est encore sur l'écran
-                        if (!collisions.CollisionRight(Hitbox, walls, this.speed))
+                        if (!collisions.CollisionRight(Hitbox, walls, speed))
                         {
-                            this.Hitbox.X += this.speed;
+                            this.Hitbox.X += speed;
                             this.Direction = Direction.Right;
-                            if (collisions.CollisionDown(Hitbox, walls, this.speed))
+                            if (collisions.CollisionDown(Hitbox, walls, speed))
                                 this.Animate(1, 15, 2);
                         }
                         else
