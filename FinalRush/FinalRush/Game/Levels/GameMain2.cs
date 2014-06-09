@@ -49,6 +49,11 @@ namespace FinalRush
             enemies.Add(new Enemy(1302, 300, Resources.Zombie));
             enemies.Add(new Enemy(1302, 300, Resources.Zombie));
             enemies.Add(new Enemy(1150, 340, Resources.Zombie));
+
+            enemies.Add(new Enemy(4500, 340, Resources.Zombie));
+            enemies2.Add(new Enemy2(4500, 340, Resources.Zombie));
+            enemies2.Add(new Enemy2(1150, 340, Resources.Zombie));
+            enemies2.Add(new Enemy2(1150, 340, Resources.Zombie));
             #endregion
 
             #region Plateformes
@@ -144,6 +149,8 @@ namespace FinalRush
             #endregion
 
             #region Bonus
+            bonus.Add(new Bonus(4000, 100, Resources.Coin, 20, 20, Color.White));
+
             healthbonus.Add(new HealthBonus(1500, 320, Resources.Health, 20, 20, Color.White));
 
             speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));

@@ -19,6 +19,7 @@ namespace FinalRush
         int speedjump = 1;
         int random;
         int framecolumn;
+        int origin;
         SoundEffectInstance mort_enemies2;
         int compt = 0;
         bool left;
@@ -37,7 +38,7 @@ namespace FinalRush
         public Enemy2(int x, int y, Texture2D newTexture)
         {
             framecolumn = 1;
-            speed = 1;
+            speed = 3;
             pv = 3;
             mort_enemies2 = Resources.enemies_sound.CreateInstance();
             fallspeed = 5;
@@ -53,6 +54,7 @@ namespace FinalRush
             Global.Enemy2 = this;
             a_portee = false;
             shot_sound_instance = Resources.tir_rafale.CreateInstance();
+            origin = Hitbox.X;
         }
 
         public void Update(List<Wall> walls)
@@ -149,12 +151,12 @@ namespace FinalRush
                     else
                         if (distance2player > 200 || distance2player <= -200)
                         {
-                            if (this.Hitbox.X <= 2089)
+                            if (this.Hitbox.X <= origin - 200)
                             {
                                 left = false;
                                 compt = 1;
                             }
-                            else if (this.Hitbox.X >= 2750)
+                            else if (this.Hitbox.X >= origin + 200)
                             {
                                 left = true;
                                 compt = 1;
@@ -163,7 +165,7 @@ namespace FinalRush
             }
             if (left)
             {
-                if (!collisions.CollisionLeft(Hitbox, walls, speed))
+                if (!collisions.CollisionLeft(Hitbox, walls, speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
                 {
                     this.Hitbox.X -= speed;
                     this.Direction = Direction.Left;
@@ -177,7 +179,7 @@ namespace FinalRush
 
             if (!left)
             {
-                if (!collisions.CollisionRight(Hitbox, walls, speed))
+                if (!collisions.CollisionRight(Hitbox, walls, speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
                 {
                     this.Hitbox.X += speed;
                     this.Direction = Direction.Right;

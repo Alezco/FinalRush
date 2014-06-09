@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using FinalRush.Game.Levels;
 
 namespace FinalRush
 {
@@ -27,6 +28,11 @@ namespace FinalRush
         Texture2D background = Resources.Environnment4;
         Texture2D foreground = Resources.Foreground4;
 
+        // Editeur
+        static Editeur edit = new Editeur();
+        int[,] map = edit.Edition(4);
+        int size = 64;
+
         // CONSTRUCTOR
 
         public GameMain4()
@@ -42,36 +48,50 @@ namespace FinalRush
             movinghorizontallywalls = new List<MovingHorizontallyWall>();
             Global.GameMain4 = this;
 
-            #region Ennemis
-            //Ennemis
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                for (int y = 0; y < map.GetLength(0); y++)
+                {
+                    int number = map[y, x];
+                    if (number == 1)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Roche_top, size, size, Color.White));
+                    if (number == 2)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Roche, size, size, Color.White));
+                    if (number == 3)
+                        enemies.Add(new Enemy(x * size, y * size, Resources.Zombie));
+                    if (number == 4)
+                        enemies2.Add(new Enemy2(x * size, y * size, Resources.Elite));
 
-            //enemies.Add(new Enemy(1100, 350, Resources.Zombie));
-            movinghorizontallywalls.Add(new MovingHorizontallyWall(435, 345, Resources.Platform, 50, 16, 425, 445, Color.IndianRed));
+                }
 
-            #endregion
+            }
 
             #region Plateformes
             //Plateformes
 
-            Walls.Add(new Wall(425, 245, Resources.Platform, 90, 16, Color.IndianRed));
+            Walls.Add(new Wall(425, 275, Resources.Platform, 90, 16, Color.FloralWhite));
+            Walls.Add(new Wall(560, 220, Resources.Platform, 90, 16, Color.FloralWhite));
+            Walls.Add(new Wall(695, 170, Resources.Platform, 256, 16, Color.FloralWhite));
+            Walls.Add(new Wall(1030, 220, Resources.Platform, 90, 16, Color.FloralWhite));
+            Walls.Add(new Wall(1344, 470, Resources.Platform, 384, 16, Color.FloralWhite));
 
             #endregion
 
             #region Terrain
 
-            //Sol
-
-            for (int i = 0; i < 80; i++)
-                if (i != 2 & i != 3 & i != 5 & i != 6 & i != 16 & i != 20 & i != 21 & i != 30)
-                    Walls.Add(new Wall(64 * i, 416, Resources.Roche_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus
-            //Bonus
 
-            //bonus.Add(new Bonus(700, 345, Resources.Coin, 20, 20, Color.White));
-            speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
-
+            bonus.Add(new Bonus(812, 270, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(1045, 200, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(1526, 450, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(2200, 396, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(2646, 332, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(4200, 150, Resources.Coin, 20, 20, Color.White));
+            speedbonus.Add(new VitesseBonus(512, 332, Resources.Speed, 20, 20, Color.White));
+            speedbonus.Add(new VitesseBonus(3050, 332, Resources.Speed, 20, 20, Color.White));
+            healthbonus.Add(new HealthBonus(1085, 200, Resources.Health, 20, 20, Color.White));
             #endregion
         }
 

@@ -51,7 +51,7 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         int compt = 0;
-        int lvlcomplete = 0;  //niveaux terminés
+        int lvlcomplete = 10;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
