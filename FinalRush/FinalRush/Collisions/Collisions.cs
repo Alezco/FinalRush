@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace FinalRush
 {
     class Collisions
     {
         public bool collision_speed = false;
+        SoundEffectInstance bonus_bruitages;
+
         public Collisions()
         {
             Global.Collisions = this;
+            bonus_bruitages = Resources.bonus_bruitage.CreateInstance();
         }
 
         #region Collisions Walls
@@ -113,6 +117,7 @@ namespace FinalRush
             {
                 if ((newHitbox.Intersects(hb.Hitbox)))
                 {
+                    bonus_bruitages.Play();
                     hb.Hitbox = new Rectangle(0, 0, 0, 0);
                     Global.Player.health += 20;
                     if (Global.Player.health > 100)
@@ -129,6 +134,7 @@ namespace FinalRush
             {
                 if ((newHitbox.Intersects(sb.Hitbox)))
                 {
+                    bonus_bruitages.Play();
                     sb.Hitbox = new Rectangle(0, 0, 0, 0);
                     collision_speed = true;
                 }

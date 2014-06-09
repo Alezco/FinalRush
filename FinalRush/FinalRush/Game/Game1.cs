@@ -203,7 +203,7 @@ namespace FinalRush
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(timer, "Bravo, tu as termine le niveau en " + main.Text + " secondes", new Vector2(Window.ClientBounds.Width / 2 - 300, 200), Color.White);
-                spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 300), Color.White);
+                spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 330), Color.White);
                 spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2 - 70, 250), Color.White);
                 spriteBatch.End();
             }

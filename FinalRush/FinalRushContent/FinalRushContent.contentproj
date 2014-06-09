@@ -140,8 +140,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SpriteFonts\TimerFont.spritefont">
-      <Name>TimerFont</Name>
+    <Compile Include="SpriteFonts\nb_enemies_killed.spritefont">
+      <Name>nb_enemies_killed</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
@@ -841,6 +841,27 @@
       <Name>SpeedBonus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SpriteFonts\TimerFont.spritefont">
+      <Name>TimerFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\Bruitages\Bonus_Bruitages.mp3">
+      <Name>Bonus_Bruitages</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\Bruitages\Mort_Enemies.mp3">
+      <Name>Mort_Enemies</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

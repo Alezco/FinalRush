@@ -62,7 +62,7 @@ namespace FinalRush
         int compteurpourframecolumn = 1;
         Texture2D fond_menu, fond_win, fond_gameover, fond_how2play;
 
-        public SpriteFont font;
+        public SpriteFont font,nb_enemies_killed;
         public string text, piece_text;
         public float time, timer_bonus;
         public int score = 0;
@@ -263,6 +263,7 @@ namespace FinalRush
             fond_win = content.Load<Texture2D>(@"Sprites\Menu\Won");
             fond_gameover = content.Load<Texture2D>(@"Sprites\Menu\GameOver");
             Font = content.Load<SpriteFont>(@"SpriteFonts\TimerFont");
+            nb_enemies_killed = content.Load<SpriteFont>(@"SpriteFonts\nb_enemies_killed");
             Intro_fond = content.Load<Texture2D>(@"Sprites\Menu\Intro\Intro_Fond");
             foreach (GUIElement element in Intro)
             {
@@ -712,7 +713,7 @@ namespace FinalRush
                     /*if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
                       {
                       }*/
-                    UpdateGame(player2, gameTime, 2, 4600, 30);
+                    UpdateGame(player2, gameTime, 2, 4600, 300);
                     break;
                 case GameState.InGame3:
                     comptlevel = 3;
@@ -1044,6 +1045,7 @@ namespace FinalRush
                     foreach (GUIElement element in Won)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + (Global.Enemy.enemy_dead+Global.Enemy2.enemy2_dead) + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

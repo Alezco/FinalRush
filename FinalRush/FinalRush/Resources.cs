@@ -21,7 +21,7 @@ namespace FinalRush
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4;
-        public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau;
+        public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage,enemies_sound;
         public static Texture2D HealthBar, bullet;
         public static Texture2D Coin, Health, Speed;
         public static SpriteFont ammo_font, piece_font;
@@ -119,6 +119,8 @@ namespace FinalRush
             reload_sound = Content.Load<SoundEffect>(@"Sons\Bruitages\reload_sound");
             tir_rafale = Content.Load<SoundEffect>(@"Sons\Bruitages\tir_rafale");
             couteau = Content.Load<SoundEffect>(@"Sons\Bruitages\couteau");
+            bonus_bruitage = Content.Load<SoundEffect>(@"Sons\Bruitages\Bonus_Bruitages");
+            enemies_sound = Content.Load<SoundEffect>(@"Sons\Bruitages\Mort_Enemies");
 
             // SpriteFont
             ammo_font = Content.Load<SpriteFont>(@"SpriteFonts\Ammo");

@@ -19,8 +19,10 @@ namespace FinalRush
         int speedjump = 1;
         int random;
         int framecolumn;
+        SoundEffectInstance mort_enemies2;
         int compt = 0;
         bool left;
+        public int enemy2_dead;
         int distance2player = 2000;
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
@@ -37,6 +39,7 @@ namespace FinalRush
             framecolumn = 1;
             speed = 1;
             pv = 3;
+            mort_enemies2 = Resources.enemies_sound.CreateInstance();
             fallspeed = 5;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
@@ -69,6 +72,8 @@ namespace FinalRush
                         pv--;
                     else
                     {
+                        mort_enemies2.Play();
+                        enemy2_dead++;
                         Hitbox.Width = 0;
                         Hitbox.Height = 0;
                     }

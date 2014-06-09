@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace FinalRush
 {
@@ -19,6 +20,8 @@ namespace FinalRush
         int framecolumn;
         int compt = 0;
         bool left;
+        public int enemy_dead;
+        SoundEffectInstance mort_enemies;
         List<Bullets> bullets;
         Random rand = new Random();
         SpriteEffects effect;
@@ -29,6 +32,7 @@ namespace FinalRush
             framecolumn = 1;
             speed = 1;
             fallspeed = 5;
+            mort_enemies = Resources.enemies_sound.CreateInstance();
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
             Direction = Direction.Right;
@@ -48,6 +52,8 @@ namespace FinalRush
             {
                 if (this.Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
                 {
+                    enemy_dead ++;
+                    mort_enemies.Play();
                     Hitbox.Width = 0;
                     Hitbox.Height = 0;
                     bullets[i].isVisible = false;
