@@ -285,10 +285,10 @@ namespace FinalRush
 
             // On déplace les boutons du menu à notre guise (par rapport à (0,0))
 
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_jouer").MoveElement(0, -50);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(0, 30);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Credits").MoveElement(0, 110);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(0, 190);
+            main.Find(x => x.AssetName == @"Sprites\Menu\Button_jouer").MoveElement(0, -30);
+            main.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(0, 50);
+            main.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Credits").MoveElement(0, 120);
+            main.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(0, 200);
 
             // Options
 
@@ -300,15 +300,15 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Volume").MoveElement(-253, -90);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus").MoveElement(0, -90);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins").MoveElement(-70, -90);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Bruitages").MoveElement(-240, -30);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus2").MoveElement(0, -30);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins2").MoveElement(-70, -30);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Commandes").MoveElement(-222, 30);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_PleinEcran").MoveElement(-225, 90);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Retour").MoveElement(-270, 210);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Volume").MoveElement(-253, -50);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus").MoveElement(0, -50);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins").MoveElement(-70, -50);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Bruitages").MoveElement(-240, 15);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus2").MoveElement(0, 15);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins2").MoveElement(-70, 15);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Commandes").MoveElement(-222, 80);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_PleinEcran").MoveElement(-225, 145);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Retour").MoveElement(-200, 210);
 
             // De même pour InPause
 
@@ -319,10 +319,10 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
 
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Continuer").MoveElement(-80, -50);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(-80, 30);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipalGros").MoveElement(-80, 110);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(-80, 190);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Continuer").MoveElement(0, -50);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(0, 30);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipalGros").MoveElement(0, 110);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(0, 190);
 
             // De même pour GameOver
 
@@ -385,9 +385,9 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Level1").MoveElement(-70, 0);
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite").MoveElement(0, 140);
+            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Level1").MoveElement(0, 50);
+            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite").MoveElement(50, 200);
 
             foreach (GUIElement element in Chapitre2)
             {
@@ -395,10 +395,10 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(-70, 0);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite2").MoveElement(0, 140);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche").MoveElement(-139, 140);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(0, 50);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite2").MoveElement(50, 200);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre3)
             {
@@ -406,10 +406,10 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(-70, 0);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite3").MoveElement(0, 140);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche2").MoveElement(-139, 140);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(0, 50);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite3").MoveElement(50, 200);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche2").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre4)
             {
@@ -417,10 +417,10 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(-70, 0);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite4").MoveElement(0, 140);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche3").MoveElement(-139, 140);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(0, 50);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite4").MoveElement(50, 200);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche3").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre5)
             {
@@ -428,10 +428,10 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(-70, 0);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite5").MoveElement(0, 140);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche4").MoveElement(-139, 140);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(0, 50);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite5").MoveElement(50, 200);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche4").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre6)
             {
@@ -439,10 +439,9 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70, 0);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(-70000, 0);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-139, 140);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(0, 50);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-50, 200);
 
             foreach (GUIElement element in Multi)
             {
@@ -1100,31 +1099,31 @@ namespace FinalRush
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre2)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 1) spriteBatch.Draw(Resources.lvl2_block, new Rectangle(162, 140, 336, 200), Color.White);
+                    if (lvlcomplete < 1) spriteBatch.Draw(Resources.lvl2_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre3:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre3)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 2) spriteBatch.Draw(Resources.lvl3_block, new Rectangle(162, 140, 336, 200), Color.White);
+                    if (lvlcomplete < 2) spriteBatch.Draw(Resources.lvl3_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre4:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre4)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 3) spriteBatch.Draw(Resources.lvl4_block, new Rectangle(162, 140, 336, 200), Color.White);
+                    if (lvlcomplete < 3) spriteBatch.Draw(Resources.lvl4_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre5:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre5)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 4) spriteBatch.Draw(Resources.lvl5_block, new Rectangle(162, 140, 336, 200), Color.White);
+                    if (lvlcomplete < 4) spriteBatch.Draw(Resources.lvl5_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre6:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre6)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 5) spriteBatch.Draw(Resources.lvl6_block, new Rectangle(162, 140, 336, 200), Color.White);
+                    if (lvlcomplete < 5) spriteBatch.Draw(Resources.lvl6_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Multi:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

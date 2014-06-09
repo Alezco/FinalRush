@@ -54,21 +54,37 @@ namespace FinalRush
                 for (int y = 0; y < map.GetLength(0); y++)
                 {
                     int number = map[y, x];
-                    if (number == 1)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Sand_top, size, size, Color.White));
-                    if (number == 2)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Herbe, size, size, Color.White));
-                    if (number == 3)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Herbe_neige, size, size, Color.White));
-                    if (number == 4)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Ice, size, size, Color.White));
-                    if (number == 5)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Ice_top, size, size, Color.White));
-                    if (number == 6)
-                        enemies.Add(new Enemy(x * size, y, Resources.Zombie));
+                    switch (number)
+                    {
+                        case 1:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Sand_top, size, size, Color.White));
+                            break;
+                        case 2:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Herbe, size, size, Color.White));
+                            break;
+                        case 3:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Herbe_neige, size, size, Color.White));
+                            break;
+                        case 4:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Ice, size, size, Color.White));
+                            break;
+                        case 5:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Ice_top, size, size, Color.White));
+                            break;
+                        case 6:
+                            enemies.Add(new Enemy(x * size, y, Resources.Zombie));
+                            break;
+                        case 7:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Platform, 30, 16, Color.White));
+                            break;
+                        case 8:
+                            Walls.Add(new Wall(x * size, y * size, Resources.Platform, 50, 16, Color.White));
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
-
         }
 
         // UPDATE & DRAW
