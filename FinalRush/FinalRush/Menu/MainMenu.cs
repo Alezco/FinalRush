@@ -47,7 +47,7 @@ namespace FinalRush
         //Multi multi;
         SpriteFont piece_font;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
-        bool HasPlayed;
+        bool HasPlayed, boss_appeared,boss_already_appeared;
         public int comptlevel = 0;
         public int total_piece = 0;
         int compt = 0;
@@ -62,7 +62,7 @@ namespace FinalRush
         int compteurpourframecolumn = 1;
         Texture2D fond_menu, fond_win, fond_gameover, fond_how2play;
 
-        public SpriteFont font,nb_enemies_killed;
+        public SpriteFont font, nb_enemies_killed;
         public string text, piece_text;
         public float time, timer_bonus;
         public int score = 0;
@@ -109,6 +109,8 @@ namespace FinalRush
             started = false;
             paused = false;
             finished = false;
+            boss_appeared = false;
+            boss_already_appeared = false;
             total_piece_updated = false;
             Text = "0";
             nb_pieces = 0;
@@ -518,20 +520,23 @@ namespace FinalRush
                 case 4:
                     gameState = GameState.InGame4;
                     MediaPlayer.Play(Resources.Musique4);
+                    MediaPlayer.IsRepeating = true;
                     Main4 = new GameMain4();
                     player4 = new Player();
                     break;
                 case 5:
                     gameState = GameState.InGame5;
-                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.Play(Resources.Musique5);
+                    MediaPlayer.IsRepeating = true;
                     Main5 = new GameMain5();
                     player5 = new Player();
                     break;
                 case 6:
                     gameState = GameState.InGame6;
-                    MediaPlayer.Play(Resources.Musique3);
+                    MediaPlayer.IsRepeating = true;
                     Main6 = new GameMain6();
                     player6 = new Player();
+                    MediaPlayer.Play(Resources.Musique6);
                     break;
                 case 7:
                     gameState = GameState.InGameMulti;
@@ -695,7 +700,7 @@ namespace FinalRush
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus,gameTime);
+                    Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -803,6 +808,26 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+
+                    if (player6.Hitbox.X == 1000)
+                        MediaPlayer.Stop();
+                    else
+                        if (player6.Hitbox.X >= 1300 && !boss_appeared && !boss_already_appeared)
+                        {
+                            boss_appeared = true;
+                            boss_already_appeared = true;
+                        }
+                    if (boss_appeared && boss_already_appeared)
+                    {
+                        boss_appeared = false;
+                        MediaPlayer.Play(Resources.MusiqueBoss);
+                    }
+
+                    if (player6.Hitbox.X > 1000 && player6.Hitbox.X < 1300 && MediaPlayer.Volume > 0f)
+                        MediaPlayer.Volume = MediaPlayer.Volume - 0.01f;
+
+                    if (player6.Hitbox.X > 1300 && MediaPlayer.Volume < 1f)
+                        MediaPlayer.Volume = MediaPlayer.Volume + 0.01f;
 
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
@@ -1045,7 +1070,7 @@ namespace FinalRush
                     foreach (GUIElement element in Won)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + (Global.Enemy.enemy_dead+Global.Enemy2.enemy2_dead) + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
+                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + (Global.Enemy.enemy_dead + Global.Enemy2.enemy2_dead) + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
@@ -1107,7 +1132,7 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     break;
                 case GameState.Scenario:
-                    if ( colourScenario.R == 255 ) spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), Color.Black);
+                    if (colourScenario.R == 255) spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), Color.Black);
                     else
                         spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
                     break;
