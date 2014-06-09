@@ -16,23 +16,23 @@ namespace FinalRush
     {
         // FIELDS
 
-        public Player LocalPlayer;
         //public Multi multi;
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
+        List<Bullets> playerBullets, player2Bullets;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment;
         Texture2D foreground = Resources.Foreground;
+        public Bullets bullets;
 
         // CONSTRUCTOR
 
         public GameMainMulti()
         {
             menu = new MainMenu(Global.Handler, 0f);
-            LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
             enemies = new List<Enemy>();
@@ -45,6 +45,7 @@ namespace FinalRush
             writeStream = new MemoryStream();
             reader = new BinaryReader(readStream);
             writer = new BinaryWriter(writeStream);
+            bullets = new Bullets(Resources.bullet);
 
             #region Ennemis
             //Ennemis
@@ -176,8 +177,8 @@ namespace FinalRush
             client.Connect(IP, port);
             readBuffer = new byte[buffer_size];
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
-            
-            
+            playerBullets = new List<Bullets>();
+            player2Bullets = new List<Bullets>();
         }
 
         private void StreamReceived(IAsyncResult ar)
@@ -229,7 +230,7 @@ namespace FinalRush
                     {
                         player2Connected = true;
                         player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Height);
-                        player2.Marco = Resources.Player2;
+                        player2.Marco = Resources.Marco;
 
                         writeStream.Position = 0;
                         writer.Write((byte)Protocol.Connected);
@@ -248,8 +249,18 @@ namespace FinalRush
                     float py = reader.ReadSingle();
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
+                    //player2.Animate(1, 15, 2);
+
                     player2.Hitbox = new Rectangle(player2.Hitbox.X + (int)px, player2.Hitbox.Y + (int)py, player2.Hitbox.Width, player2.Hitbox.Height);
                 }
+                //else if (p == Protocol.BulletCreated)
+                //{
+                //    float px = reader.ReadSingle();
+                //    float py = reader.ReadSingle();
+                //    byte id = reader.ReadByte();
+                //    string ip = reader.ReadString();
+                //    player2.Hitbox = new Rectangle(player2.Hitbox.X + (int)px, player2.Hitbox.Y + (int)py, player2.Hitbox.Width, player2.Hitbox.Height);
+                //}
             }
             catch (Exception)
             {
@@ -297,12 +308,6 @@ namespace FinalRush
             Vector2 iPosition = new Vector2(player.Hitbox.X + player.Hitbox.Width / 2, player.Hitbox.Y + player.Hitbox.Height / 2);
             Vector2 movement = Vector2.Zero;
 
-            if (clavier.IsKeyDown(Keys.Left))
-                movement.X = -4;
-            else if (clavier.IsKeyDown(Keys.Right))
-                movement.X = 4;
-
-            player.speed = (int)movement.X;
             player.Update(souris, clavier, Walls, bonus);
 
             Vector2 nPosition = new Vector2(player.Hitbox.X + player.Hitbox.Width / 2, player.Hitbox.Y + player.Hitbox.Height / 2);
@@ -316,6 +321,12 @@ namespace FinalRush
                 writer.Write(deltap.Y);
                 SendData(GetDataFromMemoryStream(writeStream));
             }
+            //if (deltap != Vector2.Zero)
+            //{
+            //    writeStream.Position = 0;
+            //    writer.Write((byte)Protocol.BulletCreated);
+            //    SendData(GetDataFromMemoryStream(writeStream));
+            //}
 
             GameTime gametime = new GameTime();
 
@@ -360,9 +371,16 @@ namespace FinalRush
                 b.Draw(spritebatch);
 
             if (player != null)
+            {
                 player.Draw(spritebatch);
+                foreach (Bullets b in playerBullets)
+                    b.Draw(spritebatch);
+            }
             if (player2Connected)
+            {
                 player2.Draw(spritebatch);
+                bullets.Draw(spritebatch);
+            }
         }
     }
 }

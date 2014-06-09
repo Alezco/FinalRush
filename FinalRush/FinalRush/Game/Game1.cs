@@ -53,7 +53,6 @@ namespace FinalRush
             graphics.PreferredBackBufferHeight = screenheight;
             IsMouseVisible = true;
             Global.Handler = this;
-            //Global.Multi = new Multi();
         }
 
         protected override void Initialize()

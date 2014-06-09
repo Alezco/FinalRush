@@ -9,6 +9,7 @@ namespace FinalRush
     {
         Disconnected = 0,
         Connected = 1,
-        PlayerMoved = 2
+        PlayerMoved = 2,
+        BulletCreated = 3
     }
 }

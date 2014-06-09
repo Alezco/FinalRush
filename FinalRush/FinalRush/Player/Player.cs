@@ -40,7 +40,7 @@ namespace FinalRush
         public int health = 100;
         public Texture2D healthbar;
         int fallspeed;
-        int framecolumn;
+        public int framecolumn;
         int speedjump = 1;
         bool hasjumped;
         float rotation;
