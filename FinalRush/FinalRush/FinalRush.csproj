@@ -78,6 +78,7 @@
     <Compile Include="Collisions\Collisions.cs" />
     <Compile Include="Collisions\MovingHorizontallyWall.cs" />
     <Compile Include="Collisions\Wall.cs" />
+    <Compile Include="Game\Levels\Editeur.cs" />
     <Compile Include="Game\Levels\GameMainMulti.cs" />
     <Compile Include="Bonus\HealthBonus.cs" />
     <Compile Include="Multijoueur\Delegates.cs" />

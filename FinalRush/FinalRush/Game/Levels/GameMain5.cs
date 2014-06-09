@@ -7,12 +7,18 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using FinalRush.Game.Levels;
 
 namespace FinalRush
 {
     class GameMain5
     {
         // FIELDS
+
+        // Trois Varibles
+        public static Editeur edit = new Editeur();
+        public int[,] map = edit.Edition(5);
+        public int size = 64;
 
         public Player LocalPlayer;
         public List<Wall> Walls;
@@ -41,68 +47,28 @@ namespace FinalRush
             enemies2 = new List<Enemy2>();
             Global.GameMain5 = this;
 
-            #region Ennemis
-            ////Ennemis
+            // Double Boucle qui fait marcher l'éditeur
 
-            //enemies.Add(new Enemy(1100, 350, Resources.Zombie));
-            //enemies.Add(new Enemy(1150, 350, Resources.Zombie));
-            //enemies.Add(new Enemy(1180, 350, Resources.Zombie));
-            //enemies.Add(new Enemy(2550, 250, Resources.Zombie));
-            //enemies.Add(new Enemy(2650, 250, Resources.Zombie));
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                for (int y = 0; y < map.GetLength(0); y++)
+                {
+                    int number = map[y, x];
+                    if (number == 1)
+                        Walls.Add(new Wall(x * size, y * size, Resources.Ground, size, size, Color.White));
+                    if (number == 2)
+                        Walls.Add(new Wall(x * size, y * size, Resources.Herbe, size, size, Color.White));
+                    if (number == 3)
+                        Walls.Add(new Wall(x * size, y * size, Resources.Herbe_neige, size, size, Color.White));
+                    if (number == 4)
+                        Walls.Add(new Wall(x * size, y * size, Resources.Ice, size, size, Color.White));
+                    if (number == 5)
+                        Walls.Add(new Wall(x * size, y * size, Resources.Ice_top, size, size, Color.White));
+                    if (number == 6)
+                        enemies.Add(new Enemy(x * size, y, Resources.Zombie));
+                }
+            }
 
-            //enemies2.Add(new Enemy2(2400, 376, Resources.Zombie));
-
-            //#endregion
-
-            //#region Plateformes
-            ////Plateformes
-
-            //Walls.Add(new Wall(425, 245, Resources.Platform, 50, 16, Color.IndianRed));
-            //Walls.Add(new Wall(130, 360, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(280, 300, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(680, 365, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(520, 300, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1160, 200, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1266, 415, Resources.Platform, 1, 1, Color.IndianRed));
-            //Walls.Add(new Wall(1664, 350, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1828, 280, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1828, 140, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1664, 210, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1984, 140, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(2100, 240, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(2200, 340, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(1984, 340, Resources.Platform, 50, 16, Color.IndianRed));
-            //Walls.Add(new Wall(2500, 340, Resources.Platform, 200, 16, Color.IndianRed));
-            //Walls.Add(new Wall(2500, 339, Resources.Platform, 1, 1, Color.IndianRed));
-            //Walls.Add(new Wall(2700, 339, Resources.Platform, 1, 1, Color.IndianRed));
-            //Walls.Add(new Wall(3520, 350, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(3620, 300, Resources.Platform, 40, 16, Color.IndianRed));
-            //Walls.Add(new Wall(3680, 250, Resources.Platform, 20, 16, Color.IndianRed));
-            //Walls.Add(new Wall(3720, 200, Resources.Platform, 20, 16, Color.IndianRed));
-            //Walls.Add(new Wall(3860, 400, Resources.Platform, 92, 16, Color.IndianRed));
-            //Walls.Add(new Wall(4000, 340, Resources.Platform, 92, 16, Color.IndianRed));
-
-            #endregion
-
-            #region Terrain
-            //Colonnes et sol
-
-            //Walls.Add(new Wall(896, 416, Resources.Ground, 64, 64, Color.White));
-
-
-            //Sol
-
-            for (int i = 0; i < 80; i++)
-                if (i != 20)
-                    Walls.Add(new Wall(64 * i, 416, Resources.Sand_top, 64, 64, Color.White));
-            #endregion
-
-            #region Bonus
-            ////Bonus
-
-            //bonus.Add(new Bonus(700, 345, Resources.Coin, 20, 20, Color.White));
-            speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
-            #endregion
         }
 
         // UPDATE & DRAW
