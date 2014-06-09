@@ -8,6 +8,7 @@ namespace FinalRush
     public enum Protocol
     {
         Disconnected = 0,
-        Connected = 1
+        Connected = 1,
+        PlayerMoved = 2
     }
 }

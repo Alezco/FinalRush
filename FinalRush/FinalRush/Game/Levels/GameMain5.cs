@@ -55,7 +55,7 @@ namespace FinalRush
                 {
                     int number = map[y, x];
                     if (number == 1)
-                        Walls.Add(new Wall(x * size, y * size, Resources.Ground, size, size, Color.White));
+                        Walls.Add(new Wall(x * size, y * size, Resources.Sand_top, size, size, Color.White));
                     if (number == 2)
                         Walls.Add(new Wall(x * size, y * size, Resources.Herbe, size, size, Color.White));
                     if (number == 3)

@@ -79,7 +79,7 @@
     <Compile Include="Collisions\MovingHorizontallyWall.cs" />
     <Compile Include="Collisions\Wall.cs" />
     <Compile Include="Game\Levels\Editeur.cs" />
-    <Compile Include="Game\Levels\GameMainMulti.cs" />
+    <Compile Include="Multijoueur\GameMainMulti.cs" />
     <Compile Include="Bonus\HealthBonus.cs" />
     <Compile Include="Multijoueur\Delegates.cs" />
     <Compile Include="Game\Levels\GameMain3.cs" />
@@ -93,7 +93,6 @@
     <Compile Include="IA\Enemy2.cs" />
     <Compile Include="Menu\GUIElement.cs" />
     <Compile Include="Menu\MainMenu.cs" />
-    <Compile Include="Multijoueur\Multi.cs" />
     <Compile Include="Collisions\Piques.cs" />
     <Compile Include="Player\Bullets.cs" />
     <Compile Include="Player\Camera.cs" />

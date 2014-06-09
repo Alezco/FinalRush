@@ -64,7 +64,7 @@ namespace FinalRush
             fallspeed = 5;
             Hitbox.Width = 36;
             Hitbox.Height = 40;
-            Hitbox = new Rectangle(50, 300, Hitbox.Width, Hitbox.Height);
+            Hitbox = new Rectangle(50, 376, Hitbox.Width, Hitbox.Height);
             framecolumn = 1;
             effect = SpriteEffects.None;
             Direction = Direction.Right;

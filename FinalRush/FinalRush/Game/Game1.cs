@@ -155,7 +155,7 @@ namespace FinalRush
             else if (main.comptlevel == 7)
             {
                 MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
-                camera.Update(gameTime, main.p7);
+                camera.Update(gameTime, MainMulti.player );
             }
             else
                 camera.Update(gameTime, Main.LocalPlayer);

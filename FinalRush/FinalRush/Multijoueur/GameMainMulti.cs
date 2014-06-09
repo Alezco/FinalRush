@@ -39,6 +39,12 @@ namespace FinalRush
             enemies2 = new List<Enemy2>();
             //multi = Global.Multi;
             Global.GameMainMulti = this;
+            player = new Player();
+            player2 = new Player();
+            readStream = new MemoryStream();
+            writeStream = new MemoryStream();
+            reader = new BinaryReader(readStream);
+            writer = new BinaryWriter(writeStream);
 
             #region Ennemis
             //Ennemis
@@ -159,6 +165,8 @@ namespace FinalRush
         BinaryReader reader;
         BinaryWriter writer;
         public Player player, player2;
+        bool player2Connected;
+
 
 
         public void Initialize()
@@ -168,11 +176,8 @@ namespace FinalRush
             client.Connect(IP, port);
             readBuffer = new byte[buffer_size];
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
-            readStream = new MemoryStream();
-            writeStream = new MemoryStream();
-            reader = new BinaryReader(readStream);
-            writer = new BinaryWriter(writeStream);
-            player = new Player();
+            
+            
         }
 
         private void StreamReceived(IAsyncResult ar)
@@ -220,10 +225,10 @@ namespace FinalRush
                 {
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
-                    if (player2 == null)
+                    if (!player2Connected)
                     {
-                        player2 = new Player();
-                        player2.Hitbox = new Rectangle(player2.Hitbox.X + 50, player2.Hitbox.Y + 50, player2.Hitbox.Width, player2.Hitbox.Height);
+                        player2Connected = true;
+                        player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Height);
                         player2.Marco = Resources.Player2;
 
                         writeStream.Position = 0;
@@ -235,7 +240,15 @@ namespace FinalRush
                 {
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
-                    player2 = null;
+                    player2Connected = false;
+                }
+                else if (p == Protocol.PlayerMoved)
+                {
+                    float px = reader.ReadSingle();
+                    float py = reader.ReadSingle();
+                    byte id = reader.ReadByte();
+                    string ip = reader.ReadString();
+                    player2.Hitbox = new Rectangle(player2.Hitbox.X + (int)px, player2.Hitbox.Y + (int)py, player2.Hitbox.Width, player2.Hitbox.Height);
                 }
             }
             catch (Exception)
@@ -281,8 +294,30 @@ namespace FinalRush
 
         public void Update(MouseState souris, KeyboardState clavier)
         {
+            Vector2 iPosition = new Vector2(player.Hitbox.X + player.Hitbox.Width / 2, player.Hitbox.Y + player.Hitbox.Height / 2);
+            Vector2 movement = Vector2.Zero;
+
+            if (clavier.IsKeyDown(Keys.Left))
+                movement.X = -4;
+            else if (clavier.IsKeyDown(Keys.Right))
+                movement.X = 4;
+
+            player.speed = (int)movement.X;
+            player.Update(souris, clavier, Walls, bonus);
+
+            Vector2 nPosition = new Vector2(player.Hitbox.X + player.Hitbox.Width / 2, player.Hitbox.Y + player.Hitbox.Height / 2);
+            Vector2 deltap = Vector2.Subtract(nPosition, iPosition);
+
+            if (deltap != Vector2.Zero)
+            {
+                writeStream.Position = 0;
+                writer.Write((byte)Protocol.PlayerMoved);
+                writer.Write(deltap.X);
+                writer.Write(deltap.Y);
+                SendData(GetDataFromMemoryStream(writeStream));
+            }
+
             GameTime gametime = new GameTime();
-            //LocalPlayer.Update(souris, clavier, Walls, bonus);
 
             menu.Update(gametime);
             for (int i = 0; i < enemies2.Count; i++)
@@ -302,12 +337,12 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
-            if (LocalPlayer.Hitbox.X <= 400)
+            if (player.Hitbox.X <= 400)
                 spritebatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
-            else if (LocalPlayer.Hitbox.X >= 4200)
+            else if (player.Hitbox.X >= 4200)
                 spritebatch.Draw(background, new Rectangle(3800, 0, 800, 480), Color.White);
             else
-                spritebatch.Draw(background, new Rectangle(LocalPlayer.Hitbox.X + LocalPlayer.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
+                spritebatch.Draw(background, new Rectangle(player.Hitbox.X + player.Hitbox.Width / 2 - 400, 0, 800, 480), Color.White);
             for (int i = 0; i <= 2; i++)
                 spritebatch.Draw(foreground, new Rectangle(1600 * i, 0, 1600, 480), Color.White);
             //LocalPlayer.Draw(spritebatch);
@@ -326,7 +361,7 @@ namespace FinalRush
 
             if (player != null)
                 player.Draw(spritebatch);
-            if (player2 != null)
+            if (player2Connected)
                 player2.Draw(spritebatch);
         }
     }
