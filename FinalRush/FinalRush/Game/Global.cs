@@ -30,5 +30,6 @@ namespace FinalRush
         public static Piques Piques;
         public static MovingHorizontallyWall MovingHorizontallyWall;
         public static VitesseBonus SpeedBonus;
+        public static Boss Boss;
     }
 }

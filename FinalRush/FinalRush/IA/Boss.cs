@@ -9,12 +9,12 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace FinalRush
 {
-    class Enemy2
+    class Boss
     {
         public Rectangle Hitbox;
         Direction Direction;
         int speed;
-        int pv;
+        public int pv;
         int fallspeed;
         int speedjump = 1;
         int random;
@@ -34,7 +34,7 @@ namespace FinalRush
         SpriteEffects effect;
         Collisions collisions = new Collisions();
 
-        public Enemy2(int x, int y, Texture2D newTexture)
+        public Boss(int x, int y, Texture2D newTexture)
         {
             framecolumn = 1;
             speed = 3;
@@ -50,7 +50,7 @@ namespace FinalRush
             isDead2 = false;
             bullets = Global.Player.bullets;
             enemy_bullets = new List<Bullets>();
-            Global.Enemy2 = this;
+            Global.Boss = this;
             a_portee = false;
             shot_sound_instance = Resources.tir_rafale.CreateInstance();
             origin = Hitbox.X;
@@ -185,66 +185,6 @@ namespace FinalRush
                 }
             }
 
-
-            #endregion
-
-            #region Tir
-
-            //enemy_bullets.Capacity = 5;
-            //if ((distance2player >= -100 && distance2player <= 0) || (distance2player > 0 && distance2player <= 100))
-            //    a_portee = true;
-            //else
-            //    a_portee = false;
-            //if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 3 && a_portee && !enemy_shot && enemy_bullets.Count < 5)
-            //{
-            //    shot_sound_instance.Play();
-            //    enemy_shot = true;
-            //    Bullets bullet = new Bullets(Resources.bullet);
-            //    bullet.velocity = 5;
-            //    bullet.isVisible = true;
-            //    enemy_bullets.Add(bullet);
-            //    if (Direction == Direction.Right)
-            //        bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
-            //    else
-            //        bullet.position = new Vector2(Hitbox.X, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
-
-            //}
-            //else
-            //    enemy_shot = false;
-
-            //// la balle disparait si elle parcourt la distance ou rencontre un obstacle
-
-
-            //foreach (Bullets bullet in enemy_bullets)
-            //{
-            //    if (Direction == Direction.Right)
-            //        bullet.position.X += bullet.velocity; // va vers la droite
-            //    else
-            //        bullet.position.X -= bullet.velocity; // va vers la gauche
-            //    if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) >= 100)
-            //        bullet.isVisible = false;
-            //    else
-            //        if (Global.Player.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 3, 3)))
-            //        {
-            //            Global.Player.health++;
-            //            bullet.isVisible = false;
-            //        }
-
-            //    foreach (Wall wall in Global.GameMain.Walls)
-            //    {
-            //        if (wall.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 5, 2)))
-            //            bullet.isVisible = false;
-            //    }
-            //}
-
-            //for (int i = 0; i < enemy_bullets.Count; i++)
-            //{
-            //    if (!enemy_bullets[i].isVisible)
-            //    {
-            //        enemy_bullets.RemoveAt(i);
-            //        i--;
-            //    }
-            //}
 
             #endregion
 

@@ -150,7 +150,7 @@ namespace FinalRush
 
             foreach (Enemy e in enemy)
             {
-                if (newHitbox.Intersects(e.Hitbox))
+                if (!e.isDead && newHitbox.Intersects(e.Hitbox))
                     Global.Player.health--;
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
@@ -166,11 +166,21 @@ namespace FinalRush
 
             foreach (Enemy2 e in enemy)
             {
-                if (newHitbox.Intersects(e.Hitbox))
+                if (!e.isDead2 && newHitbox.Intersects(e.Hitbox))
                     Global.Player.health--;
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }
+            return collision;
+        }
+
+        public bool CollisionBoss(Rectangle Hitbox, Boss boss)
+        {
+            bool collision = false;
+            if (Hitbox.Intersects(boss.Hitbox))
+                Global.Player.health--;
+            if (Global.Player.health < 0)
+                Global.Player.health = 0;
             return collision;
         }
         #endregion

@@ -49,7 +49,9 @@ namespace FinalRush
         List<Enemy> enemies;
         List<Enemy2> enemies2;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
-        bool HasPlayed, boss_appeared, boss_already_appeared;
+        bool HasPlayed;
+        public bool boss_already_appeared;
+        public bool boss_appeared;
         public int comptlevel = 0;
         public int total_piece = 0;
         public int nb_players_dead = 0;
@@ -624,6 +626,12 @@ namespace FinalRush
             enjeu = true;
             if (player.health == 0 || player.dead)
             {
+                if (comptlevel == 6)
+                {
+                    boss_already_appeared = false;
+                    boss_appeared = false;
+                }
+
                 enjeu = false;
                 nb_players_dead++;
                 gameState = GameState.GameOver;
@@ -946,7 +954,7 @@ namespace FinalRush
                     if (player6.Hitbox.X == 1000)
                         MediaPlayer.Stop();
                     else
-                        if (player6.Hitbox.X >= 1300 && !boss_appeared && !boss_already_appeared)
+                        if (player6.Hitbox.X >= 1100 && !boss_appeared && !boss_already_appeared)
                         {
                             boss_appeared = true;
                             boss_already_appeared = true;
@@ -965,6 +973,7 @@ namespace FinalRush
 
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
+                    Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);
 
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {

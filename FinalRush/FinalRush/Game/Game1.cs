@@ -154,7 +154,7 @@ namespace FinalRush
             else if (main.comptlevel == 7)
             {
                 MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
-                camera.Update(gameTime, MainMulti.player );
+                camera.Update(gameTime, MainMulti.player);
             }
             else
                 camera.Update(gameTime, Main.LocalPlayer);
@@ -179,8 +179,13 @@ namespace FinalRush
                 if (health > 0)
                 {
                     spriteBatch.Begin();
-                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
+                    spriteBatch.End();
+                }
+                if (Global.MainMenu.boss_appeared)
+                {
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X,Global.Boss.Hitbox.Y -25, Global.Boss.pv, 20), Color.Red);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();

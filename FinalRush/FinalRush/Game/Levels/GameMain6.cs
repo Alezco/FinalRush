@@ -15,6 +15,7 @@ namespace FinalRush
         // FIELDS
 
         public Player LocalPlayer;
+        public Boss boss;
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
@@ -32,6 +33,7 @@ namespace FinalRush
         public GameMain6()
         {
             menu = new MainMenu(Global.Handler, 0f);
+            boss = new Boss(2600, 376, Resources.Elite);
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
@@ -39,11 +41,11 @@ namespace FinalRush
             speedbonus = new List<VitesseBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
+
             Global.GameMain6 = this;
 
             #region Ennemis
             //Ennemis
-
             //enemies.Add(new Enemy(1100, 350, Resources.Zombie));
 
             #endregion
@@ -88,6 +90,7 @@ namespace FinalRush
 
         public void Update(MouseState souris, KeyboardState clavier)
         {
+            boss.Update(Walls);
             GameTime gametime = new GameTime();
             LocalPlayer.Update(souris, clavier, Walls, bonus);
             menu.Update(gametime);
@@ -99,6 +102,7 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
+            boss.Draw(spritebatch);
             if (LocalPlayer.Hitbox.X <= 400)
                 spritebatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             else if (LocalPlayer.Hitbox.X >= 4200)
