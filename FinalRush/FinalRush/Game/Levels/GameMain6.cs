@@ -28,6 +28,8 @@ namespace FinalRush
         Texture2D background = Resources.Environnment6;
         Texture2D foreground = Resources.Foreground6;
         public int framecolumn;
+        bool resetlave;
+        int comptlave = 0;
         int compteur = 1;
 
         // CONSTRUCTOR
@@ -53,7 +55,7 @@ namespace FinalRush
             piques.Add(new Piques(320, 417, Resources.Lave, 64, 64, Color.White));
             piques.Add(new Piques(384, 417, Resources.Lave, 64, 64, Color.White));
 
-            Animate(1, 32, 1);
+            //Animate(1, 32, 1);
 
             #region Ennemis
             //Ennemis
@@ -97,15 +99,15 @@ namespace FinalRush
             #endregion
         }
 
-        public void Animate(int begin, int end, int speed)
-        {
-            if (compteur % speed == 0)
-            {
-                if (framecolumn > end - 1) framecolumn = begin;
-                else framecolumn++;
-            }
-            compteur++;
-        }
+        //public void Animate(int begin, int end, int speed)
+        //{
+        //    if (compteur % speed == 0)
+        //    {
+        //        if (framecolumn > end - 1) framecolumn = begin;
+        //        else framecolumn++;
+        //    }
+        //    compteur++;
+        //}
 
         // UPDATE & DRAW
 
@@ -119,11 +121,22 @@ namespace FinalRush
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)
                 enemy2.Update(Walls);
+            if (resetlave)
+            {
+                resetlave = false;
+                framecolumn = 1;
+                comptlave = 0;
+            }
+            else
+            {
+                if (comptlave % 2 == 0) framecolumn++;
+                if (framecolumn == 32) resetlave = true;
+                comptlave++;
+            }
         }
 
         public void Draw(SpriteBatch spritebatch)
         {
-            boss.Draw(spritebatch);
             if (LocalPlayer.Hitbox.X <= 400)
                 spritebatch.Draw(background, new Rectangle(0, 0, 800, 480), Color.White);
             else if (LocalPlayer.Hitbox.X >= 4200)
@@ -136,6 +149,8 @@ namespace FinalRush
 
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spritebatch);
+
+            boss.Draw(spritebatch);
 
             foreach (Enemy2 enemy2 in enemies2)
                 enemy2.Draw(spritebatch);
