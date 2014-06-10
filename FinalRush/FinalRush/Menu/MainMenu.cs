@@ -45,7 +45,7 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         //Multi multi;
-        SpriteFont piece_font,players_dead;
+        SpriteFont piece_font, players_dead;
         List<Enemy> enemies;
         List<Enemy2> enemies2;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
@@ -507,11 +507,11 @@ namespace FinalRush
             Global.Handler.ammo_left = 6;
             Global.Handler.recharge_left = 5;
             MediaPlayer.IsRepeating = true;
+            HasPlayed = true;
             switch (i)
             {
                 case 1:
                     gameState = GameState.InGame;
-                    HasPlayed = true;
                     MediaPlayer.Play(Resources.MusiqueMain);
                     Main = new GameMain();
                     player = new Player();
@@ -520,7 +520,6 @@ namespace FinalRush
                     break;
                 case 2:
                     gameState = GameState.InGame2;
-                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique2);
                     Main2 = new GameMain2();
                     player2 = new Player();
@@ -529,34 +528,35 @@ namespace FinalRush
                     break;
                 case 3:
                     gameState = GameState.InGame3;
-                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique3);
                     Main3 = new GameMain3();
                     player3 = new Player();
+                    enemies = Global.GameMain3.enemies;
+                    enemies2 = Global.GameMain3.enemies2;
                     break;
                 case 4:
                     gameState = GameState.InGame4;
-                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique4);
-                    MediaPlayer.IsRepeating = true;
                     Main4 = new GameMain4();
                     player4 = new Player();
+                    enemies = Global.GameMain4.enemies;
+                    enemies2 = Global.GameMain4.enemies2;
                     break;
                 case 5:
                     gameState = GameState.InGame5;
-                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique5);
-                    MediaPlayer.IsRepeating = true;
                     Main5 = new GameMain5();
                     player5 = new Player();
+                    enemies = Global.GameMain5.enemies;
+                    enemies2 = Global.GameMain5.enemies2;
                     break;
                 case 6:
                     gameState = GameState.InGame6;
-                    HasPlayed = true;
-                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Play(Resources.Musique6);
                     Main6 = new GameMain6();
                     player6 = new Player();
-                    MediaPlayer.Play(Resources.Musique6);
+                    enemies = Global.GameMain6.enemies;
+                    enemies2 = Global.GameMain6.enemies2;
                     break;
                 case 7:
                     gameState = GameState.InGameMulti;
@@ -598,7 +598,7 @@ namespace FinalRush
             }
 
             Text = ((int)time).ToString();
-            score = (nb_pieces * 10) + timeToLoose - ((int)time) + enemies_dead * 20 - nb_players_dead *10;
+            score = (nb_pieces * 10) + timeToLoose - ((int)time) + enemies_dead * 20 - nb_players_dead * 10;
 
             if (time == timeToLoose)
             {
@@ -1216,7 +1216,7 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
                     spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + enemies_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
-                    spriteBatch.DrawString(players_dead,"Nombre de morts: " + nb_players_dead + " !",new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 360), Color.White);
+                    spriteBatch.DrawString(players_dead, "Nombre de morts: " + nb_players_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 360), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
@@ -1237,7 +1237,7 @@ namespace FinalRush
                     foreach (GUIElement element in Credits)
                         element.Draw(spriteBatch);
 
-                                        Global.Handler.GraphicsDevice.Clear(Color.Black);
+                    Global.Handler.GraphicsDevice.Clear(Color.Black);
 
                     #region Crédits
 
@@ -1257,10 +1257,6 @@ namespace FinalRush
                                      "\n              Iksame                 \n" +
                                      "\n       Audio Artistic Director         " +
                                      "\n             WhiteDevil              \n" +
-                                     "\n         Lead Game Designer            " +
-                                     "\n               Alezco                  " +
-                                     "\n               Yaumy                   " +
-                                     "\n               Iksame                \n" +
                                      "\n         Lead Game Designer            " +
                                      "\n               Alezco                  " +
                                      "\n               Yaumy                   " +
@@ -1293,7 +1289,8 @@ namespace FinalRush
                                      "\n   Artificial Intelligence Specialist  " +
                                      "\n                Yaumy                  " +
                                      "\n              WhiteDevil             \n" +
-
+                                     "\n            Cruel Dictator             " +
+                                     "\n                Alezco               \n" +
                                      "\n            Beta Testers               " +
                                      "\n              ArrenKae                 " +
                                      "\n               Yaumy                   " +
@@ -1305,6 +1302,7 @@ namespace FinalRush
                                      "\n               Jorcau                  " +
                                      "\n               Didule                  " +
                                      "\n               Pouale                  " +
+                                     "\n               Drifer                  " +
                                      "\n             Nemsadomaso               " +
                                      "\n              Ulyssek                  " +
                                      "\n               Awakee                  " +
@@ -1320,7 +1318,7 @@ namespace FinalRush
                                      "\n     Specialist Creator Technical      " +
                                      "\n    Producing Designing Programmer     " +
                                      "\n                Yaumy            \n\n\n" +
-                                     "\n         Thank you for playing         " ;
+                                     "\n         Thank you for playing         ";
 
                     spriteBatch.DrawString(nb_enemies_killed, message, new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 210, TextScroll), Color.White);
 

@@ -179,6 +179,7 @@ namespace FinalRush
                 if (health > 0)
                 {
                     spriteBatch.Begin();
+                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
                     spriteBatch.End();
                 }
