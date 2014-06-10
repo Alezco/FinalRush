@@ -46,8 +46,10 @@ namespace FinalRush
         GameMainMulti MainMulti;
         //Multi multi;
         SpriteFont piece_font;
+        List<Enemy> enemies;
+        List<Enemy2> enemies2;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
-        bool HasPlayed, boss_appeared,boss_already_appeared;
+        bool HasPlayed, boss_appeared, boss_already_appeared;
         public int comptlevel = 0;
         public int total_piece = 0;
         int compt = 0;
@@ -55,6 +57,7 @@ namespace FinalRush
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
+        SoundEffectInstance mort_enemies;
         Color colour = new Color(255, 255, 255, 255);
         Color colourScenario = new Color(255, 255, 255, 255);
         Texture2D Intro_fond, Intro_fond2, coin;
@@ -66,6 +69,7 @@ namespace FinalRush
         public string text, piece_text;
         public float time, timer_bonus;
         public int score = 0;
+        public int enemies_dead;
         private Vector2 position;
         public bool started;
         public bool paused;
@@ -114,6 +118,7 @@ namespace FinalRush
             total_piece_updated = false;
             Text = "0";
             nb_pieces = 0;
+            mort_enemies = Resources.enemies_sound.CreateInstance();
             piece_font = Resources.piece_font;
             piece_text = " 0";
 
@@ -493,6 +498,7 @@ namespace FinalRush
             score = 300;
             nb_pieces = 0;
             time = 0f;
+            enemies_dead = 0;
             Global.Handler.ammo_left = 6;
             Global.Handler.recharge_left = 5;
             MediaPlayer.IsRepeating = true;
@@ -500,24 +506,32 @@ namespace FinalRush
             {
                 case 1:
                     gameState = GameState.InGame;
+                    HasPlayed = true;
                     MediaPlayer.Play(Resources.MusiqueMain);
                     Main = new GameMain();
                     player = new Player();
+                    enemies = Global.GameMain.enemies;
+                    enemies2 = Global.GameMain.enemies2;
                     break;
                 case 2:
                     gameState = GameState.InGame2;
+                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique2);
                     Main2 = new GameMain2();
                     player2 = new Player();
+                    enemies = Global.GameMain2.enemies;
+                    enemies2 = Global.GameMain2.enemies2;
                     break;
                 case 3:
                     gameState = GameState.InGame3;
+                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique3);
                     Main3 = new GameMain3();
                     player3 = new Player();
                     break;
                 case 4:
                     gameState = GameState.InGame4;
+                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique4);
                     MediaPlayer.IsRepeating = true;
                     Main4 = new GameMain4();
@@ -525,6 +539,7 @@ namespace FinalRush
                     break;
                 case 5:
                     gameState = GameState.InGame5;
+                    HasPlayed = true;
                     MediaPlayer.Play(Resources.Musique5);
                     MediaPlayer.IsRepeating = true;
                     Main5 = new GameMain5();
@@ -532,6 +547,7 @@ namespace FinalRush
                     break;
                 case 6:
                     gameState = GameState.InGame6;
+                    HasPlayed = true;
                     MediaPlayer.IsRepeating = true;
                     Main6 = new GameMain6();
                     player6 = new Player();
@@ -672,6 +688,26 @@ namespace FinalRush
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
 
+                    for (int i = 0; i < enemies.Count(); i++)
+                    {
+                        if (enemies[i].isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.RemoveAt(i);
+                        }
+                    }
+                    for (int i = 0; i < enemies2.Count(); i++)
+                    {
+                        if (enemies2[i].isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.RemoveAt(i);
+                        }
+                    }
+
+
                     Global.Collisions.CollisionHealthBonus(player.Hitbox, Main.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player.Hitbox, Main.speedbonus, gameTime);
 
@@ -698,6 +734,26 @@ namespace FinalRush
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
+
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.Remove(e);
+                        }
+                    }
+                    foreach (Enemy2 e2 in enemies2)
+                    {
+                        if (e2.isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.Remove(e2);
+                        }
+                    }
+
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
 
@@ -724,6 +780,25 @@ namespace FinalRush
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
 
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.Remove(e);
+                        }
+                    }
+                    foreach (Enemy2 e2 in enemies2)
+                    {
+                        if (e2.isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.Remove(e2);
+                        }
+                    }
+
                     Global.Collisions.CollisionPiques(player3.Hitbox, Main3.piques);
                     Global.Collisions.CollisionHealthBonus(player3.Hitbox, Main3.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player3.Hitbox, Main3.speedbonus, gameTime);
@@ -749,6 +824,25 @@ namespace FinalRush
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
+
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.Remove(e);
+                        }
+                    }
+                    foreach (Enemy2 e2 in enemies2)
+                    {
+                        if (e2.isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.Remove(e2);
+                        }
+                    }
 
                     Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);
@@ -779,6 +873,25 @@ namespace FinalRush
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
 
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.Remove(e);
+                        }
+                    }
+                    foreach (Enemy2 e2 in enemies2)
+                    {
+                        if (e2.isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.Remove(e2);
+                        }
+                    }
+
                     Global.Collisions.CollisionHealthBonus(player5.Hitbox, Main5.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player5.Hitbox, Main5.speedbonus, gameTime);
 
@@ -807,6 +920,25 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+
+                    foreach (Enemy e in enemies)
+                    {
+                        if (e.isDead)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies.Remove(e);
+                        }
+                    }
+                    foreach (Enemy2 e2 in enemies2)
+                    {
+                        if (e2.isDead2)
+                        {
+                            enemies_dead++;
+                            mort_enemies.Play();
+                            enemies2.Remove(e2);
+                        }
+                    }
 
                     if (player6.Hitbox.X == 1000)
                         MediaPlayer.Stop();
@@ -1069,7 +1201,7 @@ namespace FinalRush
                     foreach (GUIElement element in Won)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + (Global.Enemy.enemy_dead + Global.Enemy2.enemy2_dead) + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
+                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + enemies_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

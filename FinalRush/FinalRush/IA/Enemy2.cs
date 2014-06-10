@@ -20,10 +20,9 @@ namespace FinalRush
         int random;
         int framecolumn;
         int origin;
-        SoundEffectInstance mort_enemies2;
         int compt = 0;
         bool left;
-        public int enemy2_dead;
+        public bool isDead2;
         int distance2player = 2000;
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
@@ -40,7 +39,6 @@ namespace FinalRush
             framecolumn = 1;
             speed = 3;
             pv = 3;
-            mort_enemies2 = Resources.enemies_sound.CreateInstance();
             fallspeed = 5;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
@@ -49,6 +47,7 @@ namespace FinalRush
             Hitbox.Height = 38;
             Hitbox = new Rectangle(x, y, Hitbox.Width, Hitbox.Height);
             left = true;
+            isDead2 = false;
             bullets = Global.Player.bullets;
             enemy_bullets = new List<Bullets>();
             Global.Enemy2 = this;
@@ -73,21 +72,12 @@ namespace FinalRush
                     if (pv > 1)
                         pv--;
                     else
-                    {
-                        mort_enemies2.Play();
-                        enemy2_dead++;
-                        Hitbox.Width = 0;
-                        Hitbox.Height = 0;
-                    }
+                        isDead2 = true;
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
-            {
-                Hitbox.Width = 0;
-                Hitbox.Height = 0;
-            }
-
+            if (!isDead2 && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+                isDead2 = true;
 
             #endregion
 
@@ -280,7 +270,8 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
+            if (!isDead2)
+                spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
         }
     }
 }

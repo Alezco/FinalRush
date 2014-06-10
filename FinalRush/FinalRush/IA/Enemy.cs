@@ -20,8 +20,7 @@ namespace FinalRush
         int framecolumn;
         int compt = 0;
         bool left;
-        public int enemy_dead;
-        SoundEffectInstance mort_enemies;
+        public bool isDead;
         List<Bullets> bullets;
         Random rand = new Random();
         SpriteEffects effect;
@@ -32,7 +31,7 @@ namespace FinalRush
             framecolumn = 1;
             speed = 1;
             fallspeed = 5;
-            mort_enemies = Resources.enemies_sound.CreateInstance();
+            isDead = false;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
             Direction = Direction.Right;
@@ -50,23 +49,18 @@ namespace FinalRush
             #region Mort Ennemi
             for (int i = 0; i < bullets.Count(); i++)
             {
-                if (this.Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
+                if (!isDead & this.Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
                 {
-                    enemy_dead ++;
-                    mort_enemies.Play();
-                    Hitbox.Width = 0;
-                    Hitbox.Height = 0;
+                    isDead = true;
                     bullets[i].isVisible = false;
                     bullets.RemoveAt(i);
                     i--;
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
-            {
-                Hitbox.Width = 0;
-                Hitbox.Height = 0;
-            }
+            if (!isDead && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+                isDead = true;
+
             #endregion
 
             #region Animation
@@ -153,7 +147,8 @@ namespace FinalRush
 
         public void Draw(SpriteBatch spritebatch)
         {
-            spritebatch.Draw(Resources.Zombie, Hitbox, new Rectangle((framecolumn - 1) * 37, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
+            if (!isDead)
+                spritebatch.Draw(Resources.Zombie, Hitbox, new Rectangle((framecolumn - 1) * 37, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
         }
     }
 }
