@@ -24,7 +24,7 @@ namespace FinalRush
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage,enemies_sound;
         public static Texture2D HealthBar, bullet;
         public static Texture2D Coin, Health, Speed;
-        public static SpriteFont ammo_font, piece_font;
+        public static SpriteFont ammo_font, piece_font, highscores_font;
 
         // LOAD CONTENT
 
@@ -129,6 +129,7 @@ namespace FinalRush
             // SpriteFont
             ammo_font = Content.Load<SpriteFont>(@"SpriteFonts\Ammo");
             piece_font = Content.Load<SpriteFont>(@"SpriteFonts\piece_font");
+            highscores_font = Content.Load<SpriteFont>(@"SpriteFonts\HighScores");
         }
     }
 }

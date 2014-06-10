@@ -46,6 +46,8 @@ namespace FinalRush
         GameMainMulti MainMulti;
         //Multi multi;
         SpriteFont piece_font, players_dead;
+        public int HS1, HS2, HS3, HS4, HS5, HS6 = 0;
+        int old_HS1, old_HS2, old_HS3, old_HS4, old_HS5, old_HS6 = 0;
         List<Enemy> enemies;
         List<Enemy2> enemies2;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
@@ -1034,6 +1036,44 @@ namespace FinalRush
                         else
                             compteurpourframecolumn++;
                     }
+
+                    if (comptlevel == 1)
+                    {
+                        HS1 = score;
+                        if (HS1 >= old_HS1)
+                            old_HS1 = HS1;
+                    }
+                    if (comptlevel == 2)
+                    {
+                        HS2 = score;
+                        if (HS2 >= old_HS2)
+                            old_HS2 = HS2;
+                    }
+                    if (comptlevel == 3)
+                    {
+                        HS3 = score;
+                        if (HS3 >= old_HS1)
+                            old_HS3 = HS3;
+                    }
+                    if (comptlevel == 4)
+                    {
+                        HS4 = score;
+                        if (HS4 >= old_HS4)
+                            old_HS4 = HS4;
+                    }
+                    if (comptlevel == 5)
+                    {
+                        HS5 = score;
+                        if (HS5 >= old_HS5)
+                            old_HS5 = HS5;
+                    }
+                    if (comptlevel == 6)
+                    {
+                        HS6 = score;
+                        if (HS6 >= old_HS6)
+                            old_HS6 = HS6;
+                    }
+
                     enjeu = false;
                     break;
                 case GameState.InPause:
@@ -1324,44 +1364,68 @@ namespace FinalRush
                     spriteBatch.DrawString(nb_enemies_killed, message, new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 210, TextScroll), Color.White);
 
                     #endregion
-
-
                     break;
+                #region Highscores
                 case GameState.Chapitre1:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre1)
                         element.Draw(spriteBatch);
+                    if (old_HS1 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS1, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
                     break;
                 case GameState.Chapitre2:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre2)
                         element.Draw(spriteBatch);
-                    if (lvlcomplete < 1) spriteBatch.Draw(Resources.lvl2_block, new Rectangle(232, 190, 336, 200), Color.White);
+                    if (old_HS2 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS2, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
+                    if (lvlcomplete < 1) spriteBatch.Draw(Resources.lvl2_block, new Rectangle(232, 190, 336, 200), Color.Red);
                     break;
                 case GameState.Chapitre3:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre3)
                         element.Draw(spriteBatch);
+                    if (old_HS3 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS3, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
                     if (lvlcomplete < 2) spriteBatch.Draw(Resources.lvl3_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre4:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre4)
                         element.Draw(spriteBatch);
+                    if (old_HS4 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS4, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
                     if (lvlcomplete < 3) spriteBatch.Draw(Resources.lvl4_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre5:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre5)
                         element.Draw(spriteBatch);
+                    if (old_HS5 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS5, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
                     if (lvlcomplete < 4) spriteBatch.Draw(Resources.lvl5_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre6:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre6)
                         element.Draw(spriteBatch);
+                    if (old_HS6 != 0)
+                        spriteBatch.DrawString(Resources.highscores_font, "Highscore: " + old_HS6, new Vector2(Global.Handler.Window.ClientBounds.X + 50, 390), Color.Black);
+                    else
+                        spriteBatch.DrawString(Resources.highscores_font, "No Highscore for this level", new Vector2(Global.Handler.Window.ClientBounds.X - 50, 390), Color.Black);
                     if (lvlcomplete < 5) spriteBatch.Draw(Resources.lvl6_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
+                #endregion
                 case GameState.Multi:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Multi)

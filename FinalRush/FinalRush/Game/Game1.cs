@@ -181,16 +181,17 @@ namespace FinalRush
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
+                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(50, 40), Color.White);
                     spriteBatch.End();
                 }
-                if (Global.MainMenu.boss_appeared)
+                if (main.comptlevel == 6)
                 {
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X,Global.Boss.Hitbox.Y -25, Global.Boss.pv, 20), Color.Red);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();
-                if (main.comptlevel == 1)
+                if (main.comptlevel == 1 || main.comptlevel == 6)
                 {
                     spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.White);
                     //spriteBatch.DrawString(scoring, "Score : " + main.score + " pts", new Vector2(Window.ClientBounds.Width / 2 - 200, 0), Color.White);
@@ -201,6 +202,7 @@ namespace FinalRush
                     spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
                     //spriteBatch.DrawString(scoring, "Score : " + main.score + " pts", new Vector2(Window.ClientBounds.Width / 2 - 200, 0), Color.White);
                     spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
+                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(50, 40), Color.Black);
                 }
                 spriteBatch.End();
             }
