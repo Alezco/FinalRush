@@ -47,6 +47,9 @@ namespace FinalRush
             enemies.Add(new Enemy(3780, 150, Resources.Zombie));
             enemies.Add(new Enemy(3850, 150, Resources.Zombie));
             enemies.Add(new Enemy(3920, 150, Resources.Zombie));
+            enemies.Add(new Enemy(2332, 100, Resources.Zombie));
+            enemies.Add(new Enemy(2460, 100, Resources.Zombie));
+            enemies.Add(new Enemy(2588, 100, Resources.Zombie));
             #endregion
 
             #region Piques

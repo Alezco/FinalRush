@@ -139,7 +139,7 @@ namespace FinalRush
                 // la balle disparait si elle parcourt la distance ou rencontre un obstacle
                 if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) > 150)
                     bullet.isVisible = false;
-                foreach (Wall wall in Global.GameMain.Walls)
+                foreach (Wall wall in walls)
                 {
                     if (wall.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 5, 2)))
                         bullet.isVisible = false;
