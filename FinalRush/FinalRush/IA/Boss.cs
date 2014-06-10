@@ -22,7 +22,7 @@ namespace FinalRush
         int origin;
         int compt = 0;
         bool left;
-        public bool isDead2;
+        public bool isDead;
         int distance2player = 2000;
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
@@ -47,7 +47,7 @@ namespace FinalRush
             Hitbox.Height = 38;
             Hitbox = new Rectangle(x, y, Hitbox.Width, Hitbox.Height);
             left = true;
-            isDead2 = false;
+            isDead = false;
             bullets = Global.Player.bullets;
             enemy_bullets = new List<Bullets>();
             Global.Boss = this;
@@ -70,19 +70,19 @@ namespace FinalRush
                     bullets.RemoveAt(i);
                     i--;
                     if (pv > 1)
-                        pv--;
+                        pv = pv - 5;
                     else
-                        isDead2 = true;
+                        isDead = true;
                 }
             }
 
-            if (!isDead2 && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
-                isDead2 = true;
+            if (!isDead && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+                isDead = true;
 
             #endregion
 
             #region Animation
-            if (!isDead2)
+            if (!isDead)
             {
                 if (distance2player != 0)
                 {
@@ -97,7 +97,7 @@ namespace FinalRush
             #endregion
 
             #region Gravité
-            if (!isDead2)
+            if (!isDead)
             {
                 bool gravity = collisions.CollisionDown(Hitbox, walls, this.fallspeed);
 
@@ -123,7 +123,7 @@ namespace FinalRush
             #endregion
 
             #region Déplacements
-            if (!isDead2)
+            if (!isDead)
             {
                 if (distance2player == 0)
                     speed = 0;
@@ -185,7 +185,6 @@ namespace FinalRush
                 }
             }
 
-
             #endregion
 
             switch (Direction)
@@ -211,10 +210,9 @@ namespace FinalRush
             }
         }
 
-
         public void Draw(SpriteBatch spritebatch)
         {
-            if (!isDead2)
+            if (!isDead)
                 spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
         }
     }

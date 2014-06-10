@@ -711,7 +711,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -758,7 +758,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -803,7 +803,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -848,7 +848,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -896,7 +896,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -944,7 +944,7 @@ namespace FinalRush
                     }
                     for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (enemies2[i].isDead2)
+                        if (enemies2[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
@@ -1284,7 +1284,7 @@ namespace FinalRush
                                      "\n Script Artistic Lead Creating Producer" +
                                      "\n              GamerDuPC                " +
                                      "\n               Alezco                \n" +
-                                     "\n     MainMenu.cs Dirty Code Creator    " +
+                                     "\n  MainMenu.cs Longest Class Creator    " +
                                      "\n              WhiteDevil             \n" +
                                      "\n   Artificial Intelligence Specialist  " +
                                      "\n                Yaumy                  " +
@@ -1311,7 +1311,8 @@ namespace FinalRush
                                      "\n              Kleubeur                 " +
                                      "\n                 Ed                    " +
                                      "\n               Kakarl                  " +
-                                     "\n                Mama                 \n" +
+                                     "\n                Mama                   " +
+                                     "\n             SebLaMouche             \n" +
                                      "\n      Amazing OP Fantastic Great       " +
                                      "\n      Incredible Perfect Precise       " +
                                      "\n     Collisions Lead Game Physics      " +

@@ -166,7 +166,7 @@ namespace FinalRush
 
             foreach (Enemy2 e in enemy)
             {
-                if (!e.isDead2 && newHitbox.Intersects(e.Hitbox))
+                if (!e.isDead && newHitbox.Intersects(e.Hitbox))
                     Global.Player.health--;
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
@@ -177,7 +177,7 @@ namespace FinalRush
         public bool CollisionBoss(Rectangle Hitbox, Boss boss)
         {
             bool collision = false;
-            if (Hitbox.Intersects(boss.Hitbox))
+            if (!boss.isDead && Hitbox.Intersects(boss.Hitbox))
                 Global.Player.health--;
             if (Global.Player.health < 0)
                 Global.Player.health = 0;

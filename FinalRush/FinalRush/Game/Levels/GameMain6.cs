@@ -113,10 +113,10 @@ namespace FinalRush
 
         public void Update(MouseState souris, KeyboardState clavier)
         {
-            boss.Update(Walls);
             GameTime gametime = new GameTime();
             LocalPlayer.Update(souris, clavier, Walls, bonus);
             menu.Update(gametime);
+            boss.Update(Walls);
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)
@@ -150,7 +150,8 @@ namespace FinalRush
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spritebatch);
 
-            boss.Draw(spritebatch);
+            if (!boss.isDead)
+                boss.Draw(spritebatch);
 
             foreach (Enemy2 enemy2 in enemies2)
                 enemy2.Draw(spritebatch);
