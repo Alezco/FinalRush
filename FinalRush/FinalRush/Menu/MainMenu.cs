@@ -45,13 +45,14 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         //Multi multi;
-        SpriteFont piece_font;
+        SpriteFont piece_font,players_dead;
         List<Enemy> enemies;
         List<Enemy2> enemies2;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
         bool HasPlayed, boss_appeared, boss_already_appeared;
         public int comptlevel = 0;
         public int total_piece = 0;
+        public int nb_players_dead = 0;
         int compt = 0;
         int lvlcomplete = 10;  //niveaux terminés
         bool downcolor = true;
@@ -271,6 +272,7 @@ namespace FinalRush
             fond_gameover = content.Load<Texture2D>(@"Sprites\Menu\GameOver");
             Font = content.Load<SpriteFont>(@"SpriteFonts\TimerFont");
             nb_enemies_killed = content.Load<SpriteFont>(@"SpriteFonts\nb_enemies_killed");
+            players_dead = content.Load<SpriteFont>(@"SpriteFonts\nb_players_dead");
             Intro_fond = content.Load<Texture2D>(@"Sprites\Menu\Intro\Intro_Fond");
             foreach (GUIElement element in Intro)
             {
@@ -593,7 +595,7 @@ namespace FinalRush
             }
 
             Text = ((int)time).ToString();
-            score = (nb_pieces * 10) + timeToLoose - ((int)time);
+            score = (nb_pieces * 10) + timeToLoose - ((int)time) + enemies_dead * 20 - nb_players_dead *10;
 
             if (time == timeToLoose)
             {
@@ -623,6 +625,7 @@ namespace FinalRush
             if (player.health == 0 || player.dead)
             {
                 enjeu = false;
+                nb_players_dead++;
                 gameState = GameState.GameOver;
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueGameOver);
@@ -1202,6 +1205,7 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
                     spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + enemies_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
+                    spriteBatch.DrawString(players_dead,"Nombre de morts: " + nb_players_dead + " !",new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 360), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
@@ -1370,6 +1374,8 @@ namespace FinalRush
             {
                 total_piece_updated = false;
                 CreateGame(comptlevel);
+                if (!player.dead)
+                    nb_players_dead = 0;
             }
 
             if (element == @"Sprites\Menu\Bouton_Credits")
@@ -1403,8 +1409,10 @@ namespace FinalRush
                 CreateGame(6);
 
             if (element == @"Sprites\Menu\Bouton_NiveauSuivant")
+            {
                 CreateGame(comptlevel + 1);
-
+                nb_players_dead = 0;
+            }
             if (element == @"Sprites\Menu\Bouton_PleinEcran")
                 Global.Handler.graphics.ToggleFullScreen();
 
