@@ -738,22 +738,22 @@ namespace FinalRush
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
 
-                    foreach (Enemy e in enemies)
+                    for (int i = 0; i < enemies.Count(); i++)
                     {
-                        if (e.isDead)
+                        if (enemies[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies.Remove(e);
+                            enemies.RemoveAt(i);
                         }
                     }
-                    foreach (Enemy2 e2 in enemies2)
+                    for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (e2.isDead2)
+                        if (enemies2[i].isDead2)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies2.Remove(e2);
+                            enemies2.RemoveAt(i);
                         }
                     }
 
@@ -783,22 +783,22 @@ namespace FinalRush
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
 
-                    foreach (Enemy e in enemies)
+                    for (int i = 0; i < enemies.Count(); i++)
                     {
-                        if (e.isDead)
+                        if (enemies[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies.Remove(e);
+                            enemies.RemoveAt(i);
                         }
                     }
-                    foreach (Enemy2 e2 in enemies2)
+                    for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (e2.isDead2)
+                        if (enemies2[i].isDead2)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies2.Remove(e2);
+                            enemies2.RemoveAt(i);
                         }
                     }
 
@@ -828,22 +828,22 @@ namespace FinalRush
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
 
-                    foreach (Enemy e in enemies)
+                    for (int i = 0; i < enemies.Count(); i++)
                     {
-                        if (e.isDead)
+                        if (enemies[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies.Remove(e);
+                            enemies.RemoveAt(i);
                         }
                     }
-                    foreach (Enemy2 e2 in enemies2)
+                    for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (e2.isDead2)
+                        if (enemies2[i].isDead2)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies2.Remove(e2);
+                            enemies2.RemoveAt(i);
                         }
                     }
 
@@ -876,22 +876,22 @@ namespace FinalRush
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
 
-                    foreach (Enemy e in enemies)
+                    for (int i = 0; i < enemies.Count(); i++)
                     {
-                        if (e.isDead)
+                        if (enemies[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies.Remove(e);
+                            enemies.RemoveAt(i);
                         }
                     }
-                    foreach (Enemy2 e2 in enemies2)
+                    for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (e2.isDead2)
+                        if (enemies2[i].isDead2)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies2.Remove(e2);
+                            enemies2.RemoveAt(i);
                         }
                     }
 
@@ -924,22 +924,22 @@ namespace FinalRush
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
 
-                    foreach (Enemy e in enemies)
+                    for (int i = 0; i < enemies.Count(); i++)
                     {
-                        if (e.isDead)
+                        if (enemies[i].isDead)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies.Remove(e);
+                            enemies.RemoveAt(i);
                         }
                     }
-                    foreach (Enemy2 e2 in enemies2)
+                    for (int i = 0; i < enemies2.Count(); i++)
                     {
-                        if (e2.isDead2)
+                        if (enemies2[i].isDead2)
                         {
                             enemies_dead++;
                             mort_enemies.Play();
-                            enemies2.Remove(e2);
+                            enemies2.RemoveAt(i);
                         }
                     }
 
