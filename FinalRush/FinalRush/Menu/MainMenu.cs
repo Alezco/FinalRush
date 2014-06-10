@@ -56,7 +56,7 @@ namespace FinalRush
         public int total_piece = 0;
         public int nb_players_dead = 0;
         int compt = 0;
-        int lvlcomplete = 10;  //niveaux terminés
+        int lvlcomplete = 0;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -81,6 +81,7 @@ namespace FinalRush
         public bool total_piece_updated;
         float deltaTime;
         public int nb_pieces;
+        float TextScroll = 100f;
 
 
         //Liste qui contiendra tous les rectangles (donc les boutons) nécessaires
@@ -1071,6 +1072,7 @@ namespace FinalRush
                 case GameState.Credits:
                     foreach (GUIElement element in Credits)
                         element.Update();
+                    TextScroll -= 0.6f;
                     enjeu = false;
                     break;
                 case GameState.Chapitre1:
@@ -1234,6 +1236,97 @@ namespace FinalRush
                 case GameState.Credits:
                     foreach (GUIElement element in Credits)
                         element.Draw(spriteBatch);
+
+                                        Global.Handler.GraphicsDevice.Clear(Color.Black);
+
+                    #region Crédits
+
+                    if (TextScroll >= 1500F)
+                        TextScroll = 1500F;
+
+                    string message = "\n   A game created and directed by      " +
+                                     "\n         The Walking Coders          \n" +
+                                     "\n             Producers                 " +
+                                     "\n         The Walking Coders          \n" +
+                                     "\n         Artistic Director             " +
+                                     "\n              Didule                   " +
+                                     "\n              Iksame                 \n" +
+                                     "\n   Animation Lead Artistic Director    " +
+                                     "\n              Alezco                   " +
+                                     "\n              Yaumy                    " +
+                                     "\n              Iksame                 \n" +
+                                     "\n       Audio Artistic Director         " +
+                                     "\n             WhiteDevil              \n" +
+                                     "\n         Lead Game Designer            " +
+                                     "\n               Alezco                  " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Iksame                \n" +
+                                     "\n         Lead Game Designer            " +
+                                     "\n               Alezco                  " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Iksame                \n" +
+                                     "\n  Lead Architect and Gameplay Designer " +
+                                     "\n              ArrenKae                 " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Alezco                  " +
+                                     "\n             WhiteDevil                " +
+                                     "\n               Iksame                \n" +
+                                     "\n          Online Programmers           " +
+                                     "\n              ArrenKae                 " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Alezco                \n" +
+                                     "\n     Level Design Director Closing     " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Alezco                \n" +
+                                     "\n     Art Graphic Technical Director    " +
+                                     "\n               Didule                  " +
+                                     "\n                Ixam                 \n" +
+                                     "\n   Lead Sound Audio Artistic Director  " +
+                                     "\n             WhiteDevil              \n" +
+                                     "\n        Additional Sound Design        " +
+                                     "\n             WhiteDevil              \n" +
+                                     "\n Script Artistic Lead Creating Producer" +
+                                     "\n              GamerDuPC                " +
+                                     "\n               Alezco                \n" +
+                                     "\n     MainMenu.cs Dirty Code Creator    " +
+                                     "\n              WhiteDevil             \n" +
+                                     "\n   Artificial Intelligence Specialist  " +
+                                     "\n                Yaumy                  " +
+                                     "\n              WhiteDevil             \n" +
+
+                                     "\n            Beta Testers               " +
+                                     "\n              ArrenKae                 " +
+                                     "\n               Yaumy                   " +
+                                     "\n               Alezco                  " +
+                                     "\n             WhiteDevil                " +
+                                     "\n               Iksame                  " +
+                                     "\n               Charkk                  " +
+                                     "\n              GamerduPC                " +
+                                     "\n               Jorcau                  " +
+                                     "\n               Didule                  " +
+                                     "\n               Pouale                  " +
+                                     "\n             Nemsadomaso               " +
+                                     "\n              Ulyssek                  " +
+                                     "\n               Awakee                  " +
+                                     "\n               J0bba                   " +
+                                     "\n             AlexBarry                 " +
+                                     "\n              Kleubeur                 " +
+                                     "\n                 Ed                    " +
+                                     "\n               Kakarl                  " +
+                                     "\n                Mama                 \n" +
+                                     "\n      Amazing OP Fantastic Great       " +
+                                     "\n      Incredible Perfect Precise       " +
+                                     "\n     Collisions Lead Game Physics      " +
+                                     "\n     Specialist Creator Technical      " +
+                                     "\n    Producing Designing Programmer     " +
+                                     "\n                Yaumy            \n\n\n" +
+                                     "\n         Thank you for playing         " ;
+
+                    spriteBatch.DrawString(nb_enemies_killed, message, new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 210, TextScroll), Color.White);
+
+                    #endregion
+
+
                     break;
                 case GameState.Chapitre1:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

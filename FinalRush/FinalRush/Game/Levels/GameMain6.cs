@@ -20,13 +20,15 @@ namespace FinalRush
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
         public List<VitesseBonus> speedbonus;
+        public List<Piques> piques;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment6;
         Texture2D foreground = Resources.Foreground6;
-
+        public int framecolumn;
+        int compteur = 1;
 
         // CONSTRUCTOR
 
@@ -40,9 +42,18 @@ namespace FinalRush
             healthbonus = new List<HealthBonus>();
             speedbonus = new List<VitesseBonus>();
             enemies = new List<Enemy>();
+            piques = new List<Piques>();
             enemies2 = new List<Enemy2>();
+            framecolumn = 1;
 
             Global.GameMain6 = this;
+
+            piques.Add(new Piques(128, 417, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(192, 417, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(320, 417, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(384, 417, Resources.Lave, 64, 64, Color.White));
+
+            Animate(1, 32, 1);
 
             #region Ennemis
             //Ennemis
@@ -86,6 +97,16 @@ namespace FinalRush
             #endregion
         }
 
+        public void Animate(int begin, int end, int speed)
+        {
+            if (compteur % speed == 0)
+            {
+                if (framecolumn > end - 1) framecolumn = begin;
+                else framecolumn++;
+            }
+            compteur++;
+        }
+
         // UPDATE & DRAW
 
         public void Update(MouseState souris, KeyboardState clavier)
@@ -124,6 +145,12 @@ namespace FinalRush
 
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
+
+            foreach (Piques p in piques)
+            {
+                p.Draw(spritebatch);
+                spritebatch.Draw(Resources.Lave, p.Hitbox, new Rectangle((framecolumn - 1) * 64, 0, p.Hitbox.Width, p.Hitbox.Height), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
+            }
 
             foreach (HealthBonus hb in healthbonus)
                 hb.Draw(spritebatch);
