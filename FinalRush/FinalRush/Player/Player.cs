@@ -137,7 +137,7 @@ namespace FinalRush
                     bullet.position.X -= bullet.velocity; // va vers la gauche
 
                 // la balle disparait si elle parcourt la distance ou rencontre un obstacle
-                if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) > 150)
+                if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) >= 200)
                     bullet.isVisible = false;
                 foreach (Wall wall in walls)
                 {
@@ -229,7 +229,7 @@ namespace FinalRush
                     Hitbox.Y = Hitbox.Y - 15;
                 }
             }
-          
+
 
             // Tir Marco
             if (clavier.IsKeyDown(Keys.Q) && state == "standing") //On tire avec "Q" et debout uniquement 
@@ -249,7 +249,7 @@ namespace FinalRush
                 else
                 {
                     SoundEffectInstance vide_sound_instance = Resources.ammo_vide.CreateInstance();
-                        vide_sound_instance.Play();
+                    vide_sound_instance.Play();
                 }
             }
             if (state == "cut")
@@ -441,7 +441,7 @@ namespace FinalRush
             switch (state) // Affichage des bons sprites en fonction de l'état, ça va être utile pour le tir, la mort, la prise d'un coup, switch arme etc.. 
             {
                 case "standing":
-                    spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36,0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "squat":
                     spritebatch.Draw(Resources.MarcoSquat, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);

@@ -174,7 +174,7 @@ namespace FinalRush
             #region HUD
             if (main.enjeu)
             {
-                if (Global.Player.health > 0 &&Global.Player.health < 40)
+                if (Global.Player.health > 0 && Global.Player.health < 40)
                 {
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);

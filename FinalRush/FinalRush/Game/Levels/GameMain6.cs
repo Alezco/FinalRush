@@ -30,7 +30,7 @@ namespace FinalRush
         public int framecolumn;
         bool resetlave;
         int comptlave = 0;
-        int compteur = 1;
+        //int compteur = 1;
 
         // CONSTRUCTOR
 

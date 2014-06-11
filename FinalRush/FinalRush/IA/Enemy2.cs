@@ -17,21 +17,19 @@ namespace FinalRush
         int pv;
         int fallspeed;
         int speedjump = 1;
-        int random;
         int framecolumn;
         int origin;
         int compt = 0;
         bool left;
-        public bool shot;
+        bool shot;
         public bool isDead;
         int distance2player = 2000;
         List<Bullets> bullets;
-        public List<Bullets> enemy_bullets;
-        public bool a_portee;
+        List<Bullets> enemy_bullets;
+        bool a_portee;
         SoundEffectInstance shot_sound_instance;
         Color color;
 
-        Random rand = new Random();
         SpriteEffects effect;
         Collisions collisions = new Collisions();
 
@@ -41,7 +39,6 @@ namespace FinalRush
             speed = 3;
             pv = 3;
             fallspeed = 5;
-            random = rand.Next(7, 15);
             effect = SpriteEffects.None;
             Direction = Direction.Right;
             Hitbox.Width = 30;
@@ -173,7 +170,7 @@ namespace FinalRush
 
                 if (!left)
                 {
-                    if (!collisions.CollisionRight(Hitbox, walls, speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
+                    if (!collisions.CollisionRight(Hitbox, walls, speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
                     {
                         this.Hitbox.X += speed;
                         this.Direction = Direction.Right;
@@ -197,25 +194,24 @@ namespace FinalRush
             else
                 a_portee = false;
 
-            if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 10 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0 && !isDead )
+            if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 20 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0 && !isDead)
             {
                 shot_sound_instance.Play();
                 shot = true;
                 Bullets bullet = new Bullets(Resources.bullet);
-                bullet.velocity = 3;
+                bullet.velocity = 2;
                 bullet.isVisible = true;
                 enemy_bullets.Add(bullet);
                 if (Direction == Direction.Right)
                 {
                     Old_Direction = Direction.Right;
-                    bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
+                    bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 4) + new Vector2(bullet.velocity * 5, 0);
                 }
                 else
                 {
                     Old_Direction = Direction.Left;
-                    bullet.position = new Vector2(Hitbox.X, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
+                    bullet.position = new Vector2(Hitbox.X, Hitbox.Y + Hitbox.Height / 4) + new Vector2(bullet.velocity * 5, 0);
                 }
-
             }
             else
                 shot = false;
@@ -242,7 +238,7 @@ namespace FinalRush
                         bullet.isVisible = false;
                     }
 
-                foreach (Wall wall in Global.GameMain.Walls)
+                foreach (Wall wall in walls)
                 {
                     if (wall.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 5, 2)))
                         bullet.isVisible = false;

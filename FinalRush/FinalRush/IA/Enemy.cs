@@ -120,7 +120,7 @@ namespace FinalRush
 
             if (!left)
             {
-                if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
+                if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
                 {
                     this.Hitbox.X -= speed;
                     this.Direction = Direction.Left;
