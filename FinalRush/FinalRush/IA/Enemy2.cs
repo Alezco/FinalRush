@@ -12,7 +12,7 @@ namespace FinalRush
     class Enemy2
     {
         public Rectangle Hitbox;
-        Direction Direction;
+        Direction Direction, Old_Direction;
         int speed;
         int pv;
         int fallspeed;
@@ -207,10 +207,12 @@ namespace FinalRush
                 enemy_bullets.Add(bullet);
                 if (Direction == Direction.Right)
                 {
+                    Old_Direction = Direction.Right;
                     bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
                 }
                 else
                 {
+                    Old_Direction = Direction.Left;
                     bullet.position = new Vector2(Hitbox.X, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
                 }
 
@@ -223,7 +225,7 @@ namespace FinalRush
 
             foreach (Bullets bullet in enemy_bullets)
             {
-                if (Direction == Direction.Right)
+                if (Old_Direction == Direction.Right)
                 {
                     bullet.position.X += bullet.velocity; // va vers la droite
                 }
