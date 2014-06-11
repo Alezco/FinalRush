@@ -372,7 +372,7 @@ namespace FinalRush
             else if (clavier.IsKeyDown(Keys.A))
                 Hitbox = new Rectangle(50, 370, Hitbox.Width, Hitbox.Height);
             else if (clavier.IsKeyDown(Keys.F))
-                Hitbox = new Rectangle(2500, 100, Hitbox.Width, Hitbox.Height);
+                Hitbox = new Rectangle(4500, 100, Hitbox.Width, Hitbox.Height);
             #endregion
 
             #region Saut
