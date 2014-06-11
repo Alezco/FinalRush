@@ -27,7 +27,7 @@ namespace FinalRush
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
         public bool a_portee;
-        SoundEffectInstance shot_sound_instance;
+        SoundEffectInstance shot_sound_instance, Boss_dead_instance;
         Color color;
 
         Random rand = new Random();
@@ -53,6 +53,7 @@ namespace FinalRush
             Global.Boss = this;
             a_portee = false;
             shot_sound_instance = Resources.tir_rafale.CreateInstance();
+            Boss_dead_instance = Resources.boss_mort_sound.CreateInstance();
             origin = Hitbox.X;
         }
 
@@ -61,7 +62,7 @@ namespace FinalRush
             compt++; // Cette petite ligne correspond à l'IA ( WAAAW Gros QI )
             distance2player = Hitbox.X - Global.Player.Hitbox.X;
 
-            #region Mort Ennemi
+            #region Mort Boss
             for (int i = 0; i < bullets.Count(); i++)
             {
                 if (Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
@@ -77,7 +78,10 @@ namespace FinalRush
             }
 
             if (!isDead && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+            {
+                pv = 0;
                 isDead = true;
+            }
 
             #endregion
 
@@ -182,6 +186,13 @@ namespace FinalRush
             }
 
             #endregion
+
+
+            if (pv == 0)
+            {
+                pv = -1;
+                Boss_dead_instance.Play();
+            }
 
             switch (Direction)
             {
