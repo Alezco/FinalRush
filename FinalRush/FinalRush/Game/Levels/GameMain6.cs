@@ -37,7 +37,7 @@ namespace FinalRush
         public GameMain6()
         {
             menu = new MainMenu(Global.Handler, 0f);
-            boss = new Boss(2600, 376, Resources.Elite);
+            boss = new Boss(2600, 276, Resources.Elite);
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();

@@ -16,7 +16,7 @@ namespace FinalRush
 
         public static Texture2D Marco, MarcoSaut, MarcoSquat, MarcoTir, MarcoCut;
         public static Texture2D Player2;
-        public static Texture2D Zombie, Elite;
+        public static Texture2D Zombie, Elite, Boss;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top, Lave;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block;
@@ -47,6 +47,7 @@ namespace FinalRush
 
             Zombie = Content.Load<Texture2D>(@"Sprites\Enemy\Zombie_marche");
             Elite = Content.Load<Texture2D>(@"Sprites\Enemy\Elite");
+            Boss = Content.Load<Texture2D>(@"Sprites\Enemy\Zomboss");
 
             //Environnement
 

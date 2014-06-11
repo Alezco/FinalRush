@@ -43,8 +43,8 @@ namespace FinalRush
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
             Direction = Direction.Right;
-            Hitbox.Width = 30;
-            Hitbox.Height = 38;
+            Hitbox.Width = 152;
+            Hitbox.Height = 94;
             Hitbox = new Rectangle(x, y, Hitbox.Width, Hitbox.Height);
             left = true;
             isDead = false;
@@ -87,8 +87,8 @@ namespace FinalRush
                 if (distance2player != 0)
                 {
                     if (framecolumn > 8)
-                        framecolumn = 1;
-                    else if (compt % 2 == 0)
+                        framecolumn = 2;
+                    else if (compt % 5 == 0)
                         framecolumn++;
                 }
                 else
@@ -133,13 +133,11 @@ namespace FinalRush
                     if (distance2player < 0 && distance2player >= -200)
                     {
                         left = false;
-                        compt = 1;
                     }
                     else
                         if (distance2player > 0 && distance2player <= 200)
                         {
                             left = true;
-                            compt = 1;
                         }
                         else
                             if (distance2player > 200 || distance2player <= -200)
@@ -147,12 +145,10 @@ namespace FinalRush
                                 if (this.Hitbox.X <= origin - 200)
                                 {
                                     left = false;
-                                    compt = 1;
                                 }
                                 else if (this.Hitbox.X >= origin + 200)
                                 {
                                     left = true;
-                                    compt = 1;
                                 }
                             }
                 }
@@ -165,7 +161,7 @@ namespace FinalRush
                     }
                     else
                     {
-                        framecolumn = 1;
+                        framecolumn = 2;
                         compt += 10;
                     }
                 }
@@ -179,7 +175,7 @@ namespace FinalRush
                     }
                     else
                     {
-                        framecolumn = 1;
+                        framecolumn = 2;
                         compt += 10;
                     }
                 }
@@ -189,10 +185,10 @@ namespace FinalRush
 
             switch (Direction)
             {
-                case Direction.Right:
+                case Direction.Left:
                     effect = SpriteEffects.FlipHorizontally;
                     break;
-                case Direction.Left:
+                case Direction.Right:
                     effect = SpriteEffects.None;
                     break;
             }
@@ -213,7 +209,7 @@ namespace FinalRush
         public void Draw(SpriteBatch spritebatch)
         {
             if (!isDead)
-                spritebatch.Draw(Resources.Elite, Hitbox, new Rectangle((framecolumn - 1) * 30, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
+                spritebatch.Draw(Resources.Boss, Hitbox, new Rectangle((framecolumn - 1) * 152, 0, Hitbox.Width, Hitbox.Height), color, 0f, new Vector2(0, 0), effect, 0f);
         }
     }
 }
