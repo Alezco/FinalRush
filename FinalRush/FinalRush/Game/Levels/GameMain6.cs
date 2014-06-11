@@ -7,12 +7,16 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using FinalRush.Game.Levels;
 
 namespace FinalRush
 {
     class GameMain6
     {
         // FIELDS
+        public static Editeur edit = new Editeur();
+        public int[,] map = edit.Edition(6);
+        public int size = 64;
 
         public Player LocalPlayer;
         public Boss boss;
@@ -30,7 +34,6 @@ namespace FinalRush
         public int framecolumn;
         bool resetlave;
         int comptlave = 0;
-        //int compteur = 1;
 
         // CONSTRUCTOR
 
@@ -50,12 +53,37 @@ namespace FinalRush
 
             Global.GameMain6 = this;
 
-            piques.Add(new Piques(128, 417, Resources.Lave, 64, 64, Color.White));
-            piques.Add(new Piques(192, 417, Resources.Lave, 64, 64, Color.White));
-            piques.Add(new Piques(320, 417, Resources.Lave, 64, 64, Color.White));
-            piques.Add(new Piques(384, 417, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(128, 425, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(192, 425, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(320, 425, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(384, 425, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(1024, 425, Resources.Lave, 64, 64, Color.White));
+            piques.Add(new Piques(1152, 425, Resources.Lave, 64, 64, Color.White));
 
-            //Animate(1, 32, 1);
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                for (int y = 0; y < map.GetLength(0); y++)
+                {
+                    int number = map[y, x];
+                    if (number == 1)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Rock_top, size, size, Color.White));
+                    if (number == 2)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Rock, size, size, Color.White));
+                    if (number == 3)
+                        enemies.Add(new Enemy(x * size, y * size, Resources.Zombie));
+                    if (number == 4)
+                        enemies2.Add(new Enemy2(x * size, y * size, Resources.Elite));
+                    if (number == 5)
+                        bonus.Add(new Bonus(x * size, y * size, Resources.Coin, 20, 20, Color.White));
+                    if (number == 6)
+                        healthbonus.Add(new HealthBonus(x * size + 40, y * size + 74, Resources.Health, 20, 20, Color.White));
+                    if (number == 7)
+                        speedbonus.Add(new VitesseBonus(x * size + 32, y * size + 64, Resources.Speed, 20, 20, Color.White));
+                    if (number == 8)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Platform, 100, 16, Color.OrangeRed));
+                    
+                }
+            }
 
             #region Ennemis
             //Ennemis
@@ -78,36 +106,14 @@ namespace FinalRush
             //Sol
 
             for (int i = 0; i < 80; i++)
-                if (i != 2 & i != 3 & i != 5 & i != 6 & i != 16 & i != 20 & i != 21 & i != 30)
+                if (i != 2 & i != 3 & i != 5 & i != 6 & i != 16 & i != 18 & i != 21 & i != 22 & i != 23 & i != 24 & i != 25 & i != 20 & i != 71)
                     Walls.Add(new Wall(64 * i, 416, Resources.Rock_top, 64, 64, Color.White));
             #endregion
 
             #region Bonus
-            ////Bonus
 
-            //bonus.Add(new Bonus(700, 345, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(1200, 100, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(1940, 76, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(1984, 320, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(1984, 396, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(2520, 320, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(2650, 320, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(2816, 332, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(3200, 140, Resources.Coin, 20, 20, Color.White));
-            //bonus.Add(new Bonus(4020, 320, Resources.Coin, 20, 20, Color.White));
-            speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
             #endregion
         }
-
-        //public void Animate(int begin, int end, int speed)
-        //{
-        //    if (compteur % speed == 0)
-        //    {
-        //        if (framecolumn > end - 1) framecolumn = begin;
-        //        else framecolumn++;
-        //    }
-        //    compteur++;
-        //}
 
         // UPDATE & DRAW
 

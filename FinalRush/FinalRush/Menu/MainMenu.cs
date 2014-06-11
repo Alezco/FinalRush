@@ -65,7 +65,7 @@ namespace FinalRush
         SoundEffectInstance mort_enemies;
         Color colour = new Color(255, 255, 255, 255);
         Color colourScenario = new Color(255, 255, 255, 255);
-        Texture2D Intro_fond, Intro_fond2, coin;
+        Texture2D Intro_fond, Intro_fond2, coin, deathhead, zombie;
         int framecolumn = 1;
         int compteurpourframecolumn = 1;
         Texture2D fond_menu, fond_win, fond_gameover, fond_how2play;
@@ -271,6 +271,8 @@ namespace FinalRush
         public void LoadContent(ContentManager content)
         {
             coin = content.Load<Texture2D>(@"SpriteFonts\coin");
+            deathhead = content.Load<Texture2D>(@"SpriteFonts\deathhead");
+            zombie = content.Load<Texture2D>(@"SpriteFonts\zombie");
             fond_how2play = content.Load<Texture2D>(@"Sprites\Menu\HowToPlayPage1");
             fond_menu = content.Load<Texture2D>(@"Sprites\Menu\Menu_fond");
             fond_win = content.Load<Texture2D>(@"Sprites\Menu\Won");
@@ -1251,12 +1253,14 @@ namespace FinalRush
                     break;
                 case GameState.Won:
                     spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
-                    spriteBatch.Draw(coin, new Rectangle(250, 250, 30, 30), Color.White);
+                    spriteBatch.Draw(coin, new Rectangle(350, 250, 25, 25), Color.White);
+                    spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
+                    spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
                     foreach (GUIElement element in Won)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(nb_enemies_killed, "ennemis plus de ce monde: " + enemies_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 280), Color.White);
-                    spriteBatch.DrawString(players_dead, "Nombre de morts: " + nb_players_dead + " !", new Vector2(Global.Handler.Window.ClientBounds.Width / 2 - 150, 330), Color.White);
+                    spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead , new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
+                    spriteBatch.DrawString(players_dead, "x " + nb_players_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 310), Color.White);
                     break;
                 case GameState.InPause:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);

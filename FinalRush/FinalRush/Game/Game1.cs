@@ -28,6 +28,7 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         SpriteFont scoring, timer;
+        Color color;
 
         public List<Bullets> bullets;
         SoundEffect saut;
@@ -47,6 +48,7 @@ namespace FinalRush
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             bullets = new List<Bullets>();
+            color = Color.Black;
             graphics.PreferredBackBufferWidth = screenwidth;
             graphics.PreferredBackBufferHeight = screenheight;
             IsMouseVisible = true;
@@ -225,7 +227,7 @@ namespace FinalRush
                 spriteBatch.Begin();
                 spriteBatch.DrawString(timer, "Bravo, tu as termine le niveau en " + main.Text + " secondes", new Vector2(Window.ClientBounds.Width / 2 - 300, 200), Color.White);
                 spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 360), Color.White);
-                spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2 - 70, 250), Color.White);
+                spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2, 250), Color.White);
                 spriteBatch.End();
             }
 

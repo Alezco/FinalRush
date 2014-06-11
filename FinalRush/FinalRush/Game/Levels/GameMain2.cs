@@ -149,11 +149,12 @@ namespace FinalRush
             #endregion
 
             #region Bonus
+            bonus.Add(new Bonus(384, 300, Resources.Coin, 20, 20, Color.White));
             bonus.Add(new Bonus(4000, 100, Resources.Coin, 20, 20, Color.White));
-
+            bonus.Add(new Bonus(1100, 240, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(1288, 56, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(2060, 300, Resources.Coin, 20, 20, Color.White));
             healthbonus.Add(new HealthBonus(1500, 320, Resources.Health, 20, 20, Color.White));
-
-            speedbonus.Add(new VitesseBonus(2224, 396, Resources.Speed, 20, 20, Color.White));
             #endregion
         }
 

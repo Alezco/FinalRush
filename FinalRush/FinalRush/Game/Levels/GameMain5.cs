@@ -54,37 +54,27 @@ namespace FinalRush
                 for (int y = 0; y < map.GetLength(0); y++)
                 {
                     int number = map[y, x];
-                    switch (number)
-                    {
-                        case 1:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Sand_top, size, size, Color.White));
-                            break;
-                        case 2:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Herbe, size, size, Color.White));
-                            break;
-                        case 3:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Herbe_neige, size, size, Color.White));
-                            break;
-                        case 4:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Ice, size, size, Color.White));
-                            break;
-                        case 5:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Ice_top, size, size, Color.White));
-                            break;
-                        case 6:
-                            enemies.Add(new Enemy(x * size, y, Resources.Zombie));
-                            break;
-                        case 7:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Platform, 30, 16, Color.White));
-                            break;
-                        case 8:
-                            Walls.Add(new Wall(x * size, y * size, Resources.Platform, 50, 16, Color.White));
-                            break;
-                        default:
-                            break;
-                    }
+                    if (number == 1)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Sand_top, size, size, Color.White));
+                    if (number == 2)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Sand, size, size, Color.White));
+                    if (number == 3)
+                        enemies.Add(new Enemy(x * size, y * size, Resources.Zombie));
+                    if (number == 4)
+                        enemies2.Add(new Enemy2(x * size, y * size, Resources.Elite));
+                    if (number == 5)
+                        bonus.Add(new Bonus(x * size, y * size, Resources.Coin, 20, 20, Color.White));
+                    if (number == 6)
+                        healthbonus.Add(new HealthBonus(x * size, y * size, Resources.Health, 20, 20, Color.White));
+                    if (number == 7)
+                        speedbonus.Add(new VitesseBonus(x * size, y * size, Resources.Speed, 20, 20, Color.White));
                 }
             }
+
+            Walls.Add(new Wall(3600, 300, Resources.Platform, 100, 16, Color.LightYellow));
+            Walls.Add(new Wall(3750, 250, Resources.Platform, 100, 16, Color.LightYellow));
+            Walls.Add(new Wall(3900, 190, Resources.Platform, 50, 16, Color.LightYellow));
+            Walls.Add(new Wall(4000, 150, Resources.Platform, 30, 10, Color.LightYellow));
         }
 
         // UPDATE & DRAW
