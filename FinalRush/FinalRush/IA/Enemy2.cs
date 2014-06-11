@@ -191,13 +191,13 @@ namespace FinalRush
 
             #region Tir
 
-            enemy_bullets.Capacity = 5;
-            if ((distance2player >= -200 && distance2player <= 50) || (distance2player > 50 && distance2player <= 200))
+            //enemy_bullets.Capacity = 5;
+            if ((distance2player >= -200 && distance2player <= -100) || (distance2player > 100 && distance2player <= 200))
                 a_portee = true;
             else
                 a_portee = false;
 
-            if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 10 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0)
+            if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 10 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0 && !isDead )
             {
                 shot_sound_instance.Play();
                 shot = true;
@@ -205,7 +205,6 @@ namespace FinalRush
                 bullet.velocity = 3;
                 bullet.isVisible = true;
                 enemy_bullets.Add(bullet);
-                enemy_bullets.Capacity--;
                 if (Direction == Direction.Right)
                 {
                     bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
