@@ -32,7 +32,6 @@ namespace FinalRush
         public List<Bullets> bullets;
         SoundEffect saut;
         Texture2D HealthBar;
-        public int health;
 
         int screenwidth = 800;
         int screenheight = 480;
@@ -47,7 +46,6 @@ namespace FinalRush
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            health = 100;
             bullets = new List<Bullets>();
             graphics.PreferredBackBufferWidth = screenwidth;
             graphics.PreferredBackBufferHeight = screenheight;
@@ -176,12 +174,20 @@ namespace FinalRush
             #region HUD
             if (main.enjeu)
             {
-                if (health > 0)
+                if (Global.Player.health < 40 && Global.Player.health > 0)
                 {
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
-                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(20 + Global.Player.health, 20), Color.White);
+                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(50, 22), Color.White);
+                    spriteBatch.End();
+                }
+                else if (Global.Player.health > 0 && Global.Player.health > 40)
+                {
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
+                    spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
+                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(10 + Global.Player.health, 22), Color.White);
                     spriteBatch.End();
                 }
                 if (main.comptlevel == 6)
@@ -194,15 +200,23 @@ namespace FinalRush
                 if (main.comptlevel == 1 || main.comptlevel == 6)
                 {
                     spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.White);
-                    //spriteBatch.DrawString(scoring, "Score : " + main.score + " pts", new Vector2(Window.ClientBounds.Width / 2 - 200, 0), Color.White);
                     spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.White);
                 }
                 else
                 {
-                    spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
-                    //spriteBatch.DrawString(scoring, "Score : " + main.score + " pts", new Vector2(Window.ClientBounds.Width / 2 - 200, 0), Color.White);
-                    spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
-                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(20+ Global.Player.health, 20), Color.Black);
+                    if (Global.Player.health < 0 && Global.Player.health > 40)
+                    {
+                        spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
+                        spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
+                        spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(50,22), Color.Black);
+                    }
+                    else
+                        if (Global.Player.health > 40)
+                        {
+                            spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
+                            spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
+                            spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(10 + Global.Player.health, 22), Color.Black);
+                        }
                 }
                 spriteBatch.End();
             }
