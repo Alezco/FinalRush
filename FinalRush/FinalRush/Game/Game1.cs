@@ -181,7 +181,7 @@ namespace FinalRush
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
-                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(50, 40), Color.White);
+                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(20 + Global.Player.health, 20), Color.White);
                     spriteBatch.End();
                 }
                 if (main.comptlevel == 6)
@@ -202,7 +202,7 @@ namespace FinalRush
                     spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
                     //spriteBatch.DrawString(scoring, "Score : " + main.score + " pts", new Vector2(Window.ClientBounds.Width / 2 - 200, 0), Color.White);
                     spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
-                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(50, 40), Color.Black);
+                    spriteBatch.DrawString(scoring, Global.Player.health + " %", new Vector2(20+ Global.Player.health, 20), Color.Black);
                 }
                 spriteBatch.End();
             }
@@ -210,7 +210,7 @@ namespace FinalRush
             {
                 spriteBatch.Begin();
                 spriteBatch.DrawString(timer, "Bravo, tu as termine le niveau en " + main.Text + " secondes", new Vector2(Window.ClientBounds.Width / 2 - 300, 200), Color.White);
-                spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 330), Color.White);
+                spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 360), Color.White);
                 spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2 - 70, 250), Color.White);
                 spriteBatch.End();
             }
