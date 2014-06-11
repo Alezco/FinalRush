@@ -1277,12 +1277,12 @@ namespace FinalRush
                     foreach (GUIElement element in Credits)
                         element.Draw(spriteBatch);
 
-                    Global.Handler.GraphicsDevice.Clear(Color.Black);
+                    Global.Handler.GraphicsDevice.Clear(Color.Black);              
 
                     #region Crédits
 
                     if (TextScroll >= 1500F)
-                        TextScroll = 1500F;
+                        TextScroll = 500;
 
                     string message = "\n   A game created and directed by      " +
                                      "\n         The Walking Coders          \n" +
@@ -1329,8 +1329,8 @@ namespace FinalRush
                                      "\n   Artificial Intelligence Specialist  " +
                                      "\n                Yaumy                  " +
                                      "\n              WhiteDevil             \n" +
-                                     "\n            Cruel Dictator             " +
-                                     "\n                Alezco               \n" +
+                                     "\n     Cruel and Heartless Dictator      " +
+                                     "\n               Alezco                \n" +
                                      "\n            Beta Testers               " +
                                      "\n              ArrenKae                 " +
                                      "\n               Yaumy                   " +
@@ -1344,7 +1344,10 @@ namespace FinalRush
                                      "\n               Pouale                  " +
                                      "\n               Drifer                  " +
                                      "\n             Nemsadomaso               " +
-                                     "\n              Ulyssek                  " +
+                                     "\n              DarkPrime                " +
+                                     "\n              Mickelbaz                " +
+                                     "\n               Denwau                  " +
+                                     "\n              Jujubingo                " +
                                      "\n               Awakee                  " +
                                      "\n               J0bba                   " +
                                      "\n             AlexBarry                 " +
@@ -1365,6 +1368,7 @@ namespace FinalRush
 
                     #endregion
                     break;
+
                 #region Highscores
                 case GameState.Chapitre1:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
@@ -1426,6 +1430,7 @@ namespace FinalRush
                     if (lvlcomplete < 5) spriteBatch.Draw(Resources.lvl6_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 #endregion
+
                 case GameState.Multi:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Multi)

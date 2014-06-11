@@ -129,7 +129,7 @@ namespace FinalRush
             }
             else
             {
-                if (comptlave % 2 == 0) framecolumn++;
+                if (comptlave % 5 == 0) framecolumn++;
                 if (framecolumn == 32) resetlave = true;
                 comptlave++;
             }
