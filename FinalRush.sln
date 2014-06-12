@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalRush", "FinalRush\FinalRush\FinalRush.csproj", "{7338EA8B-290B-4C4C-AC5C-8E88E60795BD}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "FinalRushContent", "FinalRush\FinalRushContent\FinalRushContent.contentproj", "{C98C85DE-1477-4A9C-BCF8-C92BFA6F5873}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalRushContent", "FinalRush\FinalRushContent\FinalRushContent.contentproj", "{C98C85DE-1477-4A9C-BCF8-C92BFA6F5873}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

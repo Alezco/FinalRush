@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System.Net.Sockets;
 using System.IO;
+using FinalRush.Game.Levels;
 
 namespace FinalRush
 {
@@ -21,11 +22,15 @@ namespace FinalRush
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
         List<Bullets> playerBullets, player2Bullets;
+        public List<VitesseBonus> speedbonus;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment;
         Texture2D foreground = Resources.Foreground;
         public Bullets bullets;
+        public static Editeur edit = new Editeur();
+        public int[,] map = edit.Edition(7);
+        public int size = 64;
 
         // CONSTRUCTOR
 
@@ -44,70 +49,23 @@ namespace FinalRush
             reader = new BinaryReader(readStream);
             writer = new BinaryWriter(writeStream);
             bullets = new Bullets(Resources.bullet);
+            speedbonus = new List<VitesseBonus>();
 
-            #region Plateformes
-            //Plateformes
-
-            Walls.Add(new Wall(425, 245, Resources.Platform, 50, 16, Color.Green));
-            Walls.Add(new Wall(130, 360, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(280, 300, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(680, 365, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(520, 300, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1160, 200, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1664, 350, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1828, 280, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1828, 140, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1664, 210, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1984, 140, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(2100, 240, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(2200, 340, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(1984, 340, Resources.Platform, 50, 16, Color.Green));
-            Walls.Add(new Wall(2500, 340, Resources.Platform, 200, 16, Color.Green));
-            Walls.Add(new Wall(3520, 350, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(3620, 300, Resources.Platform, 40, 16, Color.Green));
-            Walls.Add(new Wall(3680, 250, Resources.Platform, 20, 16, Color.Green));
-            Walls.Add(new Wall(3720, 200, Resources.Platform, 20, 16, Color.Green));
-            Walls.Add(new Wall(3860, 400, Resources.Platform, 92, 16, Color.Green));
-            Walls.Add(new Wall(4000, 340, Resources.Platform, 92, 16, Color.Green));
-
-            #endregion
-
-            #region Terrain
-            //Colonnes et sol
-
-            Walls.Add(new Wall(896, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(896, 352, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(960, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(960, 352, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(960, 288, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(1024, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(1024, 352, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(1024, 288, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(1024, 224, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(2816, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(2816, 352, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(2944, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(2944, 352, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(2944, 288, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(3072, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3072, 352, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3072, 288, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3072, 224, Resources.Herbe, 64, 64, Color.White));
-            Walls.Add(new Wall(3200, 416, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3200, 352, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3200, 288, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3200, 224, Resources.Ground, 64, 64, Color.White));
-            Walls.Add(new Wall(3200, 160, Resources.Herbe, 64, 64, Color.White));
-
-            //Sol
-
-            for (int i = 0; i < 80; i++)
-                if (i != 2 & i != 3 & i != 4 & i != 5 & i != 6 & i != 7 & i != 8 & i != 9
-                  & i != 14 & i != 15 & i != 16 & i != 20 & i != 21
-                  & i != 44 & i != 45 & i != 46 & i != 47 & i != 48 & i != 49 & i != 50 & i != 51
-                  & i != 55 & i != 56 & i != 57 & i != 58 & i != 59 & i != 60 & i != 61 & i != 62)
-                    Walls.Add(new Wall(64 * i, 416, Resources.Herbe, 64, 64, Color.White));
-            #endregion
+            for (int x = 0; x < map.GetLength(1); x++)
+            {
+                for (int y = 0; y < map.GetLength(0); y++)
+                {
+                    int number = map[y, x];
+                    if (number == 1)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Herbe, size, size, Color.White));
+                    if (number == 2)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Ground, size, size, Color.White));
+                    if (number == 3)
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Platform, 100, 16, Color.Gray));
+                    if (number == 4)
+                        speedbonus.Add(new VitesseBonus(x * size + 40, y * size + 74, Resources.Speed, 20, 20, Color.White));
+                }
+            }
 
         }
 
@@ -318,6 +276,9 @@ namespace FinalRush
 
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
+
+            foreach (VitesseBonus sb in speedbonus)
+                sb.Draw(spritebatch);
 
             if (player != null)
             {

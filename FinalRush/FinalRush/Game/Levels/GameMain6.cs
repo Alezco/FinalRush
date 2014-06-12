@@ -78,7 +78,7 @@ namespace FinalRush
                     if (number == 6)
                         healthbonus.Add(new HealthBonus(x * size + 40, y * size + 74, Resources.Health, 20, 20, Color.White));
                     if (number == 7)
-                        speedbonus.Add(new VitesseBonus(x * size + 32, y * size + 64, Resources.Speed, 20, 20, Color.White));
+                        speedbonus.Add(new VitesseBonus(x * size + 40, y * size + 74, Resources.Speed, 20, 20, Color.White));
                     if (number == 8)
                         Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Platform, 100, 16, Color.OrangeRed));
                     
