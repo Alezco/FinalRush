@@ -184,8 +184,6 @@ namespace FinalRush
                         player2Connected = true;
                         player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Height);
                         player2.Marco = Resources.Marco;
-                        if(Keyboard.GetState().IsKeyDown(Keys.Space))
-                        player2.Marco = Resources.MarcoSaut;
                         player2.bullets = new List<Bullets>();
 
                         writeStream.Position = 0;
@@ -206,7 +204,7 @@ namespace FinalRush
                     float py = reader.ReadSingle();
                     byte id = reader.ReadByte();
                     string ip = reader.ReadString();
-                    //player2.Animate(1, 15, 2);
+                    player2.Animate(1, 15, 2);
 
                     player2.Hitbox = new Rectangle(player2.Hitbox.X + (int)px, player2.Hitbox.Y + (int)py, player2.Hitbox.Width, player2.Hitbox.Height);
                 }
