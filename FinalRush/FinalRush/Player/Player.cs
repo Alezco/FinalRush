@@ -51,6 +51,8 @@ namespace FinalRush
         public string state = "standing"; // Définition de l'état de Marco, afin de choisir les sprites qui vont animer le perso
 
         SpriteFont Scoring;
+        SoundEffectInstance vide_sound_instance = Resources.ammo_vide.CreateInstance();
+        SoundEffectInstance fire_sound_instance = Resources.coup_de_feu.CreateInstance();
 
         #endregion
 
@@ -230,10 +232,10 @@ namespace FinalRush
                 }
             }
 
-
             // Tir Marco
             if (clavier.IsKeyDown(Keys.Q) && state == "standing") //On tire avec "Q" et debout uniquement 
             {
+
                 if (state != "shoot")
                 {
                     framecolumn = 1;
@@ -241,16 +243,12 @@ namespace FinalRush
                 }
 
                 if (Global.Handler.ammo_left > 0)
-                {
-                    SoundEffectInstance fire_sound_instance = Resources.coup_de_feu.CreateInstance();
+                {        
                     fire_sound_instance.Play();
                     state = "shoot";
                 }
                 else
-                {
-                    SoundEffectInstance vide_sound_instance = Resources.ammo_vide.CreateInstance();
                     vide_sound_instance.Play();
-                }
             }
             if (state == "cut")
             {
