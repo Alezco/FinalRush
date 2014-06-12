@@ -637,7 +637,7 @@ namespace FinalRush
             }
             pastkey = Keyboard.GetState();
             enjeu = true;
-            if (player.health == 0 || player.dead && gameState !=GameState.InGameMulti)
+            if (player.health == 0 || player.dead && gameState != GameState.InGameMulti)
             {
                 if (comptlevel == 6)
                 {
@@ -652,7 +652,7 @@ namespace FinalRush
                 MediaPlayer.Play(Resources.MusiqueGameOver);
                 MediaPlayer.IsRepeating = false;
             }
-            
+
         }
         #endregion
 
@@ -713,6 +713,8 @@ namespace FinalRush
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
+                    Global.Collisions.CollisionHealthBonus(player.Hitbox, Main.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player.Hitbox, Main.speedbonus, gameTime);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -732,10 +734,6 @@ namespace FinalRush
                             enemies2.RemoveAt(i);
                         }
                     }
-
-
-                    Global.Collisions.CollisionHealthBonus(player.Hitbox, Main.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player.Hitbox, Main.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player.Hitbox, Main.bonus))
                     {
@@ -750,9 +748,6 @@ namespace FinalRush
                     if (Global.Collisions.CollisionEnemy2(player.Hitbox, Main.enemies2))
                     {
                     }
-                    /*if (Global.Collisions.CollisionPiques(player.Hitbox, Main.piques))
-                    {
-                    }*/
 
                     UpdateGame(player, gameTime, 1, 4600, 300);
                     break;
@@ -760,6 +755,8 @@ namespace FinalRush
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
+                    Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -779,9 +776,6 @@ namespace FinalRush
                             enemies2.RemoveAt(i);
                         }
                     }
-
-                    Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player2.Hitbox, Main2.bonus))
                     {
@@ -796,15 +790,16 @@ namespace FinalRush
                     if (Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2))
                     {
                     }
-                    /*if (Global.Collisions.CollisionPiques(player2.Hitbox, Main2.piques))
-                      {
-                      }*/
+
                     UpdateGame(player2, gameTime, 2, 4600, 300);
                     break;
                 case GameState.InGame3:
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
+                    Global.Collisions.CollisionPiques(player3.Hitbox, Main3.piques);
+                    Global.Collisions.CollisionHealthBonus(player3.Hitbox, Main3.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player3.Hitbox, Main3.speedbonus, gameTime);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -824,10 +819,6 @@ namespace FinalRush
                             enemies2.RemoveAt(i);
                         }
                     }
-
-                    Global.Collisions.CollisionPiques(player3.Hitbox, Main3.piques);
-                    Global.Collisions.CollisionHealthBonus(player3.Hitbox, Main3.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player3.Hitbox, Main3.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player3.Hitbox, Main3.bonus))
                     {
@@ -850,6 +841,8 @@ namespace FinalRush
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
+                    Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -869,9 +862,6 @@ namespace FinalRush
                             enemies2.RemoveAt(i);
                         }
                     }
-
-                    Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player4.Hitbox, Main4.bonus))
                     {
@@ -898,6 +888,8 @@ namespace FinalRush
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
+                    Global.Collisions.CollisionHealthBonus(player5.Hitbox, Main5.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player5.Hitbox, Main5.speedbonus, gameTime);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -917,9 +909,6 @@ namespace FinalRush
                             enemies2.RemoveAt(i);
                         }
                     }
-
-                    Global.Collisions.CollisionHealthBonus(player5.Hitbox, Main5.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player5.Hitbox, Main5.speedbonus, gameTime);
 
                     if (Global.Collisions.CollisionBonus(player5.Hitbox, Main5.bonus))
                     {
@@ -946,6 +935,9 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+                    Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
+                    Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
+                    Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -986,10 +978,6 @@ namespace FinalRush
                     if (player6.Hitbox.X > 1300 && MediaPlayer.Volume < 1f)
                         MediaPlayer.Volume = MediaPlayer.Volume + 0.01f;
 
-                    Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
-                    Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);
-
                     if (Global.Collisions.CollisionBonus(player6.Hitbox, Main6.bonus))
                     {
                         nb_pieces++;
@@ -1013,9 +1001,8 @@ namespace FinalRush
                     break;
                 case GameState.InGameMulti:
                     comptlevel = 7;
-                    //p7.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
-                    //p8.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
                     MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
+                    Global.Collisions.CollisionSpeedBonus(player6.Hitbox, MainMulti.speedbonus, gameTime);
 
                     if (MainMulti.player.Hitbox.X > 4600)
                     {

@@ -68,7 +68,7 @@ namespace FinalRush
             }
 
         }
-
+        
         #region Multi
 
         public TcpClient client;
