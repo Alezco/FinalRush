@@ -51,6 +51,7 @@ namespace FinalRush
             color = Color.Black;
             graphics.PreferredBackBufferWidth = screenwidth;
             graphics.PreferredBackBufferHeight = screenheight;
+            Window.AllowUserResizing = true;
             IsMouseVisible = true;
             Global.Handler = this;
         }
@@ -179,7 +180,7 @@ namespace FinalRush
                 bullet.Draw(spriteBatch);
 
             #region HUD
-            if (main.enjeu)
+            if (main.enjeu && main.gameState != MainMenu.GameState.InGameMulti)
             {
                 if (Global.Player.health > 0 && Global.Player.health < 40)
                 {

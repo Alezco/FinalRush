@@ -34,6 +34,7 @@ namespace FinalRush
         GameMain main;
         MainMenu Main;
         public Texture2D Marco = Resources.Marco;
+        public Texture2D MarcoJump = Resources.MarcoSaut;
 
         int compteur = 1;
         public int speed;
@@ -449,7 +450,7 @@ namespace FinalRush
                     spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "squat":
-                    spritebatch.Draw(Resources.MarcoSquat, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(MarcoJump, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "jump":
                     spritebatch.Draw(Resources.MarcoSaut, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Color.White, 0f, new Vector2(0, 0), effect, 0f);

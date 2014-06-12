@@ -571,18 +571,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Create.png">
-      <Name>Create</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Menu\Join.png">
-      <Name>Join</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sons\Bruitages\couteau.mp3">
       <Name>couteau</Name>
       <Importer>Mp3Importer</Importer>
@@ -693,13 +681,6 @@
   <ItemGroup>
     <Compile Include="Sprites\Player2\player2.png">
       <Name>player2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Menu\ololol.png">
-      <Name>ololol</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

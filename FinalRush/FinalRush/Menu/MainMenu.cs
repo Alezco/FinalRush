@@ -33,7 +33,9 @@ namespace FinalRush
             Shop,
             Intro, Scenario,
             GameOver,
-            Multi
+            Multi,
+            player1win,
+            player2win
         }
 
         public GameState gameState;
@@ -77,7 +79,7 @@ namespace FinalRush
         public int enemies_dead;
         private Vector2 position;
         public bool started;
-        public bool paused,has_Lost;
+        public bool paused, has_Lost;
         KeyboardState pastkey;
         public bool finished;
         public bool total_piece_updated;
@@ -106,6 +108,8 @@ namespace FinalRush
         List<GUIElement> Chapitre6 = new List<GUIElement>();
         List<GUIElement> Multi = new List<GUIElement>();
         List<GUIElement> Shop = new List<GUIElement>();
+        List<GUIElement> player1win = new List<GUIElement>();
+        List<GUIElement> player2win = new List<GUIElement>();
 
         #endregion
 
@@ -199,13 +203,10 @@ namespace FinalRush
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\Level6"));
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\fleche_gauche5"));
 
-            Multi.Add(new GUIElement(@"Sprites\Menu\Join"));
-            Multi.Add(new GUIElement(@"Sprites\Menu\Create"));
-            Multi.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Multi.Add(new GUIElement(@"Sprites\Menu\ololol"));
-
-
             Shop.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToHasWon"));
+
+            player1win.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
+            player2win.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
 
             player = Global.Player;
             player2 = Global.Player;
@@ -458,17 +459,6 @@ namespace FinalRush
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(0, 50);
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-50, 200);
 
-            foreach (GUIElement element in Multi)
-            {
-                element.LoadContent(content);
-                element.CenterElement(480, 800);
-                element.clickEvent += OnClick;
-            }
-            Multi.Find(x => x.AssetName == @"Sprites\Menu\Join").MoveElement(-70, 0);
-            Multi.Find(x => x.AssetName == @"Sprites\Menu\Create").MoveElement(-70, 100);
-            Multi.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-70, 200);
-            Multi.Find(x => x.AssetName == @"Sprites\Menu\ololol").MoveElement(-70, -100);
-
             foreach (GUIElement element in Shop)
             {
                 element.LoadContent(content);
@@ -476,6 +466,22 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             Shop.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToHasWon").MoveElement(-70, 200);
+
+            foreach (GUIElement element in player1win)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            player1win.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(0, 210);
+
+            foreach (GUIElement element in player2win)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            player2win.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(0, 210);
         }
 
         #endregion
@@ -631,7 +637,7 @@ namespace FinalRush
             }
             pastkey = Keyboard.GetState();
             enjeu = true;
-            if (player.health == 0 || player.dead)
+            if (player.health == 0 || player.dead && gameState !=GameState.InGameMulti)
             {
                 if (comptlevel == 6)
                 {
@@ -646,6 +652,7 @@ namespace FinalRush
                 MediaPlayer.Play(Resources.MusiqueGameOver);
                 MediaPlayer.IsRepeating = false;
             }
+            
         }
         #endregion
 
@@ -1006,9 +1013,23 @@ namespace FinalRush
                     break;
                 case GameState.InGameMulti:
                     comptlevel = 7;
-                    p7.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
-                    p8.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
+                    //p7.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
+                    //p8.Update(Mouse.GetState(), Keyboard.GetState(), MainMulti.Walls, MainMulti.bonus);
                     MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
+
+                    if (MainMulti.player.Hitbox.X > 4600)
+                    {
+                        gameState = GameState.player1win;
+                        MainMulti.client.Close();
+                        MainMulti.player.Hitbox = new Rectangle(50, 376, MainMulti.player.Hitbox.Width, MainMulti.player.Hitbox.Height);
+                    }
+
+                    if (MainMulti.player2.Hitbox.X > 4600)
+                    {
+                        gameState = GameState.player2win;
+                        MainMulti.client.Close();
+                        MainMulti.player.Hitbox = new Rectangle(50, 376, MainMulti.player.Hitbox.Width, MainMulti.player.Hitbox.Height);
+                    }
 
                     if (Global.Collisions.CollisionBonus(p7.Hitbox, MainMulti.bonus))
                     {
@@ -1197,6 +1218,16 @@ namespace FinalRush
                         element.Update();
                     enjeu = false;
                     break;
+                case GameState.player1win:
+                    foreach (GUIElement element in player1win)
+                        element.Update();
+                    enjeu = false;
+                    break;
+                case GameState.player2win:
+                    foreach (GUIElement element in player2win)
+                        element.Update();
+                    enjeu = false;
+                    break;
                 default:
                     break;
             }
@@ -1262,7 +1293,7 @@ namespace FinalRush
                     foreach (GUIElement element in Won)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead , new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
+                    spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
                     spriteBatch.DrawString(players_dead, "x " + nb_players_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 310), Color.White);
                     break;
                 case GameState.InPause:
@@ -1284,12 +1315,9 @@ namespace FinalRush
                     foreach (GUIElement element in Credits)
                         element.Draw(spriteBatch);
 
-                    Global.Handler.GraphicsDevice.Clear(Color.Black);              
+                    Global.Handler.GraphicsDevice.Clear(Color.Black);
 
                     #region Crédits
-
-                    if (TextScroll >= 1500F)
-                        TextScroll = 500;
 
                     string message = "\n   A game created and directed by      " +
                                      "\n         The Walking Coders          \n" +
@@ -1331,7 +1359,7 @@ namespace FinalRush
                                      "\n Script Artistic Lead Creating Producer" +
                                      "\n              GamerDuPC                " +
                                      "\n               Alezco                \n" +
-                                     "\n  MainMenu.cs Longest Class Creator    " +
+                                     "\n     MainMenu.cs Dirty Code Creator    " +
                                      "\n              WhiteDevil             \n" +
                                      "\n   Artificial Intelligence Specialist  " +
                                      "\n                Yaumy                  " +
@@ -1441,6 +1469,16 @@ namespace FinalRush
                 case GameState.Multi:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Multi)
+                        element.Draw(spriteBatch);
+                    break;
+                case GameState.player1win:
+                    spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    foreach (GUIElement element in player1win)
+                        element.Draw(spriteBatch);
+                    break;
+                case GameState.player2win:
+                    spriteBatch.Draw(fond_gameover, new Rectangle(0, 0, 800, 480), Color.White);
+                    foreach (GUIElement element in player2win)
                         element.Draw(spriteBatch);
                     break;
                 case GameState.Scenario:
@@ -1557,7 +1595,10 @@ namespace FinalRush
             }
 
             if (element == @"Sprites\Menu\Bouton_Credits")
+            {
                 gameState = GameState.Credits;
+                TextScroll = 100f;
+            }
 
             if (element == @"Sprites\Menu\Bouton_RetourToOptions")
                 gameState = GameState.InOptions;
@@ -1625,18 +1666,6 @@ namespace FinalRush
                 gameState = GameState.Chapitre5;
 
             if (element == @"Sprites\Menu\Bouton_Multijoueur")
-                gameState = GameState.Multi;
-
-            if (element == @"Sprites\Menu\Create")
-            {
-                gameState = GameState.Multi;
-                //Global.MainMulti.Initialize();
-            }
-
-            if (element == @"Sprites\Menu\Join")
-                gameState = GameState.Multi;
-
-            if (element == @"Sprites\Menu\ololol")
             {
                 CreateGame(7);
                 MainMulti.Initialize();
