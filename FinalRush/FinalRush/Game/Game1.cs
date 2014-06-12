@@ -95,6 +95,11 @@ namespace FinalRush
         {
             MouseState souris = Mouse.GetState();
 
+            if (main.comptlevel == 1 || main.comptlevel == 6)
+                color = Color.White;
+            else
+                color = Color.Black;
+
             #region Timer & SpriteFont
             if (main.EnJeu(main.enjeu))
             {
@@ -181,7 +186,7 @@ namespace FinalRush
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
-                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(50, 22), Color.White);
+                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(50, 22), color);
                     spriteBatch.End();
                 }
                 else if (Global.Player.health > 0 && Global.Player.health > 40)
@@ -189,37 +194,18 @@ namespace FinalRush
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, 100, 20), Color.White);
                     spriteBatch.Draw(HealthBar, new Rectangle(50, 20, Global.Player.health, 20), Color.Red);
-                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(10 + Global.Player.health, 22), Color.White);
+                    spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(10 + Global.Player.health, 22), color);
                     spriteBatch.End();
                 }
                 if (main.comptlevel == 6)
                 {
                     spriteBatch.Begin();
-                    spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X,Global.Boss.Hitbox.Y -25, Global.Boss.pv, 20), Color.Red);
+                    spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X, Global.Boss.Hitbox.Y - 25, Global.Boss.pv, 20), Color.Red);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();
-                if (main.comptlevel == 1 || main.comptlevel == 6)
-                {
-                    spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.White);
-                    spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.White);
-                }
-                else
-                {
-                    if (Global.Player.health < 0 && Global.Player.health > 40)
-                    {
-                        spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
-                        spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
-                        spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(50,22), Color.Black);
-                    }
-                    else
-                        if (Global.Player.health > 40)
-                        {
-                            spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), Color.Black);
-                            spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), Color.Black);
-                            spriteBatch.DrawString(Resources.pourcent_life, Global.Player.health + " %", new Vector2(10 + Global.Player.health, 22), Color.Black);
-                        }
-                }
+                spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
+                spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
                 spriteBatch.End();
             }
             if (main.gameState == MainMenu.GameState.Won)
