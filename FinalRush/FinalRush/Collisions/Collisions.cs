@@ -11,10 +11,15 @@ namespace FinalRush
     class Collisions
     {
         public bool collision_speed = false;
+        bool up, down;
         SoundEffectInstance bonus_bruitages;
+        public Color marco_color;
 
         public Collisions()
         {
+            up = false;
+            down = true;
+            marco_color = Color.White;
             Global.Collisions = this;
             bonus_bruitages = Resources.bonus_bruitage.CreateInstance();
         }
@@ -151,7 +156,29 @@ namespace FinalRush
             foreach (Enemy e in enemy)
             {
                 if (!e.isDead && newHitbox.Intersects(e.Hitbox))
-                    Global.Player.health--;
+                {
+                    if (down && marco_color.A > 200)
+                    {
+                        marco_color.A--;
+                        marco_color.R += 5;
+                    }
+                    if (marco_color.A == 200)
+                    {
+                        down = false;
+                        up = true;
+                    }
+                    if (marco_color.A == 254)
+                    {
+                        down = true;
+                        up = false;
+                    }
+                    if (up && marco_color.A < 254)
+                    {
+                        marco_color.A++;
+                        marco_color.R -= 5;
+                    }
+                    Global.Player.health++;
+                }
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }

@@ -18,7 +18,7 @@ namespace FinalRush
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
-        MainMenu main;
+        public MainMenu main;
         public Camera camera;
         GameMain Main;
         GameMain2 Main2;
