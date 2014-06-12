@@ -222,13 +222,10 @@ namespace FinalRush
             foreach (Bullets bullet in enemy_bullets)
             {
                 if (Old_Direction == Direction.Right)
-                {
                     bullet.position.X += bullet.velocity; // va vers la droite
-                }
                 else
-                {
                     bullet.position.X -= bullet.velocity; // va vers la gauche
-                }
+
                 if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) >= 200)
                     bullet.isVisible = false;
                 else

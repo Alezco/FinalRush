@@ -77,7 +77,7 @@ namespace FinalRush
         public int enemies_dead;
         private Vector2 position;
         public bool started;
-        public bool paused;
+        public bool paused,has_Lost;
         KeyboardState pastkey;
         public bool finished;
         public bool total_piece_updated;
@@ -120,6 +120,7 @@ namespace FinalRush
             paused = false;
             finished = false;
             boss_appeared = false;
+            has_Lost = false;
             boss_already_appeared = false;
             total_piece_updated = false;
             Text = "0";
@@ -504,6 +505,7 @@ namespace FinalRush
         {
             total_piece_updated = false;
             enjeu = true;
+            has_Lost = false;
             score = 300;
             nb_pieces = 0;
             time = 0f;
@@ -693,6 +695,7 @@ namespace FinalRush
                     enjeu = false;
                     break;
                 case GameState.GameOver:
+                    has_Lost = true;
                     if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                         CreateGame(comptlevel);
                     foreach (GUIElement element in GameOver)
@@ -1547,9 +1550,10 @@ namespace FinalRush
             if (element == @"Sprites\Menu\Boutton_Rejouer")
             {
                 total_piece_updated = false;
-                CreateGame(comptlevel);
-                if (!player.dead)
+                if (!has_Lost)
                     nb_players_dead = 0;
+                CreateGame(comptlevel);
+
             }
 
             if (element == @"Sprites\Menu\Bouton_Credits")

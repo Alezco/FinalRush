@@ -44,6 +44,7 @@ namespace FinalRush
         int speedjump = 1;
         bool hasjumped;
         float rotation;
+        Direction Old_Dir;
         float distanceX, distanceY;
         MouseState mouse;
         public bool dead;
@@ -123,9 +124,15 @@ namespace FinalRush
                 Bullets bullet = new Bullets(Resources.bullet);
                 bullet.velocity = 5;
                 if (Direction == Direction.Right)
+                {
                     bullet.position = new Vector2(Hitbox.X + Hitbox.Width / 2, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
+                    Old_Dir = Direction.Right;
+                }
                 else
+                {
                     bullet.position = new Vector2(Hitbox.X, Hitbox.Y + Hitbox.Height / 3) + new Vector2(bullet.velocity * 5, 0);
+                    Old_Dir = Direction.Left;
+                }
                 bullet.isVisible = true;
                 bullets.Add(bullet);
             }
@@ -133,7 +140,7 @@ namespace FinalRush
                 shot = false;
             foreach (Bullets bullet in bullets)
             {
-                if (Direction == Direction.Right)
+                if (Old_Dir == Direction.Right)
                     bullet.position.X += bullet.velocity; // va vers la droite
                 else
                     bullet.position.X -= bullet.velocity; // va vers la gauche
