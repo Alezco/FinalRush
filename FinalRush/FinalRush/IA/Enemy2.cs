@@ -153,32 +153,33 @@ namespace FinalRush
                                     compt = 1;
                                 }
                             }
-                }
-                if (left)
-                {
-                    if (!collisions.CollisionLeft(Hitbox, walls, speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
-                    {
-                        this.Hitbox.X -= speed;
-                        this.Direction = Direction.Left;
-                    }
-                    else
-                    {
-                        framecolumn = 1;
-                        compt += 10;
-                    }
-                }
 
-                if (!left)
-                {
-                    if (!collisions.CollisionRight(Hitbox, walls, speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
+                    if (left)
                     {
-                        this.Hitbox.X += speed;
-                        this.Direction = Direction.Right;
+                        if (!collisions.CollisionLeft(Hitbox, walls, speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
+                        {
+                            this.Hitbox.X -= speed;
+                            this.Direction = Direction.Left;
+                        }
+                        else
+                        {
+                            framecolumn = 1;
+                            compt += 10;
+                        }
                     }
-                    else
+
+                    if (!left)
                     {
-                        framecolumn = 1;
-                        compt += 10;
+                        if (!collisions.CollisionRight(Hitbox, walls, speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
+                        {
+                            this.Hitbox.X += speed;
+                            this.Direction = Direction.Right;
+                        }
+                        else
+                        {
+                            framecolumn = 1;
+                            compt += 10;
+                        }
                     }
                 }
             }
@@ -194,7 +195,7 @@ namespace FinalRush
             else
                 a_portee = false;
 
-            if (Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 20 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0 && !isDead)
+            if (!isDead && Math.Abs(Hitbox.Y - Global.Player.Hitbox.Y) < 20 && a_portee && !shot && enemy_bullets.Count == 0 && Global.Player.health > 0)
             {
                 shot_sound_instance.Play();
                 shot = true;
@@ -221,20 +222,22 @@ namespace FinalRush
 
             foreach (Bullets bullet in enemy_bullets)
             {
-                if (Old_Direction == Direction.Right)
-                    bullet.position.X += bullet.velocity; // va vers la droite
-                else
-                    bullet.position.X -= bullet.velocity; // va vers la gauche
+                if (!isDead)
+                {
+                    if (Old_Direction == Direction.Right)
+                        bullet.position.X += bullet.velocity; // va vers la droite
+                    else
+                        bullet.position.X -= bullet.velocity; // va vers la gauche
 
-                if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) >= 200)
-                    bullet.isVisible = false;
-                else
-                    if (Global.Player.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 3, 3)))
-                    {
-                        Global.Player.health -= 3;
+                    if (Vector2.Distance(bullet.position, new Vector2(Hitbox.X, Hitbox.Y)) >= 200)
                         bullet.isVisible = false;
-                    }
-
+                    else
+                        if (Global.Player.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 3, 3)))
+                        {
+                            Global.Player.health -= 3;
+                            bullet.isVisible = false;
+                        }
+                }
                 foreach (Wall wall in walls)
                 {
                     if (wall.Hitbox.Intersects(new Rectangle((int)bullet.position.X, (int)bullet.position.Y, 5, 2)))

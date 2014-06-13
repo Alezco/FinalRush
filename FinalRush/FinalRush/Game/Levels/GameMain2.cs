@@ -50,10 +50,8 @@ namespace FinalRush
             enemies.Add(new Enemy(1302, 300, Resources.Zombie));
             enemies.Add(new Enemy(1150, 340, Resources.Zombie));
 
-            enemies.Add(new Enemy(4500, 340, Resources.Zombie));
-            enemies2.Add(new Enemy2(4500, 340, Resources.Zombie));
-            enemies2.Add(new Enemy2(1150, 340, Resources.Zombie));
-            enemies2.Add(new Enemy2(1150, 340, Resources.Zombie));
+            enemies2.Add(new Enemy2(4500, 340, Resources.Elite));
+            enemies2.Add(new Enemy2(1150, 340, Resources.Elite));
             #endregion
 
             #region Plateformes
@@ -168,8 +166,18 @@ namespace FinalRush
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
 
+            for (int i = 0; i < enemies2.Count(); i++)
+            {
+                if (enemies2[i].isDead)
+                {
+                    enemies2.RemoveAt(i);
+                    i--;
+                }
+            }
+
             foreach (Enemy2 enemy2 in enemies2)
-                enemy2.Update(Walls);
+                if (!enemy2.isDead)
+                    enemy2.Update(Walls);
         }
 
         public void Draw(SpriteBatch spritebatch)

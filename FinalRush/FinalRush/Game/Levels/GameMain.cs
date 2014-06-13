@@ -164,7 +164,8 @@ namespace FinalRush
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)
-                enemy2.Update(Walls);
+                if (!enemy2.isDead)
+                    enemy2.Update(Walls);
         }
 
         public void Draw(SpriteBatch spritebatch)

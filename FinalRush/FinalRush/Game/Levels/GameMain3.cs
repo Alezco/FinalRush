@@ -172,8 +172,19 @@ namespace FinalRush
             menu.Update(gametime);
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
+
+            for (int i = 0; i < enemies2.Count(); i++)
+            {
+                if (enemies2[i].isDead)
+                {
+                    enemies2.RemoveAt(i);
+                    i--;
+                }
+            }
+
             foreach (Enemy2 enemy2 in enemies2)
-                enemy2.Update(Walls);
+                if (!enemy2.isDead)
+                    enemy2.Update(Walls);
         }
 
         public void Draw(SpriteBatch spritebatch)
