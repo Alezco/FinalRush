@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using System.Diagnostics;
 
 namespace FinalRush
 {
@@ -165,6 +166,7 @@ namespace FinalRush
             InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Commandes"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_PleinEcran"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Anglais"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Website"));
 
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Continuer"));
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Button_options"));
@@ -389,7 +391,7 @@ namespace FinalRush
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Volume").MoveElement(-200, -50);
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Plus").MoveElement(70, -50);
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Moins").MoveElement(0, -50);
-
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Website").MoveElement(225, 80);
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Plus2").MoveElement(70, 15);
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Moins2").MoveElement(0, 15);
 
@@ -1888,6 +1890,8 @@ namespace FinalRush
                 english = false;
                 LoadContent(content);
             }
+            if (element == @"Sprites\Menu\English\Bouton_Website")
+                Process.Start("http://finalrush.alwaysdata.net/index.php");
         }
     }
         #endregion
