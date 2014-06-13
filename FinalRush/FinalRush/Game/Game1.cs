@@ -28,6 +28,7 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         SpriteFont scoring, timer;
+        Texture2D bullet_texture,timer_texture;
         Color color;
 
         public List<Bullets> bullets;
@@ -70,6 +71,8 @@ namespace FinalRush
             timer = Content.Load<SpriteFont>(@"SpriteFonts\TimerFont");
             scoring = Content.Load<SpriteFont>(@"SpriteFonts\ScoringFont");
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");
+            bullet_texture = Content.Load<Texture2D>(@"SpriteFonts\Bullet_Texture");
+            timer_texture = Content.Load<Texture2D>(@"SpriteFonts\Timer_Text");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.LoadContent(Content);
             saut = Content.Load<SoundEffect>(@"Sons\Bruitages\saut_mario");
@@ -114,12 +117,12 @@ namespace FinalRush
                 if (Global.Player.shot)
                     ammo_left--;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.R) && recharge_left > 0 &&ammo_left < 6 && !reloading)
+                if (Keyboard.GetState().IsKeyDown(Keys.R) && recharge_left > 0 && ammo_left < 6 && !reloading)
                     reloading = true;
                 if (reloading && Keyboard.GetState().IsKeyUp(Keys.R))
                 {
                     reloading = false;
-                    recharge_left = recharge_left - (6 -ammo_left);
+                    recharge_left = recharge_left - (6 - ammo_left);
                     ammo_left = 6;
                     reloading_instance.Play();
                 }
@@ -205,26 +208,19 @@ namespace FinalRush
                     spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X, Global.Boss.Hitbox.Y - 25, Global.Boss.pv, 20), Color.Red);
                     spriteBatch.End();
                 }
-                if (!Global.MainMenu.english)
-                {
-                    spriteBatch.Begin();
-                    spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
-                    spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
-                    spriteBatch.End();
-                }
-                else
-                {
-                    spriteBatch.Begin();
-                    spriteBatch.DrawString(timer, "Time : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
-                    spriteBatch.DrawString(Resources.ammo_font, "Ammo left: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
-                    spriteBatch.End();
-                }
+                spriteBatch.Begin();
+                spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.Black);
+                spriteBatch.DrawString(timer, ": " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
+                spriteBatch.Draw(bullet_texture, new Rectangle(Window.ClientBounds.Width / 2 + 87, 0, 10, 35), Color.White);
+                spriteBatch.DrawString(Resources.ammo_font, ": " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
+                spriteBatch.End();
             }
             if (main.gameState == MainMenu.GameState.Won)
             {
                 spriteBatch.Begin();
-                spriteBatch.DrawString(timer, "Bravo, tu as termine le niveau en " + main.Text + " secondes", new Vector2(Window.ClientBounds.Width / 2 - 300, 200), Color.White);
-                spriteBatch.DrawString(scoring, "Ton score est de : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 360), Color.White);
+                spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 60, 200, 35, 35), Color.Black); 
+                spriteBatch.DrawString(timer, ": " + main.Text + " s", new Vector2(Window.ClientBounds.Width / 2 -20, 200), Color.White);
+                spriteBatch.DrawString(scoring, "Score : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 360), Color.White);
                 spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2, 250), Color.White);
                 spriteBatch.End();
             }

@@ -19,7 +19,7 @@ namespace FinalRush
         public static Texture2D Zombie, Elite, Boss;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top, Lave;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
-        public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block;
+        public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block, Bullet_Texture;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4,Musique5,Musique6,MusiqueBoss;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage,enemies_sound,boss_mort_sound;
         public static Texture2D HealthBar, bullet;
@@ -79,6 +79,7 @@ namespace FinalRush
             Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
             Foreground6 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground6");
             Lave = Content.Load<Texture2D>(@"Sprites\Environnment\lava");
+            Bullet_Texture = Content.Load<Texture2D>(@"SpriteFonts\Bullet_Texture");
 
             //Bonus
 
