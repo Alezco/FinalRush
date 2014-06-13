@@ -71,7 +71,7 @@ namespace FinalRush
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Resources.LoadContent(Content);
-            saut = Content.Load<SoundEffect>(@"Sons\Bruitages\saut");
+            saut = Content.Load<SoundEffect>(@"Sons\Bruitages\saut_mario");
             Main = new GameMain();
             Main2 = new GameMain2();
             Main3 = new GameMain3();

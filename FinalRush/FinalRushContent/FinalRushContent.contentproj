@@ -414,13 +414,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sons\Bruitages\saut.mp3">
-      <Name>saut</Name>
-      <Importer>Mp3Importer</Importer>
-      <Processor>SoundEffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sons\Bruitages\Coeur_Rapide.mp3">
       <Name>Coeur_Rapide</Name>
       <Importer>Mp3Importer</Importer>
@@ -916,6 +909,13 @@
       <Name>zombie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sons\Bruitages\saut_mario.mp3">
+      <Name>saut_mario</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

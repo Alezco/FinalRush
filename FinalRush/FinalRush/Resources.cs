@@ -116,7 +116,7 @@ namespace FinalRush
 
             // Bruitages
 
-            saut = Content.Load<SoundEffect>(@"Sons\Bruitages\saut");
+            saut = Content.Load<SoundEffect>(@"Sons\Bruitages\saut_mario");
             piece = Content.Load<SoundEffect>(@"Sons\Bruitages\piece");
             CoeurRapide = Content.Load<SoundEffect>(@"Sons\Bruitages\Coeur_Rapide");
             coup_de_feu = Content.Load<SoundEffect>(@"Sons\Bruitages\coup_de_feu");

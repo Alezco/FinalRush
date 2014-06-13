@@ -390,7 +390,7 @@ namespace FinalRush
             {
                 framecolumn = 1;
                 if (!collisions.CollisionUp(Hitbox, walls, this.fallspeed))
-                {
+                {                
                     SoundEffectInstance saut_instance = Resources.saut.CreateInstance();
                     saut_instance.Play();
                     this.Hitbox.Y -= 12;
