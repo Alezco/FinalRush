@@ -31,7 +31,6 @@ namespace FinalRush
             Credits,
             Won,
             Chapitre1, Chapitre2, Chapitre3, Chapitre4, Chapitre5, Chapitre6,
-            Shop,
             Intro, Scenario,
             GameOver,
             Multi,
@@ -49,7 +48,6 @@ namespace FinalRush
         GameMain5 Main5;
         GameMain6 Main6;
         GameMainMulti MainMulti;
-        //Multi multi;
         SpriteFont piece_font, players_dead;
         public int HS1, HS2, HS3, HS4, HS5, HS6 = 0;
         int old_HS1, old_HS2, old_HS3, old_HS4, old_HS5, old_HS6 = 0;
@@ -199,7 +197,6 @@ namespace FinalRush
             Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_NiveauSuivant"));
             Won.Add(new GUIElement(@"Sprites\Menu\Francais\Boutton_Rejouer"));
             Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
-            Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Boutique"));
 
             GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Credits"));
             GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Boutton_Rejouer"));
@@ -240,8 +237,6 @@ namespace FinalRush
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche5"));
             Chapitre6.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            Shop.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToHasWon"));
-
             player1win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
             player2win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
 
@@ -260,7 +255,6 @@ namespace FinalRush
             Main5 = Global.GameMain5;
             Main6 = Global.GameMain6;
             MainMulti = Global.GameMainMulti;
-            //multi = Global.Multi;
             Global.MainMenu = this;
         }
 
@@ -524,8 +518,7 @@ namespace FinalRush
                 Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(0, 800);
             }
             Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(-320, 210);
-            Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Boutique").MoveElement(240, 160);
-
+        
             foreach (GUIElement element in GameEnded)
             {
                 element.LoadContent(content);
@@ -654,14 +647,6 @@ namespace FinalRush
             }
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level6").MoveElement(0, 50);
             Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche5").MoveElement(-50, 200);
-
-            foreach (GUIElement element in Shop)
-            {
-                element.LoadContent(content);
-                element.CenterElement(480, 800);
-                element.clickEvent += OnClick;
-            }
-            Shop.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToHasWon").MoveElement(-70, 200);
 
             foreach (GUIElement element in player1win)
             {
@@ -1077,10 +1062,6 @@ namespace FinalRush
                     {
                     }
 
-                    //if (Global.Collisions.CollisionPiques(player4.Hitbox, Main4.piques))
-                    //{
-                    //}
-
                     UpdateGame(player4, gameTime, 4, 4600, 300);
                     break;
                 case GameState.InGame5:
@@ -1123,10 +1104,6 @@ namespace FinalRush
                     if (Global.Collisions.CollisionEnemy2(player5.Hitbox, Main5.enemies2))
                     {
                     }
-
-                    //if (Global.Collisions.CollisionPiques(player5.Hitbox, Main5.piques))
-                    //{
-                    //}
 
                     UpdateGame(player5, gameTime, 5, 4600, 300);
                     break;
@@ -1191,10 +1168,6 @@ namespace FinalRush
                     {
                     }
 
-                    //if (Global.Collisions.CollisionPiques(player6.Hitbox, Main6.piques))
-                    //{
-                    //}
-
                     UpdateGame(player6, gameTime, 6, 4600, 300);
                     break;
                 case GameState.InGameMulti:
@@ -1229,9 +1202,7 @@ namespace FinalRush
                     if (Global.Collisions.CollisionEnemy2(p7.Hitbox, MainMulti.enemies2))
                     {
                     }
-                    /*if (Global.Collisions.CollisionPiques(p7.Hitbox, Main2.piques))
-                      {
-                      }*/
+
                     UpdateGame(p7, gameTime, 2, 4600, 30);
                     break;
                 case GameState.Won:
@@ -1406,11 +1377,6 @@ namespace FinalRush
                     break;
                 case GameState.Multi:
                     foreach (GUIElement element in Multi)
-                        element.Update();
-                    enjeu = false;
-                    break;
-                case GameState.Shop:
-                    foreach (GUIElement element in Shop)
                         element.Update();
                     enjeu = false;
                     break;
@@ -1693,12 +1659,6 @@ namespace FinalRush
                     else
                         spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
                     break;
-                case GameState.Shop:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
-                    spriteBatch.DrawString(piece_font, " x " + total_piece, new Vector2(200, 0), Color.White);
-                    foreach (GUIElement element in Shop)
-                        element.Draw(spriteBatch);
-                    break;
                 case GameState.InClose:
                     break;
                 default:
@@ -1878,15 +1838,6 @@ namespace FinalRush
                 MainMulti.Initialize();
             }
 
-            if (element == @"Sprites\Menu\Francais\Bouton_Boutique" && !total_piece_updated)
-            {
-                total_piece = nb_pieces + total_piece;
-                gameState = GameState.Shop;
-                MediaPlayer.Stop();
-                MediaPlayer.Play(Resources.MusiqueBoutique);
-                MediaPlayer.IsRepeating = true;
-                total_piece_updated = true;
-            }
 
             if (element == @"Sprites\Menu\Francais\Bouton_RetourToHasWon")
             {

@@ -220,7 +220,7 @@ namespace FinalRush
                 spriteBatch.Begin();
                 spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 60, 200, 35, 35), Color.Black); 
                 spriteBatch.DrawString(timer, ": " + main.Text + " s", new Vector2(Window.ClientBounds.Width / 2 -20, 200), Color.White);
-                spriteBatch.DrawString(scoring, "Score : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 150, 360), Color.White);
+                spriteBatch.DrawString(scoring, "Score : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 100, 360), Color.White);
                 spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2, 250), Color.White);
                 spriteBatch.End();
             }
