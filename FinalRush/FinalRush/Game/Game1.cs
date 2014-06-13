@@ -38,7 +38,7 @@ namespace FinalRush
         int screenheight = 480;
         SpriteFont piece_font;
         public int ammo_left = 6;
-        public int recharge_left = 5;
+        public int recharge_left;
         SoundEffectInstance reloading_instance;
         bool reloading = false;
         #endregion
@@ -47,6 +47,7 @@ namespace FinalRush
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            recharge_left = 30;
             bullets = new List<Bullets>();
             color = Color.Black;
             graphics.PreferredBackBufferWidth = screenwidth;
@@ -113,13 +114,13 @@ namespace FinalRush
                 if (Global.Player.shot)
                     ammo_left--;
 
-                if (Keyboard.GetState().IsKeyDown(Keys.R) && recharge_left > 0 && ammo_left < 6 && !reloading)
+                if (Keyboard.GetState().IsKeyDown(Keys.R) && recharge_left > 0 &&ammo_left < 6 && !reloading)
                     reloading = true;
                 if (reloading && Keyboard.GetState().IsKeyUp(Keys.R))
                 {
                     reloading = false;
+                    recharge_left = recharge_left - (6 -ammo_left);
                     ammo_left = 6;
-                    recharge_left--;
                     reloading_instance.Play();
                 }
             }
@@ -204,10 +205,20 @@ namespace FinalRush
                     spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X, Global.Boss.Hitbox.Y - 25, Global.Boss.pv, 20), Color.Red);
                     spriteBatch.End();
                 }
-                spriteBatch.Begin();
-                spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
-                spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
-                spriteBatch.End();
+                if (!Global.MainMenu.english)
+                {
+                    spriteBatch.Begin();
+                    spriteBatch.DrawString(timer, "Temps : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
+                    spriteBatch.DrawString(Resources.ammo_font, "Munitions restantes: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
+                    spriteBatch.End();
+                }
+                else
+                {
+                    spriteBatch.Begin();
+                    spriteBatch.DrawString(timer, "Time : " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
+                    spriteBatch.DrawString(Resources.ammo_font, "Ammo left: " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
+                    spriteBatch.End();
+                }
             }
             if (main.gameState == MainMenu.GameState.Won)
             {

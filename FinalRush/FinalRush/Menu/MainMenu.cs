@@ -168,6 +168,8 @@ namespace FinalRush
             InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Anglais"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Website"));
 
+            InPause.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Continuer"));
+            InPause.Add(new GUIElement(@"Sprites\Menu\English\Bouton_quitter"));
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Continuer"));
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Button_options"));
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipalGros"));
@@ -403,11 +405,22 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Continuer").MoveElement(0, -50);
+            if (!english)
+            {
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Continuer").MoveElement(0, -50);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 190);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Continuer").MoveElement(0, 800);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_quitter").MoveElement(0, 800);
+            }
+            else
+            {
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Continuer").MoveElement(0, -50);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_quitter").MoveElement(0, 190);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Continuer").MoveElement(0, 800);
+                InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 800);
+            }
             InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_options").MoveElement(0, 30);
             InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipalGros").MoveElement(0, 110);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 190);
 
             // De même pour GameOver
 
@@ -696,7 +709,7 @@ namespace FinalRush
             time = 0f;
             enemies_dead = 0;
             Global.Handler.ammo_left = 6;
-            Global.Handler.recharge_left = 5;
+            Global.Handler.recharge_left = 30;
             MediaPlayer.IsRepeating = true;
             HasPlayed = true;
             switch (i)
@@ -1740,7 +1753,7 @@ namespace FinalRush
                     SoundEffect.MasterVolume = 0f;
                 else SoundEffect.MasterVolume = SoundEffect.MasterVolume - 0.1f;
             }
-            if (element == @"Sprites\Menu\Francais\Bouton_Continuer")
+            if (element == @"Sprites\Menu\Francais\Bouton_Continuer" || element == @"Sprites\Menu\English\Bouton_Continuer")
             {
                 if (comptlevel == 1)
                     gameState = GameState.InGame;
