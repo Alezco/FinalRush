@@ -88,13 +88,13 @@ namespace FinalRush
 
             //Menu
 
-            MarcoWon = Content.Load<Texture2D>(@"Sprites\Menu\MarcoHappy");
-            lvl2_block = Content.Load<Texture2D>(@"Sprites\Menu\level2_block");
-            lvl3_block = Content.Load<Texture2D>(@"Sprites\Menu\level3_block");
-            lvl4_block = Content.Load<Texture2D>(@"Sprites\Menu\level4_block");
-            lvl5_block = Content.Load<Texture2D>(@"Sprites\Menu\level5_block");
-            lvl6_block = Content.Load<Texture2D>(@"Sprites\Menu\level6_block");
-            Scenario = Content.Load<Texture2D>(@"Sprites\Menu\Scenario");
+            MarcoWon = Content.Load<Texture2D>(@"Sprites\Menu\Francais\MarcoHappy");
+            lvl2_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level2_block");
+            lvl3_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level3_block");
+            lvl4_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level4_block");
+            lvl5_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level5_block");
+            lvl6_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level6_block");
+            Scenario = Content.Load<Texture2D>(@"Sprites\Menu\Francais\Scenario");
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");
 
 

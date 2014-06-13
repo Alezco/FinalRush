@@ -50,7 +50,6 @@ namespace FinalRush
         MouseState mouse;
         public bool dead;
         public bool shot;
-        bool down, up;
         public string state = "standing"; // Définition de l'état de Marco, afin de choisir les sprites qui vont animer le perso
 
         SpriteFont Scoring;
@@ -66,8 +65,6 @@ namespace FinalRush
         {
             bullets = new List<Bullets>();
             speed = 4;
-            down = true;
-            up = false;
             fallspeed = 5;
             Hitbox.Width = 36;
             Hitbox.Height = 40;

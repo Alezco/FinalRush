@@ -37,28 +37,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Menu_fond.png">
+    <Compile Include="Sprites\Menu\Francais\Menu_fond.png">
       <Name>Menu_fond</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Button_jouer.png">
+    <Compile Include="Sprites\Menu\Francais\Button_jouer.png">
       <Name>Button_jouer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Button_options.png">
+    <Compile Include="Sprites\Menu\Francais\Button_options.png">
       <Name>Button_options</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Button_quitter.png">
+    <Compile Include="Sprites\Menu\Francais\Button_quitter.png">
       <Name>Button_quitter</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -79,12 +79,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Moins.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Moins.png">
       <Name>Bouton_Moins</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\Bouton_Plus.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Plus.png">
       <Name>Bouton_Plus</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -98,21 +98,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Bruitages.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Bruitages.png">
       <Name>Bouton_Bruitages</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Moins2.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Moins2.png">
       <Name>Bouton_Moins2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Plus2.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Plus2.png">
       <Name>Bouton_Plus2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -126,14 +126,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Suivant.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Suivant.png">
       <Name>Bouton_Suivant</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Flèches_Directionnelles.png">
+    <Compile Include="Sprites\Menu\Francais\Flèches_Directionnelles.png">
       <Name>Flèches_Directionnelles</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -168,7 +168,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Continuer.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Continuer.png">
       <Name>Bouton_Continuer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -210,14 +210,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\GameOver.png">
+    <Compile Include="Sprites\Menu\Francais\GameOver.png">
       <Name>GameOver</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Retour.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Retour.png">
       <Name>Bouton_Retour</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -231,21 +231,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_RetourToOptions.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_RetourToOptions.png">
       <Name>Bouton_RetourToOptions</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Won.png">
+    <Compile Include="Sprites\Menu\Francais\Won.png">
       <Name>Won</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_RetourToJouer.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_RetourToJouer.png">
       <Name>Bouton_RetourToJouer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -266,59 +266,59 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Level1.png">
+    <Compile Include="Sprites\Menu\Francais\Level1.png">
       <Name>Level1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\Level2.png">
+    <Compile Include="Sprites\Menu\Francais\Level2.png">
       <Name>Level2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\Level3.png">
+    <Compile Include="Sprites\Menu\Francais\Level3.png">
       <Name>Level3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Credits.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Credits.png">
       <Name>Bouton_Credits</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Chapitres.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Chapitres.png">
       <Name>Bouton_Chapitres</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_NouvellePartie.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_NouvellePartie.png">
       <Name>Bouton_NouvellePartie</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_NiveauSuivant.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_NiveauSuivant.png">
       <Name>Bouton_NiveauSuivant</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_MenuPrincipal.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_MenuPrincipal.png">
       <Name>Bouton_MenuPrincipal</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Boutton_Rejouer.png">
+    <Compile Include="Sprites\Menu\Francais\Boutton_Rejouer.png">
       <Name>Boutton_Rejouer</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -339,21 +339,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_MenuPrincipalGros.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_MenuPrincipalGros.png">
       <Name>Bouton_MenuPrincipalGros</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Commandes.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Commandes.png">
       <Name>Bouton_Commandes</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\HowToPlayPage1.png">
+    <Compile Include="Sprites\Menu\Francais\HowToPlayPage1.png">
       <Name>HowToPlayPage1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -393,21 +393,21 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_PleinEcran.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_PleinEcran.png">
       <Name>Bouton_PleinEcran</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\MarcoHappy.png">
+    <Compile Include="Sprites\Menu\Francais\MarcoHappy.png">
       <Name>MarcoHappy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Volume.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Volume.png">
       <Name>Bouton_Volume</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -470,7 +470,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Scenario.png">
+    <Compile Include="Sprites\Menu\Francais\Scenario.png">
       <Name>Scenario</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -501,28 +501,28 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_droite.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_droite.png">
       <Name>fleche_droite</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_gauche.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_gauche.png">
       <Name>fleche_gauche</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_droite2.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_droite2.png">
       <Name>fleche_droite2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_gauche2.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_gauche2.png">
       <Name>fleche_gauche2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -557,7 +557,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Multijoueur.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Multijoueur.png">
       <Name>Bouton_Multijoueur</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -585,42 +585,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_droite3.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_droite3.png">
       <Name>fleche_droite3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_droite4.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_droite4.png">
       <Name>fleche_droite4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_droite5.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_droite5.png">
       <Name>fleche_droite5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_gauche3.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_gauche3.png">
       <Name>fleche_gauche3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_gauche4.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_gauche4.png">
       <Name>fleche_gauche4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\fleche_gauche5.png">
+    <Compile Include="Sprites\Menu\Francais\fleche_gauche5.png">
       <Name>fleche_gauche5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -651,14 +651,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_Boutique.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_Boutique.png">
       <Name>Bouton_Boutique</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Bouton_RetourToHasWon.png">
+    <Compile Include="Sprites\Menu\Francais\Bouton_RetourToHasWon.png">
       <Name>Bouton_RetourToHasWon</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -752,52 +752,52 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level4.png">
+    <Compile Include="Sprites\Menu\Francais\level4.png">
       <Name>level4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\level5.png">
+    <Compile Include="Sprites\Menu\Francais\level5.png">
       <Name>level5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\level6.png">
+    <Compile Include="Sprites\Menu\Francais\level6.png">
       <Name>level6</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level2_block.png">
+    <Compile Include="Sprites\Menu\Francais\level2_block.png">
       <Name>level2_block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level3_block.png">
+    <Compile Include="Sprites\Menu\Francais\level3_block.png">
       <Name>level3_block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level5_block.png">
+    <Compile Include="Sprites\Menu\Francais\level5_block.png">
       <Name>level5_block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level6_block.png">
+    <Compile Include="Sprites\Menu\Francais\level6_block.png">
       <Name>level6_block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\level4_block.png">
+    <Compile Include="Sprites\Menu\Francais\level4_block.png">
       <Name>level4_block</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -916,6 +916,111 @@
       <Name>saut_mario</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_quitter.png">
+      <Name>Bouton_quitter</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_jouer.png">
+      <Name>Bouton_jouer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_Bruitages.png">
+      <Name>Bouton_Bruitages</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_Retour.png">
+      <Name>Bouton_Retour</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_PleinEcran.png">
+      <Name>Bouton_PleinEcran</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_Commandes.png">
+      <Name>Bouton_Commandes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\Francais\Bouton_Anglais.png">
+      <Name>Bouton_Anglais</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_French.png">
+      <Name>Bouton_French</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_NouvellePartie.png">
+      <Name>Bouton_NouvellePartie</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_Chapitres.png">
+      <Name>Bouton_Chapitres</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_Multijoueur.png">
+      <Name>Bouton_Multijoueur</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_RetourToJouer.png">
+      <Name>Bouton_RetourToJouer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_NiveauSuivant.png">
+      <Name>Bouton_NiveauSuivant</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Boutton_Rejouer.png">
+      <Name>Boutton_Rejouer</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Bouton_MenuPrincipal.png">
+      <Name>Bouton_MenuPrincipal</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

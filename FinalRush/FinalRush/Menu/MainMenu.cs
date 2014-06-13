@@ -35,9 +35,11 @@ namespace FinalRush
             GameOver,
             Multi,
             player1win,
-            player2win
+            player2win,
+            GameEnded
         }
 
+        public bool english;
         public GameState gameState;
         GameMain Main;
         GameMain2 Main2;
@@ -110,6 +112,7 @@ namespace FinalRush
         List<GUIElement> Shop = new List<GUIElement>();
         List<GUIElement> player1win = new List<GUIElement>();
         List<GUIElement> player2win = new List<GUIElement>();
+        List<GUIElement> GameEnded = new List<GUIElement>();
 
         #endregion
 
@@ -119,6 +122,7 @@ namespace FinalRush
             : base(game)
         {
             // Constructeur:
+            english = false;
             time = startTime;
             started = false;
             paused = false;
@@ -138,75 +142,103 @@ namespace FinalRush
             Intro.Add(new GUIElement(@"Sprites\Menu\Intro\Intro2_Fond"));
             Intro.Add(new GUIElement(@"Sprites\Menu\Intro\Intro_Fond"));
 
-            main.Add(new GUIElement(@"Sprites\Menu\Button_jouer"));
-            main.Add(new GUIElement(@"Sprites\Menu\Button_options"));
-            main.Add(new GUIElement(@"Sprites\Menu\Button_quitter"));
-            main.Add(new GUIElement(@"Sprites\Menu\Bouton_Credits"));
 
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Retour"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Volume"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Plus"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Moins"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Bruitages"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Plus2"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Moins2"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_Commandes"));
-            InOptions.Add(new GUIElement(@"Sprites\Menu\Bouton_PleinEcran"));
+            main.Add(new GUIElement(@"Sprites\Menu\English\Bouton_jouer"));
+            main.Add(new GUIElement(@"Sprites\Menu\English\Bouton_quitter"));
+            main.Add(new GUIElement(@"Sprites\Menu\Francais\Button_jouer"));
+            main.Add(new GUIElement(@"Sprites\Menu\Francais\Button_options"));
+            main.Add(new GUIElement(@"Sprites\Menu\Francais\Button_quitter"));
+            main.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Credits"));
 
-            InPause.Add(new GUIElement(@"Sprites\Menu\Bouton_Continuer"));
-            InPause.Add(new GUIElement(@"Sprites\Menu\Button_options"));
-            InPause.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipalGros"));
-            InPause.Add(new GUIElement(@"Sprites\Menu\Button_quitter"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Bruitages"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Retour"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_PleinEcran"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Commandes"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_French"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Retour"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Volume"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Plus"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Moins"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Bruitages"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Plus2"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Moins2"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Commandes"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_PleinEcran"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Anglais"));
 
-            HowToPlay.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToOptions"));
+            InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Continuer"));
+            InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Button_options"));
+            InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipalGros"));
+            InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Button_quitter"));
 
-            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Bouton_NouvellePartie"));
-            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Bouton_Multijoueur"));
-            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Bouton_Retour"));
-            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Bouton_Chapitres"));
+            HowToPlay.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToOptions"));
 
-            GameOver.Add(new GUIElement(@"Sprites\Menu\Boutton_Rejouer"));
-            GameOver.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_NouvellePartie"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Multijoueur"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Retour"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Chapitres"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_NouvellePartie"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Multijoueur"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Retour"));
+            SelectionMap.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Chapitres"));
 
-            Credits.Add(new GUIElement(@"Sprites\Menu\Bouton_Retour"));
+            GameOver.Add(new GUIElement(@"Sprites\Menu\Francais\Boutton_Rejouer"));
+            GameOver.Add(new GUIElement(@"Sprites\Menu\English\Boutton_Rejouer"));
+            GameOver.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
 
-            Won.Add(new GUIElement(@"Sprites\Menu\Bouton_NiveauSuivant"));
-            Won.Add(new GUIElement(@"Sprites\Menu\Boutton_Rejouer"));
-            Won.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
-            Won.Add(new GUIElement(@"Sprites\Menu\Bouton_Boutique"));
+            Credits.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Retour"));
+            Credits.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Retour"));
 
-            Chapitre1.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre1.Add(new GUIElement(@"Sprites\Menu\Level1"));
-            Chapitre1.Add(new GUIElement(@"Sprites\Menu\fleche_droite"));
+            Won.Add(new GUIElement(@"Sprites\Menu\English\Bouton_NiveauSuivant"));
+            Won.Add(new GUIElement(@"Sprites\Menu\English\Boutton_Rejouer"));
+            Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_NiveauSuivant"));
+            Won.Add(new GUIElement(@"Sprites\Menu\Francais\Boutton_Rejouer"));
+            Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
+            Won.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Boutique"));
 
-            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Level2"));
-            Chapitre2.Add(new GUIElement(@"Sprites\Menu\fleche_droite2"));
-            Chapitre2.Add(new GUIElement(@"Sprites\Menu\fleche_gauche"));
+            GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Credits"));
+            GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Boutton_Rejouer"));
+            GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
+            GameEnded.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Boutique"));
 
-            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Level3"));
-            Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_droite3"));
-            Chapitre3.Add(new GUIElement(@"Sprites\Menu\fleche_gauche2"));
+            Chapitre1.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre1.Add(new GUIElement(@"Sprites\Menu\Francais\Level1"));
+            Chapitre1.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_droite"));
+            Chapitre1.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Level4"));
-            Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_droite4"));
-            Chapitre4.Add(new GUIElement(@"Sprites\Menu\fleche_gauche3"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Francais\Level2"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_droite2"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche"));
+            Chapitre2.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Level5"));
-            Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_droite5"));
-            Chapitre5.Add(new GUIElement(@"Sprites\Menu\fleche_gauche4"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Francais\Level3"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_droite3"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche2"));
+            Chapitre3.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToJouer"));
-            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Level6"));
-            Chapitre6.Add(new GUIElement(@"Sprites\Menu\fleche_gauche5"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Francais\Level4"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_droite4"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche3"));
+            Chapitre4.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            Shop.Add(new GUIElement(@"Sprites\Menu\Bouton_RetourToHasWon"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Francais\Level5"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_droite5"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche4"));
+            Chapitre5.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
 
-            player1win.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
-            player2win.Add(new GUIElement(@"Sprites\Menu\Bouton_MenuPrincipal"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Francais\Level6"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\Francais\fleche_gauche5"));
+            Chapitre6.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToJouer"));
+
+            Shop.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToHasWon"));
+
+            player1win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
+            player2win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
 
             player = Global.Player;
             player2 = Global.Player;
@@ -275,10 +307,10 @@ namespace FinalRush
             coin = content.Load<Texture2D>(@"SpriteFonts\coin");
             deathhead = content.Load<Texture2D>(@"SpriteFonts\deathhead");
             zombie = content.Load<Texture2D>(@"SpriteFonts\zombie");
-            fond_how2play = content.Load<Texture2D>(@"Sprites\Menu\HowToPlayPage1");
-            fond_menu = content.Load<Texture2D>(@"Sprites\Menu\Menu_fond");
-            fond_win = content.Load<Texture2D>(@"Sprites\Menu\Won");
-            fond_gameover = content.Load<Texture2D>(@"Sprites\Menu\GameOver");
+            fond_how2play = content.Load<Texture2D>(@"Sprites\Menu\Francais\HowToPlayPage1");
+            fond_menu = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond");
+            fond_win = content.Load<Texture2D>(@"Sprites\Menu\Francais\Won");
+            fond_gameover = content.Load<Texture2D>(@"Sprites\Menu\Francais\GameOver");
             Font = content.Load<SpriteFont>(@"SpriteFonts\TimerFont");
             nb_enemies_killed = content.Load<SpriteFont>(@"SpriteFonts\nb_enemies_killed");
             players_dead = content.Load<SpriteFont>(@"SpriteFonts\nb_players_dead");
@@ -300,11 +332,22 @@ namespace FinalRush
             }
 
             // On déplace les boutons du menu à notre guise (par rapport à (0,0))
-
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_jouer").MoveElement(0, -30);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(0, 50);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Credits").MoveElement(0, 120);
-            main.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(0, 200);
+            if (!english)
+            {
+                main.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_jouer").MoveElement(0, 800);
+                main.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_quitter").MoveElement(0, 800);
+                main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 200);
+                main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_jouer").MoveElement(0, -30);
+            }
+            else
+            {
+                main.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_jouer").MoveElement(0, -30);
+                main.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_quitter").MoveElement(0, 200);
+                main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 800);
+                main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_jouer").MoveElement(0, 800);
+            }
+            main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_options").MoveElement(0, 50);
+            main.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Credits").MoveElement(0, 120);
 
             // Options
 
@@ -316,15 +359,39 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Volume").MoveElement(-253, -50);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus").MoveElement(0, -50);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins").MoveElement(-70, -50);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Bruitages").MoveElement(-240, 15);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Plus2").MoveElement(0, 15);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Moins2").MoveElement(-70, 15);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Commandes").MoveElement(-222, 80);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_PleinEcran").MoveElement(-225, 145);
-            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Retour").MoveElement(-200, 210);
+            if (!english)
+            {
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Bruitages").MoveElement(-200, 15);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Commandes").MoveElement(-200, 80);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_PleinEcran").MoveElement(-200, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(-200, 210);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Anglais").MoveElement(225, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Bruitages").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Commandes").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_PleinEcran").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_French").MoveElement(0, 800);
+
+            }
+            else
+            {
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Bruitages").MoveElement(-200, 15);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Commandes").MoveElement(-200, 80);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_PleinEcran").MoveElement(-200, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(-200, 210);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_French").MoveElement(225, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Bruitages").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Commandes").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_PleinEcran").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Anglais").MoveElement(0, 800);
+            }
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Volume").MoveElement(-200, -50);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Plus").MoveElement(70, -50);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Moins").MoveElement(0, -50);
+
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Plus2").MoveElement(70, 15);
+            InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Moins2").MoveElement(0, 15);
 
             // De même pour InPause
 
@@ -335,10 +402,10 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
 
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Continuer").MoveElement(0, -50);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_options").MoveElement(0, 30);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipalGros").MoveElement(0, 110);
-            InPause.Find(x => x.AssetName == @"Sprites\Menu\Button_quitter").MoveElement(0, 190);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Continuer").MoveElement(0, -50);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_options").MoveElement(0, 30);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipalGros").MoveElement(0, 110);
+            InPause.Find(x => x.AssetName == @"Sprites\Menu\Francais\Button_quitter").MoveElement(0, 190);
 
             // De même pour GameOver
 
@@ -348,9 +415,17 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-
-            GameOver.Find(x => x.AssetName == @"Sprites\Menu\Boutton_Rejouer").MoveElement(-200, 210);
-            GameOver.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(200, 210);
+            if (!english)
+            {
+                GameOver.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(-200, 210);
+                GameOver.Find(x => x.AssetName == @"Sprites\Menu\English\Boutton_Rejouer").MoveElement(0, 800);
+            }
+            else
+            {
+                GameOver.Find(x => x.AssetName == @"Sprites\Menu\English\Boutton_Rejouer").MoveElement(-200, 210);
+                GameOver.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(0, 800);
+            }
+            GameOver.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(200, 210);
 
             // De même pour Commandes & Tips
 
@@ -361,7 +436,7 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
 
-            HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToOptions").MoveElement(-260, 210);
+            HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToOptions").MoveElement(-260, 210);
 
             foreach (GUIElement element in SelectionMap)
             {
@@ -370,19 +445,44 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
 
-            SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Bouton_NouvellePartie").MoveElement(0, -20);
-            SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Multijoueur").MoveElement(0, 50);
-            SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Retour").MoveElement(0, 200);
-            SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Chapitres").MoveElement(0, 120);
-
+            if (!english)
+            {
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_NouvellePartie").MoveElement(0, -20);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Multijoueur").MoveElement(0, 50);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 200);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Chapitres").MoveElement(0, 120);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_NouvellePartie").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Multijoueur").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Chapitres").MoveElement(0, 800);
+            }
+            else
+            {
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_NouvellePartie").MoveElement(0, -20);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Multijoueur").MoveElement(0, 50);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 200);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Chapitres").MoveElement(0, 120);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_NouvellePartie").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Multijoueur").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 800);
+                SelectionMap.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Chapitres").MoveElement(0, 800);
+            }
             foreach (GUIElement element in Credits)
             {
                 element.LoadContent(content);
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-
-            Credits.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Retour").MoveElement(0, 200);
+            if (!english)
+            {
+                Credits.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 200);
+                Credits.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 800);
+            }
+            else
+            {
+                Credits.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 200);
+                Credits.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 800);
+            }
 
             foreach (GUIElement element in Won)
             {
@@ -390,10 +490,33 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(-320, 210);
-            Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_NiveauSuivant").MoveElement(260, 210);
-            Won.Find(x => x.AssetName == @"Sprites\Menu\Boutton_Rejouer").MoveElement(-60, 210);
-            Won.Find(x => x.AssetName == @"Sprites\Menu\Bouton_Boutique").MoveElement(240, 160);
+            if (!english)
+            {
+                Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_NiveauSuivant").MoveElement(260, 210);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(-60, 210);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_NiveauSuivant").MoveElement(0, 800);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\English\Boutton_Rejouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Won.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_NiveauSuivant").MoveElement(260, 210);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\English\Boutton_Rejouer").MoveElement(-60, 210);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_NiveauSuivant").MoveElement(0, 800);
+                Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(0, 800);
+            }
+            Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(-320, 210);
+            Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Boutique").MoveElement(240, 160);
+
+            foreach (GUIElement element in GameEnded)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            GameEnded.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(-320, 210);
+            GameEnded.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Credits").MoveElement(260, 210);
+            GameEnded.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(-60, 210);
+            GameEnded.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Boutique").MoveElement(240, 160);
 
             foreach (GUIElement element in Chapitre1)
             {
@@ -401,9 +524,18 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Level1").MoveElement(0, 50);
-            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite").MoveElement(50, 200);
+            if (!english)
+            {
+                Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level1").MoveElement(0, 50);
+            Chapitre1.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_droite").MoveElement(50, 200);
 
             foreach (GUIElement element in Chapitre2)
             {
@@ -411,10 +543,19 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Level2").MoveElement(0, 50);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite2").MoveElement(50, 200);
-            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche").MoveElement(-50, 200);
+            if (!english)
+            {
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level2").MoveElement(0, 50);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_droite2").MoveElement(50, 200);
+            Chapitre2.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre3)
             {
@@ -422,10 +563,19 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Level3").MoveElement(0, 50);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite3").MoveElement(50, 200);
-            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche2").MoveElement(-50, 200);
+            if (!english)
+            {
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level3").MoveElement(0, 50);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_droite3").MoveElement(50, 200);
+            Chapitre3.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche2").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre4)
             {
@@ -433,10 +583,19 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Level4").MoveElement(0, 50);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite4").MoveElement(50, 200);
-            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche3").MoveElement(-50, 200);
+            if (!english)
+            {
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level4").MoveElement(0, 50);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_droite4").MoveElement(50, 200);
+            Chapitre4.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche3").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre5)
             {
@@ -444,10 +603,19 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Level5").MoveElement(0, 50);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_droite5").MoveElement(50, 200);
-            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche4").MoveElement(-50, 200);
+            if (!english)
+            {
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level5").MoveElement(0, 50);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_droite5").MoveElement(50, 200);
+            Chapitre5.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche4").MoveElement(-50, 200);
 
             foreach (GUIElement element in Chapitre6)
             {
@@ -455,9 +623,18 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToJouer").MoveElement(-300, 200);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Level6").MoveElement(0, 50);
-            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\fleche_gauche5").MoveElement(-50, 200);
+            if (!english)
+            {
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            else
+            {
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToJouer").MoveElement(-300, 200);
+                Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(0, 800);
+            }
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\Level6").MoveElement(0, 50);
+            Chapitre6.Find(x => x.AssetName == @"Sprites\Menu\Francais\fleche_gauche5").MoveElement(-50, 200);
 
             foreach (GUIElement element in Shop)
             {
@@ -465,7 +642,7 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            Shop.Find(x => x.AssetName == @"Sprites\Menu\Bouton_RetourToHasWon").MoveElement(-70, 200);
+            Shop.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToHasWon").MoveElement(-70, 200);
 
             foreach (GUIElement element in player1win)
             {
@@ -473,7 +650,7 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            player1win.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(0, 210);
+            player1win.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(0, 210);
 
             foreach (GUIElement element in player2win)
             {
@@ -481,7 +658,7 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-            player2win.Find(x => x.AssetName == @"Sprites\Menu\Bouton_MenuPrincipal").MoveElement(0, 210);
+            player2win.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(0, 210);
         }
 
         #endregion
@@ -626,7 +803,10 @@ namespace FinalRush
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueVictory);
                 MediaPlayer.IsRepeating = false;
-                gameState = GameState.Won;
+                if (comptlevel == 6)
+                    gameState = GameState.GameEnded;
+                else
+                    gameState = GameState.Won;
                 if (lvlcomplete < level)
                     lvlcomplete = level;
             }
@@ -938,7 +1118,6 @@ namespace FinalRush
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
                     Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);
-
                     for (int i = 0; i < enemies.Count(); i++)
                     {
                         if (enemies[i].isDead)
@@ -1080,14 +1259,25 @@ namespace FinalRush
                         if (HS5 >= old_HS5)
                             old_HS5 = HS5;
                     }
-                    if (comptlevel == 6)
-                    {
-                        HS6 = score;
-                        if (HS6 >= old_HS6)
-                            old_HS6 = HS6;
-                    }
 
                     enjeu = false;
+                    break;
+                case GameState.GameEnded:
+                    foreach (GUIElement element in GameEnded)
+                    {
+                        element.Update();
+                        if (compteurpourframecolumn == 35)
+                        {
+                            compteurpourframecolumn = 1;
+                            if (framecolumn == 7) framecolumn = 1;
+                            else framecolumn++;
+                        }
+                        else
+                            compteurpourframecolumn++;
+                    }
+                    HS6 = score;
+                    if (HS6 >= old_HS6)
+                        old_HS6 = HS6;
                     break;
                 case GameState.InPause:
                     if ((Keyboard.GetState().IsKeyDown(Keys.P) && pastkey.IsKeyUp(Keys.P)) || (Keyboard.GetState().IsKeyDown(Keys.Escape) && pastkey.IsKeyUp(Keys.Escape)))
@@ -1278,6 +1468,17 @@ namespace FinalRush
                     spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
                     spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
                     foreach (GUIElement element in Won)
+                        element.Draw(spriteBatch);
+                    spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
+                    spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
+                    spriteBatch.DrawString(players_dead, "x " + nb_players_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 310), Color.White);
+                    break;
+                case GameState.GameEnded:
+                    spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(coin, new Rectangle(350, 250, 25, 25), Color.White);
+                    spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
+                    spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
+                    foreach (GUIElement element in GameEnded)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
                     spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
@@ -1494,16 +1695,16 @@ namespace FinalRush
 
         public void OnClick(string element)
         {
-            if (element == @"Sprites\Menu\Button_jouer")
+            if (element == @"Sprites\Menu\Francais\Button_jouer" || element == @"Sprites\Menu\English\Bouton_jouer")
                 gameState = GameState.SelectionMap;
 
-            if (element == @"Sprites\Menu\Button_options")
+            if (element == @"Sprites\Menu\Francais\Button_options")
                 gameState = GameState.InOptions;
 
-            if (element == @"Sprites\Menu\Button_quitter")
+            if (element == @"Sprites\Menu\Francais\Button_quitter" || element == @"Sprites\Menu\English\Bouton_quitter")
                 gameState = GameState.InClose;
 
-            if (element == @"Sprites\Menu\Bouton_Retour")
+            if (element == @"Sprites\Menu\Francais\Bouton_Retour" || element == @"Sprites\Menu\English\Bouton_Retour")
             {
                 if (HasPlayed == true)
                     gameState = GameState.InPause;
@@ -1513,31 +1714,31 @@ namespace FinalRush
 
             //Modification du volume
 
-            if (element == @"Sprites\Menu\Bouton_Plus")
+            if (element == @"Sprites\Menu\Francais\Bouton_Plus")
             {
                 if (MediaPlayer.Volume >= 0.9f)
                     MediaPlayer.Volume = 1f;
                 else MediaPlayer.Volume = MediaPlayer.Volume + 0.1f;
             }
-            if (element == @"Sprites\Menu\Bouton_Moins")
+            if (element == @"Sprites\Menu\Francais\Bouton_Moins")
             {
                 if (MediaPlayer.Volume <= 0.1f)
                     MediaPlayer.Volume = 0f;
                 else MediaPlayer.Volume = MediaPlayer.Volume - 0.1f;
             }
-            if (element == @"Sprites\Menu\Bouton_Plus2")
+            if (element == @"Sprites\Menu\Francais\Bouton_Plus2")
             {
                 if (SoundEffect.MasterVolume >= 0.9f)
                     SoundEffect.MasterVolume = 1f;
                 else SoundEffect.MasterVolume = SoundEffect.MasterVolume + 0.1f;
             }
-            if (element == @"Sprites\Menu\Bouton_Moins2")
+            if (element == @"Sprites\Menu\Francais\Bouton_Moins2")
             {
                 if (SoundEffect.MasterVolume <= 0.1f)
                     SoundEffect.MasterVolume = 0f;
                 else SoundEffect.MasterVolume = SoundEffect.MasterVolume - 0.1f;
             }
-            if (element == @"Sprites\Menu\Bouton_Continuer")
+            if (element == @"Sprites\Menu\Francais\Bouton_Continuer")
             {
                 if (comptlevel == 1)
                     gameState = GameState.InGame;
@@ -1552,10 +1753,10 @@ namespace FinalRush
                 else if (comptlevel == 6)
                     gameState = GameState.InGame6;
             }
-            if (element == @"Sprites\Menu\Boutton_Rejouer")
+            if (element == @"Sprites\Menu\Francais\Boutton_Rejouer" || element == @"Sprites\Menu\English\Boutton_Rejouer")
                 CreateGame(comptlevel);
 
-            if (element == @"Sprites\Menu\Bouton_MenuPrincipal" || element == @"Sprites\Menu\Bouton_MenuPrincipalGros")
+            if (element == @"Sprites\Menu\Francais\Bouton_MenuPrincipal" || element == @"Sprites\Menu\Francais\Bouton_MenuPrincipalGros")
             {
                 gameState = GameState.MainMenu;
                 HasPlayed = false;
@@ -1566,13 +1767,13 @@ namespace FinalRush
                 MediaPlayer.IsRepeating = true;
             }
 
-            if (element == @"Sprites\Menu\Bouton_Commandes")
+            if (element == @"Sprites\Menu\Francais\Bouton_Commandes" || element == @"Sprites\Menu\English\Bouton_Commandes")
                 gameState = GameState.HowToPlay;
 
-            if (element == @"Sprites\Menu\Bouton_NouvellePartie")
+            if (element == @"Sprites\Menu\Francais\Bouton_NouvellePartie" || element == @"Sprites\Menu\English\Bouton_NouvellePartie")
                 gameState = GameState.Scenario;
 
-            if (element == @"Sprites\Menu\Boutton_Rejouer")
+            if (element == @"Sprites\Menu\Francais\Boutton_Rejouer" || element == @"Sprites\Menu\English\Boutton_Rejouer")
             {
                 total_piece_updated = false;
                 if (!has_Lost)
@@ -1581,84 +1782,84 @@ namespace FinalRush
 
             }
 
-            if (element == @"Sprites\Menu\Bouton_Credits")
+            if (element == @"Sprites\Menu\Francais\Bouton_Credits")
             {
                 gameState = GameState.Credits;
                 TextScroll = 100f;
             }
 
-            if (element == @"Sprites\Menu\Bouton_RetourToOptions")
+            if (element == @"Sprites\Menu\Francais\Bouton_RetourToOptions")
                 gameState = GameState.InOptions;
 
-            if (element == @"Sprites\Menu\Bouton_RetourToJouer")
+            if (element == @"Sprites\Menu\Francais\Bouton_RetourToJouer" || element == @"Sprites\Menu\English\Bouton_RetourToJouer")
                 gameState = GameState.SelectionMap;
 
-            if (element == @"Sprites\Menu\Bouton_Chapitres")
+            if (element == @"Sprites\Menu\Francais\Bouton_Chapitres" || element == @"Sprites\Menu\English\Bouton_Chapitres")
                 gameState = GameState.Chapitre1;
 
-            if (element == @"Sprites\Menu\Level1")
+            if (element == @"Sprites\Menu\Francais\Level1")
                 CreateGame(1);
 
-            if ((element == @"Sprites\Menu\Level2" || element == @"Sprites\Menu\Level2_block") && lvlcomplete >= 1) //retire deuxieme condition pour les tests
+            if ((element == @"Sprites\Menu\Francais\Level2" || element == @"Sprites\Menu\Francais\Level2_block") && lvlcomplete >= 1) //retire deuxieme condition pour les tests
                 CreateGame(2);
 
-            if (element == @"Sprites\Menu\Level3" && lvlcomplete >= 2)
+            if (element == @"Sprites\Menu\Francais\Level3" && lvlcomplete >= 2)
                 CreateGame(3);
 
-            if (element == @"Sprites\Menu\Level4" && lvlcomplete >= 3)
+            if (element == @"Sprites\Menu\Francais\Level4" && lvlcomplete >= 3)
                 CreateGame(4);
 
-            if (element == @"Sprites\Menu\Level5" && lvlcomplete >= 4)
+            if (element == @"Sprites\Menu\Francais\Level5" && lvlcomplete >= 4)
                 CreateGame(5);
 
-            if (element == @"Sprites\Menu\Level6" && lvlcomplete >= 5)
+            if (element == @"Sprites\Menu\Francais\Level6" && lvlcomplete >= 5)
                 CreateGame(6);
 
-            if (element == @"Sprites\Menu\Bouton_NiveauSuivant")
+            if (element == @"Sprites\Menu\Francais\Bouton_NiveauSuivant" || element == @"Sprites\Menu\English\Bouton_NiveauSuivant")
             {
                 CreateGame(comptlevel + 1);
                 nb_players_dead = 0;
             }
-            if (element == @"Sprites\Menu\Bouton_PleinEcran")
+            if (element == @"Sprites\Menu\Francais\Bouton_PleinEcran" || element == @"Sprites\Menu\English\Bouton_PleinEcran")
                 Global.Handler.graphics.ToggleFullScreen();
 
-            if (element == @"Sprites\Menu\fleche_droite")
+            if (element == @"Sprites\Menu\Francais\fleche_droite")
                 gameState = GameState.Chapitre2;
 
-            if (element == @"Sprites\Menu\fleche_droite2")
+            if (element == @"Sprites\Menu\Francais\fleche_droite2")
                 gameState = GameState.Chapitre3;
 
-            if (element == @"Sprites\Menu\fleche_droite3")
+            if (element == @"Sprites\Menu\Francais\fleche_droite3")
                 gameState = GameState.Chapitre4;
 
-            if (element == @"Sprites\Menu\fleche_droite4")
+            if (element == @"Sprites\Menu\Francais\fleche_droite4")
                 gameState = GameState.Chapitre5;
 
-            if (element == @"Sprites\Menu\fleche_droite5")
+            if (element == @"Sprites\Menu\Francais\fleche_droite5")
                 gameState = GameState.Chapitre6;
 
-            if (element == @"Sprites\Menu\fleche_gauche")
+            if (element == @"Sprites\Menu\Francais\fleche_gauche")
                 gameState = GameState.Chapitre1;
 
-            if (element == @"Sprites\Menu\fleche_gauche2")
+            if (element == @"Sprites\Menu\Francais\fleche_gauche2")
                 gameState = GameState.Chapitre2;
 
-            if (element == @"Sprites\Menu\fleche_gauche3")
+            if (element == @"Sprites\Menu\Francais\fleche_gauche3")
                 gameState = GameState.Chapitre3;
 
-            if (element == @"Sprites\Menu\fleche_gauche4")
+            if (element == @"Sprites\Menu\Francais\fleche_gauche4")
                 gameState = GameState.Chapitre4;
 
-            if (element == @"Sprites\Menu\fleche_gauche5")
+            if (element == @"Sprites\Menu\Francais\fleche_gauche5")
                 gameState = GameState.Chapitre5;
 
-            if (element == @"Sprites\Menu\Bouton_Multijoueur")
+            if (element == @"Sprites\Menu\Francais\Bouton_Multijoueur" || element == @"Sprites\Menu\English\Bouton_Multijoueur")
             {
                 CreateGame(7);
                 MainMulti.Initialize();
             }
 
-            if (element == @"Sprites\Menu\Bouton_Boutique" && !total_piece_updated)
+            if (element == @"Sprites\Menu\Francais\Bouton_Boutique" && !total_piece_updated)
             {
                 total_piece = nb_pieces + total_piece;
                 gameState = GameState.Shop;
@@ -1668,14 +1869,26 @@ namespace FinalRush
                 total_piece_updated = true;
             }
 
-            if (element == @"Sprites\Menu\Bouton_RetourToHasWon")
+            if (element == @"Sprites\Menu\Francais\Bouton_RetourToHasWon")
             {
                 gameState = GameState.Won;
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueVictory);
                 MediaPlayer.IsRepeating = false;
             }
+            if (element == @"Sprites\Menu\Francais\Bouton_Anglais")
+            {
+                ContentManager content = Global.Handler.Content;
+                english = true;
+                LoadContent(content);
+            }
+            if (element == @"Sprites\Menu\English\Bouton_French")
+            {
+                ContentManager content = Global.Handler.Content;
+                english = false;
+                LoadContent(content);
+            }
         }
-        #endregion
     }
+        #endregion
 }
