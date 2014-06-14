@@ -1925,6 +1925,9 @@ namespace FinalRush
 
         public void OnKeyUp(Keys key)
         {
+            if (key == Keys.LeftShift)
+                if (Keyboard.GetState().IsKeyUp(Keys.LeftShift))
+                    shift_pressed = false;
         }
 
         public void OnKeyDown(Keys key)
@@ -1955,10 +1958,29 @@ namespace FinalRush
                 shift_pressed = true;
 
             if (shift_pressed && key == Keys.OemPeriod)
-            {
-                shift_pressed = false;
                 ip += ".";
-            }
+
+            if (shift_pressed && key == Keys.D0)
+                ip += "0";
+            if (shift_pressed && key == Keys.D1)
+                ip += "1";
+            if (shift_pressed && key == Keys.D2)
+                ip += "2";
+            if (shift_pressed && key == Keys.D3)
+                ip += "3";
+            if (shift_pressed && key == Keys.D4)
+                ip += "4";
+            if (shift_pressed && key == Keys.D5)
+                ip += "5";
+            if (shift_pressed && key == Keys.D6)
+                ip += "6";
+            if (shift_pressed && key == Keys.D7)
+                ip += "7";
+            if (shift_pressed && key == Keys.D8)
+                ip += "8";
+            if (shift_pressed && key == Keys.D9)
+                ip += "9";
+
             
             //if (key == Keys.Back)
             //{
