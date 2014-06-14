@@ -1981,16 +1981,11 @@ namespace FinalRush
             if (shift_pressed && key == Keys.D9)
                 ip += "9";
 
-            
-            //if (key == Keys.Back)
-            //{
-            //    ip_list = ip.ToList<char>();
-            //    ip_list.RemoveAt(ip_list.Count);
-            //    for (int i = 0; i < ip_list.Count; i++)
-            //    {
-            //        ip.Remove(i);
-            //    }
-            //}
+
+            if (key == Keys.Back && ip.Length > 0)
+            {
+                ip = ip.Remove(ip.Length - 1);
+            }
             
         }
     }
