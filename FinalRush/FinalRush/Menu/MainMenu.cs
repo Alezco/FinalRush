@@ -834,7 +834,7 @@ namespace FinalRush
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueVictory);
                 MediaPlayer.IsRepeating = false;
-                    gameState = GameState.Won;
+                gameState = GameState.Won;
                 if (lvlcomplete < level)
                     lvlcomplete = level;
             }
@@ -1382,6 +1382,7 @@ namespace FinalRush
                 case GameState.Credits:
                     foreach (GUIElement element in Credits)
                         element.Update();
+                    HasPlayed = false;
                     TextScroll -= 0.6f;
                     enjeu = false;
                     break;
@@ -1547,7 +1548,10 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     break;
                 case GameState.HowToPlay:
-                    spriteBatch.Draw(fond_how2play, new Rectangle(0, 0, 800, 480), Color.White);
+                    if (!english)
+                        spriteBatch.Draw(fond_how2play, new Rectangle(0, 0, 800, 480), Color.White);
+                    else
+                        spriteBatch.Draw(Resources.Controls, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in HowToPlay)
                         element.Draw(spriteBatch);
                     break;
@@ -1717,19 +1721,35 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     break;
                 case GameState.player1win:
-                    spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    if (!english)
+                        spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    else
+                        spriteBatch.Draw(Resources.Won_English, new Rectangle(0, 0, 800, 480), Color.White);
+
                     foreach (GUIElement element in player1win)
                         element.Draw(spriteBatch);
                     break;
                 case GameState.player2win:
-                    spriteBatch.Draw(fond_gameover, new Rectangle(0, 0, 800, 480), Color.White);
+                    if (!english)
+                        spriteBatch.Draw(Resources.Defaite, new Rectangle(0, 0, 800, 480), Color.White);
+                    else
+                        spriteBatch.Draw(Resources.Defeat, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in player2win)
                         element.Draw(spriteBatch);
                     break;
                 case GameState.Scenario:
-                    if (colourScenario.R == 255) spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), Color.Black);
+                    if (!english)
+                    {
+                        if (colourScenario.R == 255) spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), Color.Black);
+                        else
+                            spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
+                    }
                     else
-                        spriteBatch.Draw(Resources.Scenario, new Rectangle(0, 0, 800, 480), colourScenario);
+                    {
+                        if (colourScenario.R == 255) spriteBatch.Draw(Resources.English_Scenar, new Rectangle(0, 0, 800, 480), Color.Black);
+                        else
+                            spriteBatch.Draw(Resources.English_Scenar, new Rectangle(0, 0, 800, 480), colourScenario);
+                    }
                     break;
                 case GameState.InClose:
                     break;
@@ -1760,7 +1780,14 @@ namespace FinalRush
                 if (HasPlayed == true)
                     gameState = GameState.InPause;
                 else
+                {
+                    if (gameState == GameState.Credits)
+                    {
+                        MediaPlayer.Stop();
+                        MediaPlayer.Play(Resources.MusiqueMenu);
+                    }
                     gameState = GameState.MainMenu;
+                }
             }
 
             //Modification du volume

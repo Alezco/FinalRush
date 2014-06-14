@@ -15,7 +15,7 @@ namespace FinalRush
         // STATIC FIELDS
 
         public static Texture2D Marco, MarcoSaut, MarcoSquat, MarcoTir, MarcoCut;
-        public static Texture2D Player2;
+        public static Texture2D Player2, Controls, Defaite, Defeat, English_Scenar, Won_English;
         public static Texture2D Zombie, Elite, Boss;
         public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top, Lave;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
@@ -97,6 +97,11 @@ namespace FinalRush
             lvl6_block = Content.Load<Texture2D>(@"Sprites\Menu\Francais\level6_block");
             Scenario = Content.Load<Texture2D>(@"Sprites\Menu\Francais\Scenario");
             HealthBar = Content.Load<Texture2D>(@"Sprites\Hero\HealthBar");
+            Controls = Content.Load<Texture2D>(@"Sprites\Menu\English\Controls");
+            Defaite = Content.Load<Texture2D>(@"Sprites\Menu\English\Defaite");
+            Defeat = Content.Load<Texture2D>(@"Sprites\Menu\English\Defeat");
+            English_Scenar = Content.Load<Texture2D>(@"Sprites\Menu\English\EnglishScenario");
+            Won_English = Content.Load<Texture2D>(@"Sprites\Menu\English\WonEnglish");
 
 
             //Musique

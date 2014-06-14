@@ -206,10 +206,16 @@ namespace FinalRush
                 {
                     spriteBatch.Begin();
                     spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X, Global.Boss.Hitbox.Y - 25, Global.Boss.pv, 20), Color.Red);
+                    spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.White);
+                    spriteBatch.End();
+                }
+                else
+                {
+                    spriteBatch.Begin();
+                    spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.Black);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();
-                spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.Black);
                 spriteBatch.DrawString(timer, ": " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
                 spriteBatch.Draw(bullet_texture, new Rectangle(Window.ClientBounds.Width / 2 + 87, 0, 10, 35), Color.White);
                 spriteBatch.DrawString(Resources.ammo_font, ": " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
