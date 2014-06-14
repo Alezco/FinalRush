@@ -1516,6 +1516,7 @@ namespace FinalRush
                     MainMulti.Draw(spriteBatch);
                     break;
                 case GameState.ChooseIp:
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in ChooseIp)
                         element.Draw(spriteBatch);
                     spriteBatch.DrawString(Resources.ammo_font, ip, new Vector2(330, 180), Color.Black);
