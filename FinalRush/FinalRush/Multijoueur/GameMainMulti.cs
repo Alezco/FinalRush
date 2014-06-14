@@ -144,6 +144,7 @@ namespace FinalRush
                         player2Connected = true;
                         player2.Hitbox = new Rectangle(player2.Hitbox.X, player2.Hitbox.Y, player2.Hitbox.Width, player2.Hitbox.Height);
                         player2.Marco = Resources.Marco;
+                        player2.marco_color = Color.Red;
                         player2.bullets = new List<Bullets>();
 
                         writeStream.Position = 0;

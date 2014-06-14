@@ -64,7 +64,7 @@ namespace FinalRush
         public int nb_players_dead = 0;
         int x = 0;
         int compt = 0;
-        int lvlcomplete = 13;  //niveaux terminés
+        int lvlcomplete = 3;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -876,7 +876,7 @@ namespace FinalRush
         {
             switch (lvlcomplete)
             {
-                default :
+                default:
                     fond = fond_menu1;
                     break;
                 case 1:
@@ -894,7 +894,7 @@ namespace FinalRush
                 case 5:
                     fond = fond_menu6;
                     break;
-                case 13:
+                case 6:
                     Random rand = new Random();
                     if (compt == 100)
                     {
@@ -1110,9 +1110,10 @@ namespace FinalRush
                 case GameState.InGame4:
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
-                    player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);
-                    Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);
-                    Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);
+                    player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);     //bonus
+                    Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);           //healthbonus
+                    Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);   //speedbonus 
+                    Global.Collisions.CollisionLow(player4.Hitbox, Main4.lowspeedarea);                  //zone ralentie
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -1493,9 +1494,10 @@ namespace FinalRush
             switch (gameState)
             {
                 case GameState.Intro:
-                    if (compt < 255) spriteBatch.Draw(Intro_fond, new Rectangle(0, 0, 800, 480), colour);
-                    else spriteBatch.Draw(Intro_fond2, new Rectangle(0, 0, 800, 480), Color.White);
-
+                    if (compt < 255)
+                        spriteBatch.Draw(Intro_fond, new Rectangle(0, 0, 800, 480), colour);
+                    else
+                        spriteBatch.Draw(Intro_fond2, new Rectangle(0, 0, 800, 480), Color.White);
                     break;
                 case GameState.MainMenu:
                     spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
@@ -2038,19 +2040,8 @@ namespace FinalRush
                 ip += "8";
             if (shift_pressed && key == Keys.D9)
                 ip += "9";
-            if (key == Keys.Back)
+            if (key == Keys.Back && ip.Length > 0)
                 ip = ip.Remove(ip.Length - 1);
-
-            //if (key == Keys.Back)
-            //{
-            //    ip_list = ip.ToList<char>();
-            //    ip_list.RemoveAt(ip_list.Count);
-            //    for (int i = 0; i < ip_list.Count; i++)
-            //    {
-            //        ip.Remove(i);
-            //    }
-            //}
-
         }
     }
 

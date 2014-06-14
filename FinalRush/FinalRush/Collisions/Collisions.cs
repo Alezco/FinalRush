@@ -10,7 +10,8 @@ namespace FinalRush
 {
     class Collisions
     {
-        public bool collision_speed = false;
+        public bool collision_speed;
+        public bool LowSpeed;
         SoundEffectInstance bonus_bruitages;
         public Color marco_color;
         public int accu = 0;
@@ -209,5 +210,19 @@ namespace FinalRush
             }
         }
         #endregion
+
+        public void CollisionLow(Rectangle Hitbox, List<LowSpeedArea> low)
+        {
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+
+            foreach (LowSpeedArea lsa in low)
+            {
+                if (newHitbox.Intersects(lsa.Hitbox))
+                    LowSpeed = true;
+                else
+                    LowSpeed = false;
+            }
+        }
+       
     }
 }

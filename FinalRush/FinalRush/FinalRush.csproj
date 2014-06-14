@@ -76,6 +76,7 @@
     <Compile Include="Bonus\Bonus.cs" />
     <Compile Include="Bonus\VitesseBonus.cs" />
     <Compile Include="Collisions\Collisions.cs" />
+    <Compile Include="Collisions\LowSpeedArea.cs" />
     <Compile Include="Collisions\MovingHorizontallyWall.cs" />
     <Compile Include="Collisions\Wall.cs" />
     <Compile Include="Game\Levels\Editeur.cs" />

@@ -17,6 +17,7 @@ namespace FinalRush
 
         public Player LocalPlayer;
         public List<Wall> Walls;
+        public List<LowSpeedArea> lowspeedarea;  //zone ralentie
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
         public List<VitesseBonus> speedbonus;
@@ -40,6 +41,7 @@ namespace FinalRush
             menu = new MainMenu(Global.Handler, 0f);
             LocalPlayer = new Player();
             Walls = new List<Wall>();
+            lowspeedarea = new List<LowSpeedArea>();   //zone ralentie
             bonus = new List<Bonus>();
             healthbonus = new List<HealthBonus>();
             speedbonus = new List<VitesseBonus>();
@@ -93,6 +95,8 @@ namespace FinalRush
             speedbonus.Add(new VitesseBonus(3050, 332, Resources.Speed, 20, 20, Color.White));
             healthbonus.Add(new HealthBonus(1085, 200, Resources.Health, 20, 20, Color.White));
             #endregion
+
+            lowspeedarea.Add(new LowSpeedArea(256, 350, Resources.Pixel, 400, 2, Color.Red));
         }
 
         // UPDATE & DRAW
@@ -142,6 +146,10 @@ namespace FinalRush
             foreach (Wall wall in Walls)
                 wall.Draw(spritebatch);
 
+            //draw zone ralentie
+            foreach (LowSpeedArea lsa in lowspeedarea)
+                lsa.Draw(spritebatch);
+               
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
 

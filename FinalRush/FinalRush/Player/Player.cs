@@ -35,7 +35,7 @@ namespace FinalRush
         MainMenu Main;
         public Texture2D Marco = Resources.Marco;
         public Texture2D MarcoJump = Resources.MarcoSaut;
-        Color marco_color = new Color(254,255,255,255);
+        public Color marco_color = new Color(254, 255, 255, 255);
 
         bool up, change = true;
         int compteur = 1;
@@ -114,6 +114,8 @@ namespace FinalRush
         {
             if (Global.Collisions.collision_speed)
                 speed = 6;
+            else if (Global.Collisions.LowSpeed)
+                speed = 2;
             else
                 speed = 4;
             GameTime gametime;
@@ -389,7 +391,7 @@ namespace FinalRush
             {
                 framecolumn = 1;
                 if (!collisions.CollisionUp(Hitbox, walls, this.fallspeed))
-                {                
+                {
                     SoundEffectInstance saut_instance = Resources.saut.CreateInstance();
                     saut_instance.Play();
                     this.Hitbox.Y -= 12;
