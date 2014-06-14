@@ -82,7 +82,7 @@ namespace FinalRush
             Main4 = new GameMain4();
             Main5 = new GameMain5();
             Main6 = new GameMain6();
-            MainMulti = new GameMainMulti();
+            MainMulti = new GameMainMulti(Global.MainMenu.ip);
             main = new MainMenu(this, 0f);
             reloading_instance = Resources.reload_sound.CreateInstance();
 

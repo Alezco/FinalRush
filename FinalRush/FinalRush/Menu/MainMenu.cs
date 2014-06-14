@@ -776,7 +776,7 @@ namespace FinalRush
                 case 7:
                     gameState = GameState.InGameMulti;
                     MediaPlayer.Play(Resources.Musique3);
-                    MainMulti = new GameMainMulti();
+                    MainMulti = new GameMainMulti(ip);
                     p7 = new Player();
                     p8 = new Player();
                     break;
@@ -1203,6 +1203,7 @@ namespace FinalRush
                     comptlevel = 7;
                     MainMulti.Update(Mouse.GetState(), Keyboard.GetState());
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, MainMulti.speedbonus, gameTime);
+                    Global.GameMainMulti.IP = this.ip;
 
                     if (MainMulti.player.Hitbox.X > 4600)
                     {
@@ -1934,6 +1935,7 @@ namespace FinalRush
         {
             if (key == Keys.NumPad1)
                 ip += "1";
+
             else if (key == Keys.NumPad2)
                 ip += "2";
             else if (key == Keys.NumPad3)
@@ -1959,7 +1961,6 @@ namespace FinalRush
 
             if (shift_pressed && key == Keys.OemPeriod)
                 ip += ".";
-
             if (shift_pressed && key == Keys.D0)
                 ip += "0";
             if (shift_pressed && key == Keys.D1)
@@ -1980,13 +1981,19 @@ namespace FinalRush
                 ip += "8";
             if (shift_pressed && key == Keys.D9)
                 ip += "9";
-
-
-            if (key == Keys.Back && ip.Length > 0)
-            {
+            if (key == Keys.Back)
                 ip = ip.Remove(ip.Length - 1);
-            }
-            
+
+            //if (key == Keys.Back)
+            //{
+            //    ip_list = ip.ToList<char>();
+            //    ip_list.RemoveAt(ip_list.Count);
+            //    for (int i = 0; i < ip_list.Count; i++)
+            //    {
+            //        ip.Remove(i);
+            //    }
+            //}
+
         }
     }
 

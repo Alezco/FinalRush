@@ -31,13 +31,14 @@ namespace FinalRush
         public static Editeur edit = new Editeur();
         public int[,] map = edit.Edition(7);
         public int size = 64;
+        public string IP;
 
         // CONSTRUCTOR
 
-        public GameMainMulti()
+        public GameMainMulti(string IP)
         {
             menu = new MainMenu(Global.Handler, 0f);
-            IP = Global.MainMenu.ip;
+            this.IP = Global.MainMenu.ip;
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
             enemies = new List<Enemy>();
@@ -73,7 +74,6 @@ namespace FinalRush
         #region Multi
 
         public TcpClient client;
-        public string IP;
         int port = 1490;
         int buffer_size = 2048;
         byte[] readBuffer;
@@ -88,6 +88,7 @@ namespace FinalRush
         {
             client = new TcpClient();
             client.NoDelay = true;
+            IP = Global.MainMenu.ip;
             client.Connect(IP, port);
             readBuffer = new byte[buffer_size];
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);
