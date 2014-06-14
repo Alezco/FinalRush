@@ -90,8 +90,8 @@ namespace FinalRush
         public int nb_pieces;
         float TextScroll = 100f;
         private Keys[] lastPressedKeys = new Keys[20];
-        private string ip = string.Empty;
-        private List<char> ip_list = new List<char>();
+        public string ip;
+        public List<char> ip_list = new List<char>();
 
 
         //Liste qui contiendra tous les rectangles (donc les boutons) nécessaires
@@ -248,7 +248,9 @@ namespace FinalRush
 
             ChooseIp.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
             ChooseIp.Add(new GUIElement(@"Sprites\Menu\Francais\EnterIp"));
+            ChooseIp.Add(new GUIElement(@"Sprites\Menu\Francais\Ok"));
 
+            ip = "";
             player = Global.Player;
             player2 = Global.Player;
             player3 = Global.Player;
@@ -412,6 +414,7 @@ namespace FinalRush
                 element.clickEvent += OnClick;
             }
             ChooseIp.Find(x => x.AssetName == @"Sprites\Menu\Francais\EnterIp").CenterElement(400, 800);
+            ChooseIp.Find(x => x.AssetName == @"Sprites\Menu\Francais\Ok").CenterElement(550, 800);
             ChooseIp.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-200, 210);
 
             // De même pour InPause
@@ -1865,9 +1868,14 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Francais\Bouton_Multijoueur" || element == @"Sprites\Menu\English\Bouton_Multijoueur")
             {
-                //CreateGame(7);
-                //MainMulti.Initialize();
                 gameState = GameState.ChooseIp;
+            }
+
+            if (element == @"Sprites\Menu\Francais\Ok")
+            {
+                Global.GameMainMulti.IP = ip;
+                CreateGame(7);
+                MainMulti.Initialize();
             }
 
 
@@ -1923,27 +1931,27 @@ namespace FinalRush
         {
             if (key == Keys.NumPad1)
                 ip += "1";
-            if (key == Keys.NumPad2)
+            else if (key == Keys.NumPad2)
                 ip += "2";
-            if (key == Keys.NumPad3)
+            else if (key == Keys.NumPad3)
                 ip += "3";
-            if (key == Keys.NumPad4)
+            else if (key == Keys.NumPad4)
                 ip += "4";
-            if (key == Keys.NumPad5)
+            else if (key == Keys.NumPad5)
                 ip += "5";
-            if (key == Keys.NumPad6)
+            else if (key == Keys.NumPad6)
                 ip += "6";
-            if (key == Keys.NumPad7)
+            else if (key == Keys.NumPad7)
                 ip += "7";
-            if (key == Keys.NumPad8)
+            else if (key == Keys.NumPad8)
                 ip += "8";
-            if (key == Keys.NumPad9)
+            else if (key == Keys.NumPad9)
                 ip += "9";
-            if (key == Keys.NumPad0)
+            else if (key == Keys.NumPad0)
                 ip += "0";
-            if (key == Keys.Decimal)
+            else if (key == Keys.Decimal)
                 ip += ".";
-            if (key == Keys.LeftShift || key == Keys.RightShift)
+            else if (key == Keys.LeftShift || key == Keys.RightShift)
                 shift_pressed = true;
 
             if (shift_pressed && key == Keys.OemPeriod)

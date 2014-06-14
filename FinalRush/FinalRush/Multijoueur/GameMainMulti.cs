@@ -37,6 +37,7 @@ namespace FinalRush
         public GameMainMulti()
         {
             menu = new MainMenu(Global.Handler, 0f);
+            IP = Global.MainMenu.ip;
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
             enemies = new List<Enemy>();
@@ -68,11 +69,11 @@ namespace FinalRush
             }
 
         }
-        
+
         #region Multi
 
         public TcpClient client;
-        string IP = "127.0.0.1";
+        public string IP;
         int port = 1490;
         int buffer_size = 2048;
         byte[] readBuffer;
