@@ -14,7 +14,6 @@ namespace FinalRush
         SoundEffectInstance bonus_bruitages;
         public Color marco_color;
         public int accu = 0;
-        bool up, down;
 
         public Collisions()
         {
@@ -157,7 +156,7 @@ namespace FinalRush
                 if (!e.isDead && newHitbox.Intersects(e.Hitbox))
                 {
                     accu = 20;
-                    Global.Player.health++;
+                    Global.Player.health--;
                 }
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
@@ -174,7 +173,10 @@ namespace FinalRush
             foreach (Enemy2 e in enemy)
             {
                 if (!e.isDead && newHitbox.Intersects(e.Hitbox))
+                {
+                    accu = 20;
                     Global.Player.health--;
+                }
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }
@@ -185,7 +187,10 @@ namespace FinalRush
         {
             bool collision = false;
             if (!boss.isDead && Hitbox.Intersects(boss.Hitbox))
+            {
                 Global.Player.health--;
+                accu = 20;
+            }
             if (Global.Player.health < 0)
                 Global.Player.health = 0;
             return collision;

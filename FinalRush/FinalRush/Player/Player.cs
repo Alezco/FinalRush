@@ -445,13 +445,11 @@ namespace FinalRush
                 if (marco_color.G > 235) up = false;
                 if (up)
                 {
-                    marco_color.A--;
                     marco_color.G += 15;
                     marco_color.B += 15;
                 }
                 else
                 {
-                    marco_color.A++;
                     marco_color.G -= 15;
                     marco_color.B -= 15;
                 }
