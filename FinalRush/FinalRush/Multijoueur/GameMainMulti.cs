@@ -84,11 +84,11 @@ namespace FinalRush
         bool player2Connected;
         public Protocol p;
 
-        public void Initialize()
+        public void Initialize(string IP)
         {
             client = new TcpClient();
             client.NoDelay = true;
-            IP = Global.MainMenu.ip;
+            this.IP = IP;
             client.Connect(IP, port);
             readBuffer = new byte[buffer_size];
             client.GetStream().BeginRead(readBuffer, 0, buffer_size, StreamReceived, null);

@@ -1876,7 +1876,7 @@ namespace FinalRush
             {
                 Global.GameMainMulti.IP = ip;
                 CreateGame(7);
-                MainMulti.Initialize();
+                MainMulti.Initialize(ip);
             }
 
 
