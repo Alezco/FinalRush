@@ -19,6 +19,8 @@ namespace FinalRush
         int random;
         int framecolumn;
         int compt = 0;
+        int playerDistance;
+        bool playerProche;
         bool left;
         public bool isDead;
         List<Bullets> bullets;
@@ -31,6 +33,7 @@ namespace FinalRush
             framecolumn = 1;
             speed = 1;
             fallspeed = 5;
+            playerProche = false;
             isDead = false;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
@@ -45,6 +48,10 @@ namespace FinalRush
         public void Update(List<Wall> walls, int random)
         {
             compt++; // Cette petite ligne correspond à l'IA ( WAAAW Gros QI )
+
+            playerDistance = Hitbox.X - Global.Player.Hitbox.X;
+            playerProche = Math.Abs(playerDistance) < 200;
+
 
             #region Mort Ennemi
             for (int i = 0; i < bullets.Count(); i++)
@@ -97,38 +104,55 @@ namespace FinalRush
 
             #region Déplacements
 
-            if (compt > random)
+            if (!playerProche)
             {
-                if (left) left = false;
-                else left = true;
-                compt = 1;
-            }
 
-            if (left)
-            {
-                if (!collisions.CollisionRight(Hitbox, walls, this.speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
+                if (compt > random)
                 {
-                    this.Hitbox.X += speed;
-                    this.Direction = Direction.Right;
+                    if (left) left = false;
+                    else left = true;
+                    compt = 1;
                 }
-                else
+
+                if (left)
                 {
-                    framecolumn = 1;
-                    compt += 10;
+                    if (!collisions.CollisionRight(Hitbox, walls, this.speed) && collisions.CollisionDown(new Rectangle(Hitbox.X + Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed))
+                    {
+                        this.Hitbox.X += speed;
+                        this.Direction = Direction.Right;
+                    }
+                    else
+                    {
+                        framecolumn = 1;
+                        compt += 10;
+                    }
+                }
+
+                if (!left)
+                {
+                    if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
+                    {
+                        this.Hitbox.X -= speed;
+                        this.Direction = Direction.Left;
+                    }
+                    else
+                    {
+                        framecolumn = 1;
+                        compt += 10;
+                    }
                 }
             }
-
-            if (!left)
+            else
             {
-                if (!collisions.CollisionLeft(Hitbox, walls, this.speed) && Hitbox.X > 0 && collisions.CollisionDown(new Rectangle(Hitbox.X - Hitbox.Width, Hitbox.Y, Hitbox.Width, Hitbox.Height), walls, speed) && Hitbox.X < 4600)
+                if (playerDistance > 0 && !collisions.CollisionLeft(Hitbox, walls, this.speed))
                 {
                     this.Hitbox.X -= speed;
                     this.Direction = Direction.Left;
                 }
-                else
+                else if (playerDistance < 0 &&  !collisions.CollisionRight(Hitbox, walls, this.speed))
                 {
-                    framecolumn = 1;
-                    compt += 10;
+                    this.Hitbox.X += speed;
+                    this.Direction = Direction.Right;
                 }
             }
 
