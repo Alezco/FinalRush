@@ -34,6 +34,7 @@ namespace FinalRush
             Intro, Scenario,
             GameOver,
             Multi,
+            ChooseIp,
             player1win,
             player2win,
             GameEnded
@@ -53,6 +54,7 @@ namespace FinalRush
         int old_HS1, old_HS2, old_HS3, old_HS4, old_HS5, old_HS6 = 0;
         List<Enemy> enemies;
         List<Enemy2> enemies2;
+        bool shift_pressed = false;
         public Player player, player2, player3, player4, player5, player6, p7, p8;
         bool HasPlayed;
         public bool boss_already_appeared;
@@ -87,6 +89,9 @@ namespace FinalRush
         float deltaTime;
         public int nb_pieces;
         float TextScroll = 100f;
+        private Keys[] lastPressedKeys = new Keys[20];
+        private string ip = string.Empty;
+        private List<char> ip_list = new List<char>();
 
 
         //Liste qui contiendra tous les rectangles (donc les boutons) nécessaires
@@ -112,6 +117,7 @@ namespace FinalRush
         List<GUIElement> player1win = new List<GUIElement>();
         List<GUIElement> player2win = new List<GUIElement>();
         List<GUIElement> GameEnded = new List<GUIElement>();
+        List<GUIElement> ChooseIp = new List<GUIElement>();
 
         #endregion
 
@@ -239,6 +245,9 @@ namespace FinalRush
 
             player1win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
             player2win.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_MenuPrincipal"));
+
+            ChooseIp.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToJouer"));
+            ChooseIp.Add(new GUIElement(@"Sprites\Menu\Francais\EnterIp"));
 
             player = Global.Player;
             player2 = Global.Player;
@@ -395,6 +404,16 @@ namespace FinalRush
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Plus2").MoveElement(70, 15);
             InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Moins2").MoveElement(0, 15);
 
+
+            foreach (GUIElement element in ChooseIp)
+            {
+                element.LoadContent(content);
+                element.CenterElement(480, 800);
+                element.clickEvent += OnClick;
+            }
+            ChooseIp.Find(x => x.AssetName == @"Sprites\Menu\Francais\EnterIp").CenterElement(400, 800);
+            ChooseIp.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToJouer").MoveElement(-200, 210);
+
             // De même pour InPause
 
             foreach (GUIElement element in InPause)
@@ -518,7 +537,7 @@ namespace FinalRush
                 Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Boutton_Rejouer").MoveElement(0, 800);
             }
             Won.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_MenuPrincipal").MoveElement(-320, 210);
-        
+
             foreach (GUIElement element in GameEnded)
             {
                 element.LoadContent(content);
@@ -892,6 +911,13 @@ namespace FinalRush
                     foreach (GUIElement element in GameOver)
                         element.Update();
                     enjeu = false;
+                    break;
+                case GameState.ChooseIp:
+                    foreach (GUIElement element in ChooseIp)
+                    {
+                        element.Update();
+                    }
+                    GetKeys();
                     break;
                 case GameState.InGame:
                     comptlevel = 1;
@@ -1436,6 +1462,11 @@ namespace FinalRush
                 case GameState.InGameMulti:
                     MainMulti.Draw(spriteBatch);
                     break;
+                case GameState.ChooseIp:
+                    foreach (GUIElement element in ChooseIp)
+                        element.Draw(spriteBatch);
+                    spriteBatch.DrawString(Resources.ammo_font, ip, new Vector2(330, 180), Color.Black);
+                    break;
                 case GameState.InOptions:
                     spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
 
@@ -1834,8 +1865,9 @@ namespace FinalRush
 
             if (element == @"Sprites\Menu\Francais\Bouton_Multijoueur" || element == @"Sprites\Menu\English\Bouton_Multijoueur")
             {
-                CreateGame(7);
-                MainMulti.Initialize();
+                //CreateGame(7);
+                //MainMulti.Initialize();
+                gameState = GameState.ChooseIp;
             }
 
 
@@ -1861,6 +1893,76 @@ namespace FinalRush
             if (element == @"Sprites\Menu\English\Bouton_Website" || element == @"Sprites\Menu\Francais\Bouton_Website")
                 Process.Start("http://finalrush.alwaysdata.net/index.php");
         }
-    }
         #endregion
+        public void GetKeys()
+        {
+            KeyboardState kbState = Keyboard.GetState();
+            Keys[] pressedKeys = kbState.GetPressedKeys();
+            foreach (Keys key in lastPressedKeys)
+            {
+                if (!pressedKeys.Contains(key))
+                {
+                    OnKeyUp(key);
+                }
+            }
+            foreach (Keys key in pressedKeys)
+            {
+                if (!lastPressedKeys.Contains(key))
+                {
+                    OnKeyDown(key);
+                }
+            }
+            lastPressedKeys = pressedKeys;
+        }
+
+        public void OnKeyUp(Keys key)
+        {
+        }
+
+        public void OnKeyDown(Keys key)
+        {
+            if (key == Keys.NumPad1)
+                ip += "1";
+            if (key == Keys.NumPad2)
+                ip += "2";
+            if (key == Keys.NumPad3)
+                ip += "3";
+            if (key == Keys.NumPad4)
+                ip += "4";
+            if (key == Keys.NumPad5)
+                ip += "5";
+            if (key == Keys.NumPad6)
+                ip += "6";
+            if (key == Keys.NumPad7)
+                ip += "7";
+            if (key == Keys.NumPad8)
+                ip += "8";
+            if (key == Keys.NumPad9)
+                ip += "9";
+            if (key == Keys.NumPad0)
+                ip += "0";
+            if (key == Keys.Decimal)
+                ip += ".";
+            if (key == Keys.LeftShift || key == Keys.RightShift)
+                shift_pressed = true;
+
+            if (shift_pressed && key == Keys.OemPeriod)
+            {
+                shift_pressed = false;
+                ip += ".";
+            }
+            
+            //if (key == Keys.Back)
+            //{
+            //    ip_list = ip.ToList<char>();
+            //    ip_list.RemoveAt(ip_list.Count);
+            //    for (int i = 0; i < ip_list.Count; i++)
+            //    {
+            //        ip.Remove(i);
+            //    }
+            //}
+            
+        }
+    }
+
 }
