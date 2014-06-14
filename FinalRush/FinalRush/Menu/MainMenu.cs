@@ -36,8 +36,7 @@ namespace FinalRush
             Multi,
             ChooseIp,
             player1win,
-            player2win,
-            GameEnded
+            player2win
         }
 
         public bool english;
@@ -835,9 +834,6 @@ namespace FinalRush
                 MediaPlayer.Stop();
                 MediaPlayer.Play(Resources.MusiqueVictory);
                 MediaPlayer.IsRepeating = false;
-                if (comptlevel == 6)
-                    gameState = GameState.GameEnded;
-                else
                     gameState = GameState.Won;
                 if (lvlcomplete < level)
                     lvlcomplete = level;
@@ -1337,25 +1333,18 @@ namespace FinalRush
                         if (HS5 >= old_HS5)
                             old_HS5 = HS5;
                     }
-
-                    enjeu = false;
-                    break;
-                case GameState.GameEnded:
-                    foreach (GUIElement element in GameEnded)
+                    if (comptlevel == 6)
                     {
-                        element.Update();
-                        if (compteurpourframecolumn == 35)
+                        HS6 = score;
+                        if (HS6 >= old_HS6)
+                            old_HS6 = HS6;
                         {
-                            compteurpourframecolumn = 1;
-                            if (framecolumn == 7) framecolumn = 1;
-                            else framecolumn++;
+                            gameState = GameState.Credits;
+                            MediaPlayer.Stop();
+                            MediaPlayer.Play(Resources.MusiqueBoutique);
                         }
-                        else
-                            compteurpourframecolumn++;
                     }
-                    HS6 = score;
-                    if (HS6 >= old_HS6)
-                        old_HS6 = HS6;
+                    enjeu = false;
                     break;
                 case GameState.InPause:
                     if ((Keyboard.GetState().IsKeyDown(Keys.P) && pastkey.IsKeyUp(Keys.P)) || (Keyboard.GetState().IsKeyDown(Keys.Escape) && pastkey.IsKeyUp(Keys.Escape)))
@@ -1547,17 +1536,6 @@ namespace FinalRush
                     spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
                     spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
                     foreach (GUIElement element in Won)
-                        element.Draw(spriteBatch);
-                    spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
-                    spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
-                    spriteBatch.DrawString(players_dead, "x " + nb_players_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 310), Color.White);
-                    break;
-                case GameState.GameEnded:
-                    spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
-                    spriteBatch.Draw(coin, new Rectangle(350, 250, 25, 25), Color.White);
-                    spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
-                    spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
-                    foreach (GUIElement element in GameEnded)
                         element.Draw(spriteBatch);
                     spriteBatch.Draw(Resources.MarcoWon, new Rectangle(400, 160, 38, 43), new Rectangle((framecolumn - 1) * 38, 0, 38, 43), Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0f);
                     spriteBatch.DrawString(nb_enemies_killed, "x " + enemies_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 280), Color.White);
@@ -1858,6 +1836,7 @@ namespace FinalRush
             if (element == @"Sprites\Menu\Francais\Bouton_Credits")
             {
                 gameState = GameState.Credits;
+                MediaPlayer.Play(Resources.MusiqueBoutique);
                 TextScroll = 100f;
             }
 
@@ -1960,6 +1939,7 @@ namespace FinalRush
             }
             if (element == @"Sprites\Menu\English\Bouton_Website" || element == @"Sprites\Menu\Francais\Bouton_Website")
                 Process.Start("http://finalrush.alwaysdata.net/index.php");
+
         }
         #endregion
         public void GetKeys()
