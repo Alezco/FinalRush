@@ -62,8 +62,9 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         public int nb_players_dead = 0;
+        int x = 0;
         int compt = 0;
-        int lvlcomplete = 0;  //niveaux terminés
+        int lvlcomplete = 13;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -73,7 +74,7 @@ namespace FinalRush
         Texture2D Intro_fond, Intro_fond2, coin, deathhead, zombie;
         int framecolumn = 1;
         int compteurpourframecolumn = 1;
-        Texture2D fond_menu, fond_win, fond_gameover, fond_how2play;
+        Texture2D fond, fond_menu1, fond_menu2, fond_menu3, fond_menu4, fond_menu5, fond_menu6, fond_win, fond_gameover, fond_how2play;
 
         public SpriteFont font, nb_enemies_killed;
         public string text, piece_text;
@@ -318,7 +319,12 @@ namespace FinalRush
             deathhead = content.Load<Texture2D>(@"SpriteFonts\deathhead");
             zombie = content.Load<Texture2D>(@"SpriteFonts\zombie");
             fond_how2play = content.Load<Texture2D>(@"Sprites\Menu\Francais\HowToPlayPage1");
-            fond_menu = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond");
+            fond_menu1 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond1");
+            fond_menu2 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond2");
+            fond_menu3 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond3");
+            fond_menu4 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond4");
+            fond_menu5 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond5");
+            fond_menu6 = content.Load<Texture2D>(@"Sprites\Menu\Francais\Menu_fond6");
             fond_win = content.Load<Texture2D>(@"Sprites\Menu\Francais\Won");
             fond_gameover = content.Load<Texture2D>(@"Sprites\Menu\Francais\GameOver");
             Font = content.Load<SpriteFont>(@"SpriteFonts\TimerFont");
@@ -868,6 +874,57 @@ namespace FinalRush
 
         public override void Update(GameTime gameTime)
         {
+            switch (lvlcomplete)
+            {
+                default :
+                    fond = fond_menu1;
+                    break;
+                case 1:
+                    fond = fond_menu2;
+                    break;
+                case 2:
+                    fond = fond_menu3;
+                    break;
+                case 3:
+                    fond = fond_menu4;
+                    break;
+                case 4:
+                    fond = fond_menu5;
+                    break;
+                case 5:
+                    fond = fond_menu6;
+                    break;
+                case 13:
+                    Random rand = new Random();
+                    if (compt == 100)
+                    {
+                        x = rand.Next(0, 6);
+                        compt = 0;
+                    }
+                    compt++;
+                    switch (x)
+                    {
+                        case 0:
+                            fond = fond_menu1;
+                            break;
+                        case 1:
+                            fond = fond_menu2;
+                            break;
+                        case 2:
+                            fond = fond_menu3;
+                            break;
+                        case 3:
+                            fond = fond_menu4;
+                            break;
+                        case 4:
+                            fond = fond_menu5;
+                            break;
+                        case 5:
+                            fond = fond_menu6;
+                            break;
+                    }
+                    break;
+            }
             switch (gameState)
             {
                 case GameState.Intro:
@@ -1441,7 +1498,7 @@ namespace FinalRush
 
                     break;
                 case GameState.MainMenu:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in main)
                         element.Draw(spriteBatch);
                     break;
@@ -1472,7 +1529,7 @@ namespace FinalRush
                     spriteBatch.DrawString(Resources.ammo_font, ip, new Vector2(330, 180), Color.Black);
                     break;
                 case GameState.InOptions:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
 
                     foreach (GUIElement element in InOptions)
                         element.Draw(spriteBatch);
@@ -1505,7 +1562,7 @@ namespace FinalRush
                     spriteBatch.DrawString(players_dead, "x " + nb_players_dead, new Vector2(Global.Handler.Window.ClientBounds.Width / 2, 310), Color.White);
                     break;
                 case GameState.InPause:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in InPause)
                         element.Draw(spriteBatch);
                     break;
@@ -1515,7 +1572,7 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     break;
                 case GameState.SelectionMap:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in SelectionMap)
                         element.Draw(spriteBatch);
                     break;
@@ -1614,7 +1671,7 @@ namespace FinalRush
 
                 #region Highscores
                 case GameState.Chapitre1:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre1)
                         element.Draw(spriteBatch);
                     if (old_HS1 != 0)
@@ -1623,7 +1680,7 @@ namespace FinalRush
                         spriteBatch.DrawString(Resources.highscores_font, "No Highscore", new Vector2(Global.Handler.Window.ClientBounds.X + 40, 390), Color.Black);
                     break;
                 case GameState.Chapitre2:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre2)
                         element.Draw(spriteBatch);
                     if (old_HS2 != 0)
@@ -1633,7 +1690,7 @@ namespace FinalRush
                     if (lvlcomplete < 1) spriteBatch.Draw(Resources.lvl2_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre3:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre3)
                         element.Draw(spriteBatch);
                     if (old_HS3 != 0)
@@ -1643,7 +1700,7 @@ namespace FinalRush
                     if (lvlcomplete < 2) spriteBatch.Draw(Resources.lvl3_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre4:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre4)
                         element.Draw(spriteBatch);
                     if (old_HS4 != 0)
@@ -1653,7 +1710,7 @@ namespace FinalRush
                     if (lvlcomplete < 3) spriteBatch.Draw(Resources.lvl4_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre5:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre5)
                         element.Draw(spriteBatch);
                     if (old_HS5 != 0)
@@ -1663,7 +1720,7 @@ namespace FinalRush
                     if (lvlcomplete < 4) spriteBatch.Draw(Resources.lvl5_block, new Rectangle(232, 190, 336, 200), Color.White);
                     break;
                 case GameState.Chapitre6:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Chapitre6)
                         element.Draw(spriteBatch);
                     if (old_HS6 != 0)
@@ -1675,7 +1732,7 @@ namespace FinalRush
                 #endregion
 
                 case GameState.Multi:
-                    spriteBatch.Draw(fond_menu, new Rectangle(0, 0, 800, 480), Color.White);
+                    spriteBatch.Draw(fond, new Rectangle(0, 0, 800, 480), Color.White);
                     foreach (GUIElement element in Multi)
                         element.Draw(spriteBatch);
                     break;

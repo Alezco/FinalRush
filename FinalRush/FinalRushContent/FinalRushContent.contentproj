@@ -37,8 +37,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\Francais\Menu_fond.png">
-      <Name>Menu_fond</Name>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond1.png">
+      <Name>Menu_fond1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -1068,6 +1068,67 @@
   <ItemGroup>
     <Compile Include="Sprites\Menu\Francais\Ok.png">
       <Name>Ok</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond2.png">
+      <Name>Menu_fond2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond3.png">
+      <Name>Menu_fond3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond4.png">
+      <Name>Menu_fond4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond5.png">
+      <Name>Menu_fond5</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\Francais\Menu_fond6.png">
+      <Name>Menu_fond6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Controls.png">
+      <Name>Controls</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Menu\English\Defaite.png">
+      <Name>Defaite</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\English\Defeat.png">
+      <Name>Defeat</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\English\EnglishScenario.png">
+      <Name>EnglishScenario</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\English\OK.png">
+      <Name>OK</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Menu\English\WonEnglish.png">
+      <Name>WonEnglish</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

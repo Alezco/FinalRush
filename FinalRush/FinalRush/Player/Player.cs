@@ -35,7 +35,9 @@ namespace FinalRush
         MainMenu Main;
         public Texture2D Marco = Resources.Marco;
         public Texture2D MarcoJump = Resources.MarcoSaut;
+        Color marco_color = new Color(254,255,255,255);
 
+        bool up, change = true;
         int compteur = 1;
         public int speed;
         public int health = 100;
@@ -436,6 +438,26 @@ namespace FinalRush
             }
 
             #endregion
+            if (Global.Collisions.accu > 0) change = false;
+            if (!change && Global.Collisions.accu > 0)
+            {
+                if (marco_color.G < 20) up = true;
+                if (marco_color.G > 235) up = false;
+                if (up)
+                {
+                    marco_color.A--;
+                    marco_color.G += 15;
+                    marco_color.B += 15;
+                }
+                else
+                {
+                    marco_color.A++;
+                    marco_color.G -= 15;
+                    marco_color.B -= 15;
+                }
+                Global.Collisions.accu--;
+            }
+            else marco_color = new Color(254, 255, 255, 255);
         }
 
 
@@ -447,19 +469,19 @@ namespace FinalRush
             switch (state) // Affichage des bons sprites en fonction de l'état, ça va être utile pour le tir, la mort, la prise d'un coup, switch arme etc.. 
             {
                 case "standing":
-                    spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Global.Collisions.marco_color, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Marco, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), marco_color, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "squat":
-                    spritebatch.Draw(Resources.MarcoSquat, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), Global.Collisions.marco_color, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Resources.MarcoSquat, Hitbox, new Rectangle((framecolumn - 1) * 35, 0, Hitbox.Width, Hitbox.Height), marco_color, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "jump":
-                    spritebatch.Draw(Resources.MarcoSaut, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), Global.Collisions.marco_color, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Resources.MarcoSaut, Hitbox, new Rectangle((framecolumn - 1) * 36, 0, Hitbox.Width, Hitbox.Height), marco_color, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "shoot":
-                    spritebatch.Draw(Resources.MarcoTir, Hitbox, new Rectangle((framecolumn - 1) * 52, 0, Hitbox.Width, Hitbox.Height), Global.Collisions.marco_color, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Resources.MarcoTir, Hitbox, new Rectangle((framecolumn - 1) * 52, 0, Hitbox.Width, Hitbox.Height), marco_color, 0f, new Vector2(0, 0), effect, 0f);
                     break;
                 case "cut":
-                    spritebatch.Draw(Resources.MarcoCut, Hitbox, new Rectangle((framecolumn - 1) * 50, 0, Hitbox.Width, Hitbox.Height), Global.Collisions.marco_color, 0f, new Vector2(0, 0), effect, 0f);
+                    spritebatch.Draw(Resources.MarcoCut, Hitbox, new Rectangle((framecolumn - 1) * 50, 0, Hitbox.Width, Hitbox.Height), marco_color, 0f, new Vector2(0, 0), effect, 0f);
                     break;
             }
         }
