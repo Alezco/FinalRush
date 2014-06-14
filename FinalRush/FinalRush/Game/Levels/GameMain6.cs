@@ -27,6 +27,7 @@ namespace FinalRush
         public List<Piques> piques;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
+        Wall TheWall;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment6;
@@ -101,7 +102,8 @@ namespace FinalRush
             #region Terrain
             //Colonnes et sol
 
-            //Walls.Add(new Wall(896, 416, Resources.Ground, 64, 64, Color.White));
+            TheWall = new Wall(4544, 352, Resources.Rock, 64, 64, Color.White);
+            Walls.Add(TheWall);
 
             //Sol
 
@@ -123,6 +125,8 @@ namespace FinalRush
             LocalPlayer.Update(souris, clavier, Walls, bonus);
             menu.Update(gametime);
             boss.Update(Walls);
+            if (boss.isDead)
+                Walls.Remove(TheWall);
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)
