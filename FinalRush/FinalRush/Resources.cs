@@ -15,9 +15,9 @@ namespace FinalRush
         // STATIC FIELDS
 
         public static Texture2D Marco, MarcoSaut, MarcoSquat, MarcoTir, MarcoCut;
-        public static Texture2D Player2, Controls, Defaite, Defeat, English_Scenar, Won_English;
+        public static Texture2D Controls, Defaite, Defeat, English_Scenar, Won_English;
         public static Texture2D Zombie, Elite, Boss;
-        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Roche, Roche_top, Lave;
+        public static Texture2D Environnment, Pixel, Herbe, Ground, Platform, Environnment2, Environnment3, Herbe_neige, Terre_neige, Ice, Ice_top, Sand, Sand_top, Rock, Rock_top,Piques, Environnment4, Environnment5, Environnment6, Environnment7, Roche, Roche_top, Lave, Foreground7, Brick, Brick_top;
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block, Bullet_Texture;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4,Musique5,Musique6,MusiqueBoss;
@@ -38,10 +38,6 @@ namespace FinalRush
             MarcoTir = Content.Load<Texture2D>(@"Sprites\Hero\MarcoTir");
             MarcoCut = Content.Load<Texture2D>(@"Sprites\Hero\MarcoCut");
             bullet = Content.Load<Texture2D>(@"Sprites\Hero\Shoot");
-
-            //Player2
-
-            Player2 = Content.Load<Texture2D>(@"Sprites\Player2\player2");
 
             // IA
 
@@ -72,12 +68,16 @@ namespace FinalRush
             Environnment6 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment6");
             Rock = Content.Load<Texture2D>(@"Sprites\Environnment\rock");
             Rock_top = Content.Load<Texture2D>(@"Sprites\Environnment\rock_top");
+            Environnment7 = Content.Load<Texture2D>(@"Sprites\Environnment\environnment7");
+            Brick = Content.Load<Texture2D>(@"Sprites\Environnment\brick");
+            Brick_top = Content.Load<Texture2D>(@"Sprites\Environnment\brick_top");
             Foreground = Content.Load<Texture2D>(@"Sprites\Environnment\foreground1");
             Foreground2 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground2");
             Foreground3 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground3");
             Foreground4 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground4");
             Foreground5 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground5");
             Foreground6 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground6");
+            Foreground7 = Content.Load<Texture2D>(@"Sprites\Environnment\foreground7");
             Lave = Content.Load<Texture2D>(@"Sprites\Environnment\lava");
             Bullet_Texture = Content.Load<Texture2D>(@"SpriteFonts\Bullet_Texture");
 

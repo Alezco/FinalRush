@@ -25,7 +25,7 @@ namespace FinalRush
         public List<VitesseBonus> speedbonus;
         Random random = new Random();
         MainMenu menu;
-        Texture2D background = Resources.Environnment;
+        Texture2D background = Resources.Environnment7;
         Texture2D foreground = Resources.Foreground;
         public Bullets bullets;
         public static Editeur edit = new Editeur();
@@ -59,9 +59,9 @@ namespace FinalRush
                 {
                     int number = map[y, x];
                     if (number == 1)
-                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Herbe, size, size, Color.White));
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Brick_top, size, size, Color.White));
                     if (number == 2)
-                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Ground, size, size, Color.White));
+                        Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Brick, size, size, Color.White));
                     if (number == 3)
                         Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Platform, 100, 16, Color.Gray));
                     if (number == 4)

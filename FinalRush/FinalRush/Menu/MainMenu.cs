@@ -66,7 +66,7 @@ namespace FinalRush
         int x = 0;
         int compt = 0;
         int compt2 = 0;
-        int lvlcomplete = 10;  //niveaux terminés
+        int lvlcomplete = 0;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
