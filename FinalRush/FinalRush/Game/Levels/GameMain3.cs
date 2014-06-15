@@ -86,7 +86,6 @@ namespace FinalRush
             #endregion
 
             #region Terrain
-            Walls.Add(new Wall(640, 415, Resources.Ice_top, 1, 1, Color.White));
             for (int i = 0; i <= 72; i++) //pour une taille de 4600
             {
                 if (i != 3 & i != 4 & i != 5 & i != 6 & i != 7 & i != 8 & i != 9 & i != 12 & i != 13 & i != 14 & i != 15
