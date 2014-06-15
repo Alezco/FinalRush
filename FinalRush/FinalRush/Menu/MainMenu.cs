@@ -47,6 +47,7 @@ namespace FinalRush
         GameMain4 Main4;
         GameMain5 Main5;
         GameMain6 Main6;
+        float volume_sons;
         GameMainMulti MainMulti;
         SpriteFont piece_font, players_dead;
         public int HS1, HS2, HS3, HS4, HS5, HS6 = 0;
@@ -61,7 +62,7 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         public int nb_players_dead = 0;
-        int x = 0;
+           int x = 0;
         int compt = 0;
         int lvlcomplete = 0;  //niveaux terminés
         bool downcolor = true;
@@ -127,6 +128,7 @@ namespace FinalRush
             : base(game)
         {
             // Constructeur:
+            volume_sons = 0.6f;
             english = false;
             time = startTime;
             started = false;
@@ -976,6 +978,7 @@ namespace FinalRush
                     GetKeys();
                     break;
                 case GameState.InGame:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
@@ -1018,6 +1021,7 @@ namespace FinalRush
                     UpdateGame(player, gameTime, 1, 4600, 300);
                     break;
                 case GameState.InGame2:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
@@ -1060,6 +1064,7 @@ namespace FinalRush
                     UpdateGame(player2, gameTime, 2, 4600, 300);
                     break;
                 case GameState.InGame3:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
@@ -1104,6 +1109,7 @@ namespace FinalRush
                     UpdateGame(player3, gameTime, 3, 4600, 300);
                     break;
                 case GameState.InGame4:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
                     player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);     //bonus
@@ -1148,6 +1154,7 @@ namespace FinalRush
                     UpdateGame(player4, gameTime, 4, 4600, 300);
                     break;
                 case GameState.InGame5:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
@@ -1191,6 +1198,7 @@ namespace FinalRush
                     UpdateGame(player5, gameTime, 5, 4600, 300);
                     break;
                 case GameState.InGame6:
+                    MediaPlayer.Volume = volume_sons;
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
@@ -1798,12 +1806,15 @@ namespace FinalRush
                 if (MediaPlayer.Volume >= 0.9f)
                     MediaPlayer.Volume = 1f;
                 else MediaPlayer.Volume = MediaPlayer.Volume + 0.1f;
+
+                volume_sons = MediaPlayer.Volume;
             }
             if (element == @"Sprites\Menu\Francais\Bouton_Moins")
             {
                 if (MediaPlayer.Volume <= 0.1f)
                     MediaPlayer.Volume = 0f;
                 else MediaPlayer.Volume = MediaPlayer.Volume - 0.1f;
+                volume_sons = MediaPlayer.Volume;
             }
             if (element == @"Sprites\Menu\Francais\Bouton_Plus2")
             {
