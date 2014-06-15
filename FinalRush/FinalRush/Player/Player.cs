@@ -37,8 +37,8 @@ namespace FinalRush
         public Texture2D MarcoJump = Resources.MarcoSaut;
         public Color marco_color = new Color(254, 255, 255, 255);
 
-        bool up, change = true;
-        int compteur = 1;
+        bool up,spaceIsPressed = true, change = true;
+        int compteursaut = 0, compteur = 1;
         public int speed;
         public int health = 100;
         public Texture2D healthbar;
@@ -387,7 +387,18 @@ namespace FinalRush
 
             #region Saut
 
-            if (clavier.IsKeyDown(Keys.Space) && hasjumped == false && gravity == true && state == "standing")
+            if (clavier.IsKeyDown(Keys.Space))
+            {
+                if (compteursaut == 1) spaceIsPressed = false;
+                else
+                {
+                    spaceIsPressed = true;
+                    compteursaut++;
+                }
+            }
+            else compteursaut = 0;
+
+            if (clavier.IsKeyDown(Keys.Space) && spaceIsPressed && !hasjumped && gravity && state == "standing")
             {
                 framecolumn = 1;
                 if (!collisions.CollisionUp(Hitbox, walls, this.fallspeed))
