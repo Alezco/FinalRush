@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using FinalRush.Game.Levels;
 namespace FinalRush
 {
     class GameMain2
@@ -21,6 +22,8 @@ namespace FinalRush
         public List<VitesseBonus> speedbonus;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
+        public List<Particules> particules;
+        int larg, haut, ent;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment2;
@@ -39,7 +42,16 @@ namespace FinalRush
             speedbonus = new List<VitesseBonus>();
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
+            particules = new List<Particules>();
             Global.GameMain2 = this;
+
+            for (int i = 0; i < 200; i++)
+            {
+                larg = random.Next(0, 4600);
+                haut = random.Next(0, 480);
+                ent = random.Next(0, 2);
+                particules.Add(new Particules(larg, haut, ent));
+            }
 
             #region Ennemis
             enemies.Add(new Enemy(1288, 56, Resources.Zombie));
@@ -184,6 +196,9 @@ namespace FinalRush
             foreach (Enemy2 enemy2 in enemies2)
                 if (!enemy2.isDead)
                     enemy2.Update(Walls);
+
+            foreach (Particules parti in particules)
+                parti.Update();
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -218,6 +233,9 @@ namespace FinalRush
 
             foreach (VitesseBonus sb in speedbonus)
                 sb.Draw(spritebatch);
+
+            foreach (Particules parti in particules)
+                parti.Draw(spritebatch);
         }
     }
 }
