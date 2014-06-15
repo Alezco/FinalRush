@@ -62,7 +62,7 @@ namespace FinalRush
         public int comptlevel = 0;
         public int total_piece = 0;
         public int nb_players_dead = 0;
-           int x = 0;
+        int x = 0;
         int compt = 0;
         int lvlcomplete = 0;  //niveaux terminés
         bool downcolor = true;
@@ -1541,7 +1541,10 @@ namespace FinalRush
                         element.Draw(spriteBatch);
                     break;
                 case GameState.Won:
-                    spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    if (!english)
+                        spriteBatch.Draw(fond_win, new Rectangle(0, 0, 800, 480), Color.White);
+                    else
+                        spriteBatch.Draw(Resources.Won_English, new Rectangle(0, 0, 800, 480), Color.White);
                     spriteBatch.Draw(coin, new Rectangle(350, 250, 25, 25), Color.White);
                     spriteBatch.Draw(zombie, new Rectangle(355, 280, 20, 30), Color.White);
                     spriteBatch.Draw(deathhead, new Rectangle(350, 310, 30, 30), Color.White);
