@@ -28,7 +28,7 @@ namespace FinalRush
         GameMain6 Main6;
         GameMainMulti MainMulti;
         SpriteFont scoring, timer;
-        Texture2D bullet_texture,timer_texture;
+        Texture2D bullet_texture, timer_texture;
         Color color;
 
         public List<Bullets> bullets;
@@ -175,7 +175,7 @@ namespace FinalRush
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.transform);
             main.Draw(spriteBatch);
@@ -205,8 +205,12 @@ namespace FinalRush
                 if (main.comptlevel == 6)
                 {
                     spriteBatch.Begin();
-                    spriteBatch.Draw(HealthBar, new Rectangle(Global.Boss.Hitbox.X, Global.Boss.Hitbox.Y - 25, Global.Boss.pv, 20), Color.Red);
-                    spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.White);
+                    if (!Global.Boss.isDead)
+                    {
+                        spriteBatch.Draw(HealthBar, new Rectangle(50, 100, 4 * Global.Boss.pv, 20), Color.White);
+                        spriteBatch.Draw(HealthBar, new Rectangle(50, 100, 4 * Global.Boss.pv, 20), Color.Red);
+                        spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.White);
+                    }
                     spriteBatch.End();
                 }
                 else
@@ -224,8 +228,8 @@ namespace FinalRush
             if (main.gameState == MainMenu.GameState.Won)
             {
                 spriteBatch.Begin();
-                spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 60, 200, 35, 35), Color.Black); 
-                spriteBatch.DrawString(timer, ": " + main.Text + " s", new Vector2(Window.ClientBounds.Width / 2 -20, 200), Color.White);
+                spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 60, 200, 35, 35), Color.Black);
+                spriteBatch.DrawString(timer, ": " + main.Text + " s", new Vector2(Window.ClientBounds.Width / 2 - 20, 200), Color.White);
                 spriteBatch.DrawString(scoring, "Score : " + main.score + " points", new Vector2(Window.ClientBounds.Width / 2 - 100, 360), Color.White);
                 spriteBatch.DrawString(piece_font, "x " + main.nb_pieces, new Vector2(Window.ClientBounds.Width / 2, 250), Color.White);
                 spriteBatch.End();

@@ -20,8 +20,8 @@ namespace FinalRush
         int random;
         int framecolumn;
         int origin;
-        int compt = 0;
-        bool left;
+        int compteur = 0, compt = 0;
+        bool left, cut = false;
         public bool isDead;
         int distance2player = 2000;
         List<Bullets> bullets;
@@ -37,8 +37,8 @@ namespace FinalRush
         public Boss(int x, int y, Texture2D newTexture)
         {
             framecolumn = 1;
-            speed = 3;
-            pv = 3;
+            speed = 2;
+            pv = 30;
             fallspeed = 5;
             random = rand.Next(7, 15);
             effect = SpriteEffects.None;
@@ -79,15 +79,32 @@ namespace FinalRush
 
             if (!isDead && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
             {
-                pv = 0;
-                isDead = true;
+                if (compteur == 1) cut = false;
+                else
+                {
+                    cut = true;
+                    compteur++;
+                }
             }
+            else compteur = 0;
+
+            if (!isDead && cut && Keyboard.GetState().IsKeyDown(Keys.D) && Global.Player.Hitbox.Intersects(Hitbox))
+            {
+                if (pv > 1)
+                    pv -= 3;
+                else
+                    isDead = true;
+            }
+
 
             #endregion
 
             #region Animation
             if (!isDead)
             {
+                if (pv <= 15)
+                    speed += 5;
+
                 if (distance2player != 0)
                 {
                     if (framecolumn > 8)
@@ -133,24 +150,29 @@ namespace FinalRush
                     speed = 0;
                 else
                 {
-                    speed = 1;
-                    if (distance2player < 0 && distance2player >= -200)
+                    if (pv > 20)
+                        speed = 1;
+                    else if (pv > 10)
+                        speed = 2;
+                    else
+                        speed = 3;
+                    if (distance2player < 0 && distance2player >= -800)
                     {
                         left = false;
                     }
                     else
-                        if (distance2player > 0 && distance2player <= 200)
+                        if (distance2player > 0 && distance2player <= 800)
                         {
                             left = true;
                         }
                         else
-                            if (distance2player > 200 || distance2player <= -200)
+                            if (distance2player > 800 || distance2player <= -800)
                             {
-                                if (this.Hitbox.X <= origin - 200)
+                                if (this.Hitbox.X <= origin - 800)
                                 {
                                     left = false;
                                 }
-                                else if (this.Hitbox.X >= origin + 200)
+                                else if (this.Hitbox.X >= origin + 800)
                                 {
                                     left = true;
                                 }
@@ -187,13 +209,6 @@ namespace FinalRush
 
             #endregion
 
-
-            if (pv == 0)
-            {
-                pv = -1;
-                Boss_dead_instance.Play();
-            }
-
             switch (Direction)
             {
                 case Direction.Left:
@@ -206,12 +221,24 @@ namespace FinalRush
             switch (pv)
             {
                 case 1:
-                    color.A = 100;
+                    color.A = 20;
                     break;
-                case 2:
+                case 5:
+                    color.A = 40;
+                    break;
+                case 10:
+                    color.A = 80;
+                    break;
+                case 15:
+                    color.A = 120;
+                    break;
+                case 20:
+                    color.A = 160;
+                    break;
+                case 25:
                     color.A = 200;
                     break;
-                case 3:
+                case 30:
                     color = Color.White;
                     break;
             }

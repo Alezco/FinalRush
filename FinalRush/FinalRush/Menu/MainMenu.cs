@@ -42,6 +42,7 @@ namespace FinalRush
         public bool english;
         public GameState gameState;
         GameMain Main;
+        SoundEffectInstance Boss_dead_instance;
         GameMain2 Main2;
         GameMain3 Main3;
         GameMain4 Main4;
@@ -64,7 +65,8 @@ namespace FinalRush
         public int nb_players_dead = 0;
         int x = 0;
         int compt = 0;
-        int lvlcomplete = 0;  //niveaux terminés
+        int compt2 = 0;
+        int lvlcomplete = 10;  //niveaux terminés
         bool downcolor = true;
         bool goforgame = false;
         public bool enjeu;
@@ -137,6 +139,7 @@ namespace FinalRush
             boss_appeared = false;
             has_Lost = false;
             boss_already_appeared = false;
+            Boss_dead_instance = Resources.boss_mort_sound.CreateInstance();
             total_piece_updated = false;
             Text = "0";
             nb_pieces = 0;
@@ -896,14 +899,14 @@ namespace FinalRush
 
             if (lvlcomplete > 5)
             {
-                if (compt == 100)
+                if (compt2 == 100)
                 {
                     x++;
                     if (x > 6)
                         x = 1;
-                    compt = 0;
+                    compt2 = 0;
                 }
-                compt++;
+                compt2++;
                 switch (x)
                 {
                     case 1:
@@ -1214,6 +1217,16 @@ namespace FinalRush
                     {
                         boss_appeared = false;
                         MediaPlayer.Play(Resources.MusiqueBoss);
+                    }
+
+                    for (int i = 0; i < Global.GameMain6.boss.Count(); i++)
+                    {
+                        if (Global.GameMain6.boss[i].isDead)
+                        {
+                            Boss_dead_instance.Play();
+                            Global.GameMain6.boss.RemoveAt(i);
+                        }
+
                     }
 
                     if (player6.Hitbox.X > 1000 && player6.Hitbox.X < 1300 && MediaPlayer.Volume > 0f)
@@ -1583,7 +1596,7 @@ namespace FinalRush
                                      "\n Script Artistic Lead Creating Producer" +
                                      "\n              GamerDuPC                " +
                                      "\n               Alezco                \n" +
-                                     "\n     MainMenu.cs Dirty Code Creator    " +
+                                     "\n     MainMenu.cs Longest Code Creator    " +
                                      "\n              WhiteDevil             \n" +
                                      "\n   Artificial Intelligence Specialist  " +
                                      "\n                Yaumy                  " +

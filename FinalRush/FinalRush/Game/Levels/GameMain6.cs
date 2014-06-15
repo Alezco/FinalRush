@@ -82,7 +82,7 @@ namespace FinalRush
                         speedbonus.Add(new VitesseBonus(x * size + 40, y * size + 74, Resources.Speed, 20, 20, Color.White));
                     if (number == 8)
                         Walls.Add(new Wall(x * size, y * size + size / 2, Resources.Platform, 100, 16, Color.OrangeRed));
-                    
+
                 }
             }
 
@@ -131,8 +131,8 @@ namespace FinalRush
             foreach (Boss dragon in boss)
             {
                 dragon.Update(Walls);
-                if(dragon.isDead)
-                Walls.Remove(TheWall);
+                if (dragon.isDead)
+                    Walls.Remove(TheWall);
             }
             if (resetlave)
             {
@@ -167,7 +167,8 @@ namespace FinalRush
                 enemy2.Draw(spritebatch);
 
             foreach (Boss dragon in boss)
-                dragon.Draw(spritebatch);
+                if (!dragon.isDead)
+                    dragon.Draw(spritebatch);
 
             foreach (Wall wall in Walls)
                 wall.Draw(spritebatch);
