@@ -12,7 +12,7 @@ namespace FinalRush
     {
         public bool collision_speed;
         public bool LowSpeed;
-        SoundEffectInstance bonus_bruitages;
+        SoundEffectInstance bonus_bruitages, marco_touched_instance;
         public Color marco_color;
         public int accu = 0;
 
@@ -21,6 +21,7 @@ namespace FinalRush
             marco_color = Color.White;
             Global.Collisions = this;
             bonus_bruitages = Resources.bonus_bruitage.CreateInstance();
+            marco_touched_instance = Resources.marco_touched_sound.CreateInstance();
         }
 
         #region Collisions Walls
@@ -158,6 +159,7 @@ namespace FinalRush
                 {
                     accu = 20;
                     Global.Player.health--;
+                    marco_touched_instance.Play();
                 }
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
@@ -177,6 +179,7 @@ namespace FinalRush
                 {
                     accu = 20;
                     Global.Player.health--;
+                    marco_touched_instance.Play();
                 }
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
@@ -191,6 +194,7 @@ namespace FinalRush
             {
                 Global.Player.health--;
                 accu = 20;
+                marco_touched_instance.Play();
             }
             if (Global.Player.health < 0)
                 Global.Player.health = 0;
