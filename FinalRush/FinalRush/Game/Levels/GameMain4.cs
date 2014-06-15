@@ -96,9 +96,9 @@ namespace FinalRush
             healthbonus.Add(new HealthBonus(1085, 200, Resources.Health, 20, 20, Color.White));
             #endregion
 
-            lowspeedarea.Add(new LowSpeedArea(256, 350, Resources.Pixel, 400, 2, Color.Red));
+            lowspeedarea.Add(new LowSpeedArea(256, 350, Resources.Platform, 200, 2, Color.Brown));
         }
-
+        
         // UPDATE & DRAW
 
         public void Update(MouseState souris, KeyboardState clavier)

@@ -1031,6 +1031,7 @@ namespace FinalRush
                     Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2);
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
+                    Global.Collisions.CollisionLow(player2.Hitbox, Main2.lowspeedarea);  
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {

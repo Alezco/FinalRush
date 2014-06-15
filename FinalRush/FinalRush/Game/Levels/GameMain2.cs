@@ -15,6 +15,7 @@ namespace FinalRush
 
         public Player LocalPlayer;
         public List<Wall> Walls;
+        public List<LowSpeedArea> lowspeedarea;  //zone ralentie
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
         public List<VitesseBonus> speedbonus;
@@ -32,6 +33,7 @@ namespace FinalRush
             menu = new MainMenu(Global.Handler, 0f);
             LocalPlayer = new Player();
             Walls = new List<Wall>();
+            lowspeedarea = new List<LowSpeedArea>();   //zone ralentie
             bonus = new List<Bonus>();
             healthbonus = new List<HealthBonus>();
             speedbonus = new List<VitesseBonus>();
@@ -49,6 +51,7 @@ namespace FinalRush
             enemies.Add(new Enemy(1302, 300, Resources.Zombie));
             enemies.Add(new Enemy(1302, 300, Resources.Zombie));
             enemies.Add(new Enemy(1150, 340, Resources.Zombie));
+            enemies.Add(new Enemy(2800, 340, Resources.Zombie));
 
             enemies2.Add(new Enemy2(4500, 340, Resources.Elite));
             enemies2.Add(new Enemy2(1150, 340, Resources.Elite));
@@ -152,8 +155,11 @@ namespace FinalRush
             bonus.Add(new Bonus(1100, 240, Resources.Coin, 20, 20, Color.White));
             bonus.Add(new Bonus(1288, 56, Resources.Coin, 20, 20, Color.White));
             bonus.Add(new Bonus(2060, 300, Resources.Coin, 20, 20, Color.White));
+            bonus.Add(new Bonus(2820, 396, Resources.Coin, 20, 20, Color.White));
             healthbonus.Add(new HealthBonus(1500, 320, Resources.Health, 20, 20, Color.White));
             #endregion
+
+            lowspeedarea.Add(new LowSpeedArea(2450, 415, Resources.Platform, 300, 2, Color.Brown));
         }
 
         // UPDATE & DRAW
@@ -199,6 +205,10 @@ namespace FinalRush
 
             foreach (Wall wall in Walls)
                 wall.Draw(spritebatch);
+
+            //draw zone ralentie
+            foreach (LowSpeedArea lsa in lowspeedarea)
+                lsa.Draw(spritebatch);
 
             foreach (Bonus b in bonus)
                 b.Draw(spritebatch);
