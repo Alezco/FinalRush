@@ -148,10 +148,9 @@ namespace FinalRush
         #endregion
 
         #region Collisions Ennemis
-        public bool CollisionEnemy(Rectangle Hitbox, List<Enemy> enemy)
+        public void CollisionEnemy(Rectangle Hitbox, List<Enemy> enemy)
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-            bool collision = false;
 
             foreach (Enemy e in enemy)
             {
@@ -164,14 +163,11 @@ namespace FinalRush
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }
-
-            return collision;
         }
 
-        public bool CollisionEnemy2(Rectangle Hitbox, List<Enemy2> enemy)
+        public void CollisionEnemy2(Rectangle Hitbox, List<Enemy2> enemy)
         {
             Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
-            bool collision = false;
 
             foreach (Enemy2 e in enemy)
             {
@@ -184,21 +180,23 @@ namespace FinalRush
                 if (Global.Player.health < 0)
                     Global.Player.health = 0;
             }
-            return collision;
         }
 
-        public bool CollisionBoss(Rectangle Hitbox, Boss boss)
+        public void CollisionBoss(Rectangle Hitbox,  List<Boss> boss)
         {
-            bool collision = false;
-            if (!boss.isDead && Hitbox.Intersects(boss.Hitbox))
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+            //bool collision = false;
+            foreach (Boss dragon in boss)
             {
-                Global.Player.health--;
-                accu = 20;
-                marco_touched_instance.Play();
+                if (!dragon.isDead && Hitbox.Intersects(dragon.Hitbox))
+                {
+                    Global.Player.health--;
+                    accu = 20;
+                    marco_touched_instance.Play();
+                }
+                if (Global.Player.health < 0)
+                    Global.Player.health = 0;
             }
-            if (Global.Player.health < 0)
-                Global.Player.health = 0;
-            return collision;
         }
         #endregion
 

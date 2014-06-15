@@ -892,37 +892,41 @@ namespace FinalRush
                 case 5:
                     fond = fond_menu6;
                     break;
-                case 6:
-                    Random rand = new Random();
-                    if (compt == 100)
-                    {
-                        x = rand.Next(0, 6);
-                        compt = 0;
-                    }
-                    compt++;
-                    switch (x)
-                    {
-                        case 0:
-                            fond = fond_menu1;
-                            break;
-                        case 1:
-                            fond = fond_menu2;
-                            break;
-                        case 2:
-                            fond = fond_menu3;
-                            break;
-                        case 3:
-                            fond = fond_menu4;
-                            break;
-                        case 4:
-                            fond = fond_menu5;
-                            break;
-                        case 5:
-                            fond = fond_menu6;
-                            break;
-                    }
-                    break;
             }
+
+            if (lvlcomplete > 5)
+            {
+                if (compt == 100)
+                {
+                    x++;
+                    if (x > 6)
+                        x = 1;
+                    compt = 0;
+                }
+                compt++;
+                switch (x)
+                {
+                    case 1:
+                        fond = fond_menu1;
+                        break;
+                    case 2:
+                        fond = fond_menu2;
+                        break;
+                    case 3:
+                        fond = fond_menu3;
+                        break;
+                    case 4:
+                        fond = fond_menu4;
+                        break;
+                    case 5:
+                        fond = fond_menu5;
+                        break;
+                    case 6:
+                        fond = fond_menu6;
+                        break;
+                }
+            }
+
             switch (gameState)
             {
                 case GameState.Intro:
@@ -982,6 +986,8 @@ namespace FinalRush
                     comptlevel = 1;
                     Main.Update(Mouse.GetState(), Keyboard.GetState());
                     player.Update(Mouse.GetState(), Keyboard.GetState(), Main.Walls, Main.bonus);
+                    Global.Collisions.CollisionEnemy(player.Hitbox, Main.enemies);
+                    Global.Collisions.CollisionEnemy2(player.Hitbox, Main.enemies2);
                     Global.Collisions.CollisionHealthBonus(player.Hitbox, Main.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player.Hitbox, Main.speedbonus, gameTime);
 
@@ -1011,13 +1017,6 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player.Hitbox, Main.enemies))
-                    {
-                    }
-                    if (Global.Collisions.CollisionEnemy2(player.Hitbox, Main.enemies2))
-                    {
-                    }
-
                     UpdateGame(player, gameTime, 1, 4600, 300);
                     break;
                 case GameState.InGame2:
@@ -1025,6 +1024,8 @@ namespace FinalRush
                     comptlevel = 2;
                     Main2.Update(Mouse.GetState(), Keyboard.GetState());
                     player2.Update(Mouse.GetState(), Keyboard.GetState(), Main2.Walls, Main2.bonus);
+                    Global.Collisions.CollisionEnemy(player2.Hitbox, Main2.enemies);
+                    Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2);
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
 
@@ -1054,13 +1055,6 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player2.Hitbox, Main2.enemies))
-                    {
-                    }
-                    if (Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2))
-                    {
-                    }
-
                     UpdateGame(player2, gameTime, 2, 4600, 300);
                     break;
                 case GameState.InGame3:
@@ -1068,6 +1062,8 @@ namespace FinalRush
                     comptlevel = 3;
                     Main3.Update(Mouse.GetState(), Keyboard.GetState());
                     player3.Update(Mouse.GetState(), Keyboard.GetState(), Main3.Walls, Main3.bonus);
+                    Global.Collisions.CollisionEnemy(player3.Hitbox, Main3.enemies);
+                    Global.Collisions.CollisionEnemy2(player3.Hitbox, Main3.enemies2);
                     Global.Collisions.CollisionPiques(player3.Hitbox, Main3.piques);
                     Global.Collisions.CollisionHealthBonus(player3.Hitbox, Main3.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player3.Hitbox, Main3.speedbonus, gameTime);
@@ -1098,21 +1094,15 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player3.Hitbox, Main3.enemies))
-                    {
-                    }
-
-                    if (Global.Collisions.CollisionEnemy2(player3.Hitbox, Main3.enemies2))
-                    {
-                    }
-
                     UpdateGame(player3, gameTime, 3, 4600, 300);
                     break;
                 case GameState.InGame4:
                     MediaPlayer.Volume = volume_sons;
                     comptlevel = 4;
                     Main4.Update(Mouse.GetState(), Keyboard.GetState());
-                    player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);     //bonus
+                    player4.Update(Mouse.GetState(), Keyboard.GetState(), Main4.Walls, Main4.bonus);                   //bonus
+                    Global.Collisions.CollisionEnemy(player4.Hitbox, Main4.enemies);
+                    Global.Collisions.CollisionEnemy2(player4.Hitbox, Main4.enemies2);
                     Global.Collisions.CollisionHealthBonus(player4.Hitbox, Main4.healthbonus);           //healthbonus
                     Global.Collisions.CollisionSpeedBonus(player4.Hitbox, Main4.speedbonus, gameTime);   //speedbonus 
                     Global.Collisions.CollisionLow(player4.Hitbox, Main4.lowspeedarea);                  //zone ralentie
@@ -1143,14 +1133,6 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player4.Hitbox, Main4.enemies))
-                    {
-                    }
-
-                    if (Global.Collisions.CollisionEnemy2(player4.Hitbox, Main4.enemies2))
-                    {
-                    }
-
                     UpdateGame(player4, gameTime, 4, 4600, 300);
                     break;
                 case GameState.InGame5:
@@ -1158,6 +1140,8 @@ namespace FinalRush
                     comptlevel = 5;
                     Main5.Update(Mouse.GetState(), Keyboard.GetState());
                     player5.Update(Mouse.GetState(), Keyboard.GetState(), Main5.Walls, Main5.bonus);
+                    Global.Collisions.CollisionEnemy(player5.Hitbox, Main5.enemies);
+                    Global.Collisions.CollisionEnemy2(player5.Hitbox, Main5.enemies2);
                     Global.Collisions.CollisionHealthBonus(player5.Hitbox, Main5.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player5.Hitbox, Main5.speedbonus, gameTime);
 
@@ -1187,14 +1171,6 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player5.Hitbox, Main5.enemies))
-                    {
-                    }
-
-                    if (Global.Collisions.CollisionEnemy2(player5.Hitbox, Main5.enemies2))
-                    {
-                    }
-
                     UpdateGame(player5, gameTime, 5, 4600, 300);
                     break;
                 case GameState.InGame6:
@@ -1202,6 +1178,8 @@ namespace FinalRush
                     comptlevel = 6;
                     Main6.Update(Mouse.GetState(), Keyboard.GetState());
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
+                    Global.Collisions.CollisionEnemy(player6.Hitbox, Main6.enemies);
+                    Global.Collisions.CollisionEnemy2(player6.Hitbox, Main6.enemies2);
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
                     Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);
@@ -1251,14 +1229,6 @@ namespace FinalRush
                         piece_sound_instance.Play();
                     }
 
-                    if (Global.Collisions.CollisionEnemy(player6.Hitbox, Main6.enemies))
-                    {
-                    }
-
-                    if (Global.Collisions.CollisionEnemy2(player6.Hitbox, Main6.enemies2))
-                    {
-                    }
-
                     UpdateGame(player6, gameTime, 6, 4600, 300);
                     break;
                 case GameState.InGameMulti:
@@ -1286,13 +1256,6 @@ namespace FinalRush
                         nb_pieces++;
                         SoundEffectInstance piece_sound_instance = Resources.piece.CreateInstance();
                         piece_sound_instance.Play();
-                    }
-
-                    if (Global.Collisions.CollisionEnemy(p7.Hitbox, MainMulti.enemies))
-                    {
-                    }
-                    if (Global.Collisions.CollisionEnemy2(p7.Hitbox, MainMulti.enemies2))
-                    {
                     }
 
                     UpdateGame(p7, gameTime, 2, 4600, 30);
@@ -1638,6 +1601,7 @@ namespace FinalRush
                                      "\n               Jorcau                  " +
                                      "\n               Didule                  " +
                                      "\n               Pouale                  " +
+                                     "\n               Fatir                   " +
                                      "\n               Drifer                  " +
                                      "\n             Nemsadomaso               " +
                                      "\n              DarkPrime                " +

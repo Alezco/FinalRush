@@ -71,7 +71,7 @@ namespace FinalRush
                     bullets.RemoveAt(i);
                     i--;
                     if (pv > 1)
-                        pv = pv - 5;
+                        pv--;
                     else
                         isDead = true;
                 }

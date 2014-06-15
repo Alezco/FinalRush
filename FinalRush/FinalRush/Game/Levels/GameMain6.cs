@@ -19,7 +19,7 @@ namespace FinalRush
         public int size = 64;
 
         public Player LocalPlayer;
-        public Boss boss;
+        public List<Boss> boss;
         public List<Wall> Walls;
         public List<Bonus> bonus;
         public List<HealthBonus> healthbonus;
@@ -41,15 +41,15 @@ namespace FinalRush
         public GameMain6()
         {
             menu = new MainMenu(Global.Handler, 0f);
-            boss = new Boss(2600, 276, Resources.Elite);
             LocalPlayer = new Player();
             Walls = new List<Wall>();
             bonus = new List<Bonus>();
             healthbonus = new List<HealthBonus>();
             speedbonus = new List<VitesseBonus>();
             enemies = new List<Enemy>();
-            piques = new List<Piques>();
             enemies2 = new List<Enemy2>();
+            boss = new List<Boss>();
+            piques = new List<Piques>();
             framecolumn = 1;
 
             Global.GameMain6 = this;
@@ -87,8 +87,8 @@ namespace FinalRush
             }
 
             #region Ennemis
-            //Ennemis
-            //enemies.Add(new Enemy(1100, 350, Resources.Zombie));
+
+            boss.Add(new Boss(3600, 300, Resources.Boss));
 
             #endregion
 
@@ -124,13 +124,16 @@ namespace FinalRush
             GameTime gametime = new GameTime();
             LocalPlayer.Update(souris, clavier, Walls, bonus);
             menu.Update(gametime);
-            boss.Update(Walls);
-            if (boss.isDead)
-                Walls.Remove(TheWall);
             foreach (Enemy enemy in enemies)
                 enemy.Update(Walls, random.Next(10, 1000));
             foreach (Enemy2 enemy2 in enemies2)
                 enemy2.Update(Walls);
+            foreach (Boss dragon in boss)
+            {
+                dragon.Update(Walls);
+                if(dragon.isDead)
+                Walls.Remove(TheWall);
+            }
             if (resetlave)
             {
                 resetlave = false;
@@ -160,11 +163,11 @@ namespace FinalRush
             foreach (Enemy enemy in enemies)
                 enemy.Draw(spritebatch);
 
-            if (!boss.isDead)
-                boss.Draw(spritebatch);
-
             foreach (Enemy2 enemy2 in enemies2)
                 enemy2.Draw(spritebatch);
+
+            foreach (Boss dragon in boss)
+                dragon.Draw(spritebatch);
 
             foreach (Wall wall in Walls)
                 wall.Draw(spritebatch);
