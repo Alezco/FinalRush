@@ -1779,6 +1779,7 @@ namespace FinalRush
                 try
                 {
                     P = Process.Start(Directory.GetCurrentDirectory() + "\\unins000.exe");
+                    Global.Handler.Exit();
                 }
                 catch
                 {
