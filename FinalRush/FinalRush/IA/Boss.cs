@@ -15,6 +15,7 @@ namespace FinalRush
         Direction Direction;
         int speed;
         public int pv;
+        public bool invicibility;
         int fallspeed;
         int speedjump = 1;
         int random;
@@ -27,7 +28,7 @@ namespace FinalRush
         List<Bullets> bullets;
         public List<Bullets> enemy_bullets;
         public bool a_portee;
-        SoundEffectInstance shot_sound_instance, Boss_dead_instance;
+        SoundEffectInstance Boss_dead_instance, cri_dragon;
         Color color;
 
         Random rand = new Random();
@@ -45,6 +46,7 @@ namespace FinalRush
             Direction = Direction.Right;
             Hitbox.Width = 152;
             Hitbox.Height = 94;
+            invicibility = false;
             Hitbox = new Rectangle(x, y, Hitbox.Width, Hitbox.Height);
             left = true;
             isDead = false;
@@ -52,8 +54,8 @@ namespace FinalRush
             enemy_bullets = new List<Bullets>();
             Global.Boss = this;
             a_portee = false;
-            shot_sound_instance = Resources.tir_rafale.CreateInstance();
             Boss_dead_instance = Resources.boss_mort_sound.CreateInstance();
+            cri_dragon = Resources.cri_dragon.CreateInstance();
             origin = Hitbox.X;
         }
 
@@ -67,7 +69,7 @@ namespace FinalRush
                 #region Mort Boss
                 for (int i = 0; i < bullets.Count(); i++)
                 {
-                    if (Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
+                    if (!invicibility &&Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
                     {
                         bullets[i].isVisible = false;
                         bullets.RemoveAt(i);
@@ -148,7 +150,7 @@ namespace FinalRush
                 #region Déplacements
                 if (!isDead)
                 {
-                    if (distance2player == 0)
+                    if (Math.Abs(distance2player) <= 20)
                         speed = 0;
                     else
                     {
@@ -247,20 +249,25 @@ namespace FinalRush
             }
             if (phase == 2)
             {
+                invicibility = true;
                 accu++;
+                cri_dragon.Play();
                 if (accu % 20 == 0)
+                {
                     if (framecolumn == 2) framecolumn = 1;
                     else framecolumn = 2;
+                }
             }
             if (phase == 3)
             {
+                invicibility = false;
                 compt++; // Cette petite ligne correspond à l'IA ( WAAAW Gros QI )
                 distance2player = Hitbox.X - Global.Player.Hitbox.X;
 
                 #region Mort Boss
                 for (int i = 0; i < bullets.Count(); i++)
                 {
-                    if (Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
+                    if (!invicibility && Hitbox.Intersects(new Rectangle((int)bullets[i].position.X, (int)bullets[i].position.Y, 30, 30)))
                     {
                         bullets[i].isVisible = false;
                         bullets.RemoveAt(i);
@@ -341,7 +348,7 @@ namespace FinalRush
                 #region Déplacements
                 if (!isDead)
                 {
-                    if (distance2player == 0)
+                    if (Math.Abs(distance2player) <= 20)
                         speed = 0;
                     else
                     {

@@ -156,6 +156,7 @@ namespace FinalRush
                     foreach (Boss dragon in boss)
                     {
                         dragon.Update(Walls, 2);
+                        LocalPlayer.Update(souris, clavier, Walls, bonus);
                         if (dragon.isDead)
                             Walls.Remove(TheWall);
                     }
@@ -181,18 +182,18 @@ namespace FinalRush
                     }
                 }
             }
-                if (resetlave)
-                {
-                    resetlave = false;
-                    framecolumn = 1;
-                    comptlave = 0;
-                }
-                else
-                {
-                    if (comptlave % 5 == 0) framecolumn++;
-                    if (framecolumn == 32) resetlave = true;
-                    comptlave++;
-                }
+            if (resetlave)
+            {
+                resetlave = false;
+                framecolumn = 1;
+                comptlave = 0;
+            }
+            else
+            {
+                if (comptlave % 5 == 0) framecolumn++;
+                if (framecolumn == 32) resetlave = true;
+                comptlave++;
+            }
         }
 
         public void Draw(SpriteBatch spritebatch)

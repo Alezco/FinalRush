@@ -207,22 +207,23 @@ namespace FinalRush
                     spriteBatch.Begin();
                     if (!Global.Boss.isDead)
                     {
-                        spriteBatch.Draw(HealthBar, new Rectangle(50, 100, 4 * Global.Boss.pv, 20), Color.White);
-                        spriteBatch.Draw(HealthBar, new Rectangle(50, 100, 4 * Global.Boss.pv, 20), Color.Red);
-                        spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.White);
+                        spriteBatch.DrawString(piece_font, "Boss: ", new Vector2(Window.ClientBounds.Width / 2 + 185, 15), Color.White);
+                        spriteBatch.Draw(HealthBar, new Rectangle(640, 20, 4 * 30, 20), Color.White);
+                        spriteBatch.Draw(HealthBar, new Rectangle(640,20, 4 * Global.Boss.pv, 20), Color.Red);
+                        spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 10, 35, 35), Color.White);
                     }
                     spriteBatch.End();
                 }
                 else
                 {
                     spriteBatch.Begin();
-                    spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 0, 35, 35), Color.Black);
+                    spriteBatch.Draw(timer_texture, new Rectangle(Window.ClientBounds.Width / 2 - 150, 10, 35, 35), Color.Black);
                     spriteBatch.End();
                 }
                 spriteBatch.Begin();
-                spriteBatch.DrawString(timer, ": " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 0), color);
-                spriteBatch.Draw(bullet_texture, new Rectangle(Window.ClientBounds.Width / 2 + 87, 0, 10, 35), Color.White);
-                spriteBatch.DrawString(Resources.ammo_font, ": " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 0), color);
+                spriteBatch.DrawString(timer, ": " + main.Text, new Vector2(Window.ClientBounds.Width / 2 - 120, 10), color);
+                spriteBatch.Draw(bullet_texture, new Rectangle(Window.ClientBounds.Width / 2 + 87, 10, 10, 35), Color.White);
+                spriteBatch.DrawString(Resources.ammo_font, ": " + ammo_left + "/" + recharge_left, new Vector2(Window.ClientBounds.Width / 2 + 100, 10), color);
                 spriteBatch.End();
             }
             if (main.gameState == MainMenu.GameState.Won)

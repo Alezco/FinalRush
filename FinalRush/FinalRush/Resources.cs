@@ -21,7 +21,7 @@ namespace FinalRush
         public static Texture2D Foreground, Foreground2, Foreground3, Foreground4, Foreground5, Foreground6;
         public static Texture2D MarcoWon, Scenario, lvl2_block, lvl3_block, lvl4_block, lvl5_block, lvl6_block, Bullet_Texture;
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4,Musique5,Musique6,MusiqueBoss;
-        public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage, enemies_sound, boss_mort_sound, marco_touched_sound;
+        public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage, enemies_sound, boss_mort_sound, marco_touched_sound, cri_dragon;
         public static Texture2D HealthBar, bullet;
         public static Texture2D Coin, Health, Speed, particule1, particule2, particule3, flames;
         public static SpriteFont ammo_font, piece_font, highscores_font,pourcent_life;
@@ -138,6 +138,7 @@ namespace FinalRush
             enemies_sound = Content.Load<SoundEffect>(@"Sons\Bruitages\Mort_Enemies");
             boss_mort_sound = Content.Load<SoundEffect>(@"Sons\Bruitages\Boss_Mort_Sound");
             marco_touched_sound = Content.Load<SoundEffect>(@"Sons\Bruitages\marco_touched_sound");
+            cri_dragon = Content.Load<SoundEffect>(@"Sons\Bruitages\cri_Dragon");
 
             // SpriteFont
             ammo_font = Content.Load<SpriteFont>(@"SpriteFonts\Ammo");

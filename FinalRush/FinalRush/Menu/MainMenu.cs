@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using System.Diagnostics;
+using System.IO;
 
 namespace FinalRush
 {
@@ -48,6 +49,7 @@ namespace FinalRush
         GameMain4 Main4;
         GameMain5 Main5;
         GameMain6 Main6;
+        Process P;
         float volume_sons;
         GameMainMulti MainMulti;
         SpriteFont piece_font, players_dead;
@@ -64,6 +66,7 @@ namespace FinalRush
         public int total_piece = 0;
         public int nb_players_dead = 0;
         int x = 0;
+        bool oneClick = true;
         int compt = 0;
         int compt2 = 0;
         int lvlcomplete = 0;  //niveaux terminés
@@ -161,6 +164,8 @@ namespace FinalRush
             main.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_Credits"));
 
             InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Bruitages"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\Francais\Desinstaller"));
+            InOptions.Add(new GUIElement(@"Sprites\Menu\English\Uninstall"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Retour"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_PleinEcran"));
             InOptions.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Commandes"));
@@ -382,30 +387,34 @@ namespace FinalRush
             if (!english)
             {
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Bruitages").MoveElement(-200, 15);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Desinstaller").MoveElement(225, 80);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Commandes").MoveElement(-200, 80);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_PleinEcran").MoveElement(-200, 145);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(-200, 210);
-                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Website").MoveElement(225, 80);
-                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Anglais").MoveElement(225, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Website").MoveElement(225, 15);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Anglais").MoveElement(225, -50);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Bruitages").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Commandes").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_PleinEcran").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_French").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Website").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Uninstall").MoveElement(0, 800);
 
             }
             else
             {
-                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Website").MoveElement(225, 80);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Uninstall").MoveElement(225, 80);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Website").MoveElement(225, 15);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Bruitages").MoveElement(-200, 15);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Commandes").MoveElement(-200, 80);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_PleinEcran").MoveElement(-200, 145);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_Retour").MoveElement(-200, 210);
-                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_French").MoveElement(225, 145);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_French").MoveElement(225, -50);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Bruitages").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Commandes").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_PleinEcran").MoveElement(0, 800);
+                InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Desinstaller").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Retour").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Anglais").MoveElement(0, 800);
                 InOptions.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_Website").MoveElement(0, 800);
@@ -1031,7 +1040,7 @@ namespace FinalRush
                     Global.Collisions.CollisionEnemy2(player2.Hitbox, Main2.enemies2);
                     Global.Collisions.CollisionHealthBonus(player2.Hitbox, Main2.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player2.Hitbox, Main2.speedbonus, gameTime);
-                    Global.Collisions.CollisionLow(player2.Hitbox, Main2.lowspeedarea);  
+                    Global.Collisions.CollisionLow(player2.Hitbox, Main2.lowspeedarea);
 
                     for (int i = 0; i < enemies.Count(); i++)
                     {
@@ -1757,6 +1766,18 @@ namespace FinalRush
 
         public void OnClick(string element)
         {
+            if (element == @"Sprites\Menu\Francais\Desinstaller" || element == @"Sprites\Menu\English\Uninstall")
+            {
+                try
+                {
+                    P = Process.Start(Directory.GetCurrentDirectory() + "\\unins000.exe");
+                }
+                catch
+                {
+
+                }
+            }
+
             if (element == @"Sprites\Menu\Francais\Button_jouer" || element == @"Sprites\Menu\English\Bouton_jouer")
                 gameState = GameState.SelectionMap;
 
@@ -1958,11 +1979,16 @@ namespace FinalRush
                 english = false;
                 LoadContent(content);
             }
-            if (element == @"Sprites\Menu\English\Bouton_Website" || element == @"Sprites\Menu\Francais\Bouton_Website")
+            if (oneClick && element == @"Sprites\Menu\English\Bouton_Website" || element == @"Sprites\Menu\Francais\Bouton_Website")
+            {
                 Process.Start("http://finalrush.alwaysdata.net/index.php");
+                oneClick = false;
+            }
 
         }
         #endregion
+
+
         public void GetKeys()
         {
             KeyboardState kbState = Keyboard.GetState();
