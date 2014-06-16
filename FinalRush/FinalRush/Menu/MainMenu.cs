@@ -1184,6 +1184,7 @@ namespace FinalRush
                     player6.Update(Mouse.GetState(), Keyboard.GetState(), Main6.Walls, Main6.bonus);
                     Global.Collisions.CollisionEnemy(player6.Hitbox, Main6.enemies);
                     Global.Collisions.CollisionEnemy2(player6.Hitbox, Main6.enemies2);
+                    Global.Collisions.CollisionFlames(player6.Hitbox, Main6.flames);
                     Global.Collisions.CollisionHealthBonus(player6.Hitbox, Main6.healthbonus);
                     Global.Collisions.CollisionSpeedBonus(player6.Hitbox, Main6.speedbonus, gameTime);
                     Global.Collisions.CollisionBoss(player6.Hitbox, Global.GameMain6.boss);

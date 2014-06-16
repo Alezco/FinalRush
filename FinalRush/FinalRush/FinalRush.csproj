@@ -80,6 +80,7 @@
     <Compile Include="Collisions\MovingHorizontallyWall.cs" />
     <Compile Include="Collisions\Wall.cs" />
     <Compile Include="Game\Levels\Editeur.cs" />
+    <Compile Include="Game\Levels\Flames.cs" />
     <Compile Include="Game\Levels\Particules.cs" />
     <Compile Include="IA\Boss.cs" />
     <Compile Include="Multijoueur\GameMainMulti.cs" />

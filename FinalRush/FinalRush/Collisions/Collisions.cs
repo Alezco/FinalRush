@@ -5,6 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using FinalRush.Game.Levels;
 
 namespace FinalRush
 {
@@ -209,6 +210,25 @@ namespace FinalRush
             {
                 if (newHitbox.Intersects(p.Hitbox))
                     Global.Player.dead = true;
+            }
+        }
+        #endregion
+
+        #region Collisions Flames
+        public void CollisionFlames(Rectangle Hitbox, List<Flames> flames)
+        {
+            Rectangle newHitbox = new Rectangle(Hitbox.X, Hitbox.Y, Hitbox.Width, Hitbox.Height);
+
+            foreach (Flames f in flames)
+            {
+                if (Hitbox.Intersects(f.Hitbox))
+                {
+                    Global.Player.health--;
+                    accu = 20;
+                    marco_touched_instance.Play();
+                }
+                if (Global.Player.health < 0)
+                    Global.Player.health = 0;
             }
         }
         #endregion

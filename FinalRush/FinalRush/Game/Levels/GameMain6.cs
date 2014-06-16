@@ -27,14 +27,17 @@ namespace FinalRush
         public List<Piques> piques;
         public List<Enemy> enemies;
         public List<Enemy2> enemies2;
+        public List<Flames> flames;
         Wall TheWall;
         Random random = new Random();
         MainMenu menu;
         Texture2D background = Resources.Environnment6;
         Texture2D foreground = Resources.Foreground6;
         public int framecolumn;
-        bool resetlave;
+        bool resetlave, golave = false;
+        int larg, haut;
         int comptlave = 0;
+        int compteur = 0;
 
         // CONSTRUCTOR
 
@@ -49,10 +52,18 @@ namespace FinalRush
             enemies = new List<Enemy>();
             enemies2 = new List<Enemy2>();
             boss = new List<Boss>();
+            flames = new List<Flames>();
             piques = new List<Piques>();
             framecolumn = 1;
 
             Global.GameMain6 = this;
+
+            for (int i = 0; i < 10; i++)
+            {
+                larg = random.Next(0, 4600);
+                haut = random.Next(-2000, 0);
+                flames.Add(new Flames(larg, haut));
+            }
 
             piques.Add(new Piques(128, 425, Resources.Lave, 64, 64, Color.White));
             piques.Add(new Piques(192, 425, Resources.Lave, 64, 64, Color.White));
@@ -122,30 +133,66 @@ namespace FinalRush
         public void Update(MouseState souris, KeyboardState clavier)
         {
             GameTime gametime = new GameTime();
-            LocalPlayer.Update(souris, clavier, Walls, bonus);
-            menu.Update(gametime);
-            foreach (Enemy enemy in enemies)
-                enemy.Update(Walls, random.Next(10, 1000));
-            foreach (Enemy2 enemy2 in enemies2)
-                enemy2.Update(Walls);
-            foreach (Boss dragon in boss)
+            if (Global.Boss.pv > 10)
             {
-                dragon.Update(Walls);
-                if (dragon.isDead)
-                    Walls.Remove(TheWall);
-            }
-            if (resetlave)
-            {
-                resetlave = false;
-                framecolumn = 1;
-                comptlave = 0;
+                LocalPlayer.Update(souris, clavier, Walls, bonus);
+                menu.Update(gametime);
+                foreach (Enemy enemy in enemies)
+                    enemy.Update(Walls, random.Next(10, 1000));
+                foreach (Enemy2 enemy2 in enemies2)
+                    enemy2.Update(Walls);
+                foreach (Boss dragon in boss)
+                {
+                    dragon.Update(Walls, 1);
+                    if (dragon.isDead)
+                        Walls.Remove(TheWall);
+                }
             }
             else
             {
-                if (comptlave % 5 == 0) framecolumn++;
-                if (framecolumn == 32) resetlave = true;
-                comptlave++;
+                if (compteur < 250)
+                {
+                    compteur++;
+                    foreach (Boss dragon in boss)
+                    {
+                        dragon.Update(Walls, 2);
+                        if (dragon.isDead)
+                            Walls.Remove(TheWall);
+                    }
+                }
+                else
+                {
+                    golave = true;
+                    LocalPlayer.Update(souris, clavier, Walls, bonus);
+                    menu.Update(gametime);
+                    foreach (Enemy enemy in enemies)
+                        enemy.Update(Walls, random.Next(10, 1000));
+                    foreach (Enemy2 enemy2 in enemies2)
+                        enemy2.Update(Walls);
+                    foreach (Boss dragon in boss)
+                    {
+                        dragon.Update(Walls, 3);
+                        if (dragon.isDead)
+                            Walls.Remove(TheWall);
+                    }
+                    foreach (Flames flame in flames)
+                    {
+                        flame.Update();
+                    }
+                }
             }
+                if (resetlave)
+                {
+                    resetlave = false;
+                    framecolumn = 1;
+                    comptlave = 0;
+                }
+                else
+                {
+                    if (comptlave % 5 == 0) framecolumn++;
+                    if (framecolumn == 32) resetlave = true;
+                    comptlave++;
+                }
         }
 
         public void Draw(SpriteBatch spritebatch)
@@ -187,6 +234,12 @@ namespace FinalRush
 
             foreach (VitesseBonus sb in speedbonus)
                 sb.Draw(spritebatch);
+
+            if (golave)
+            {
+                foreach (Flames flame in flames)
+                    flame.Draw(spritebatch);
+            }
         }
     }
 }

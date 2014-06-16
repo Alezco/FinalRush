@@ -23,7 +23,7 @@ namespace FinalRush
         public static Song MusiqueMain, MusiqueMenu, MusiquePause, MusiqueGameOver, MusiqueVictory, MusiqueIntro, Musique2, Musique3, MusiqueBoutique, Musique4,Musique5,Musique6,MusiqueBoss;
         public static SoundEffect saut, piece, CoeurRapide, coup_de_feu, ammo_vide, reload_sound, tir_rafale, couteau, bonus_bruitage, enemies_sound, boss_mort_sound, marco_touched_sound;
         public static Texture2D HealthBar, bullet;
-        public static Texture2D Coin, Health, Speed, particule1, particule2, particule3;
+        public static Texture2D Coin, Health, Speed, particule1, particule2, particule3, flames;
         public static SpriteFont ammo_font, piece_font, highscores_font,pourcent_life;
 
         // LOAD CONTENT
@@ -89,6 +89,7 @@ namespace FinalRush
             particule1 = Content.Load<Texture2D>(@"Sprites\Bonus\particules1");
             particule2 = Content.Load<Texture2D>(@"Sprites\Bonus\particules2");
             particule3 = Content.Load<Texture2D>(@"Sprites\Bonus\particules3");
+            flames = Content.Load<Texture2D>(@"Sprites\Bonus\flames");
 
             //Menu
 
