@@ -119,7 +119,6 @@ namespace FinalRush
         List<GUIElement> Chapitre5 = new List<GUIElement>();
         List<GUIElement> Chapitre6 = new List<GUIElement>();
         List<GUIElement> Multi = new List<GUIElement>();
-        List<GUIElement> Shop = new List<GUIElement>();
         List<GUIElement> player1win = new List<GUIElement>();
         List<GUIElement> player2win = new List<GUIElement>();
         List<GUIElement> GameEnded = new List<GUIElement>();
@@ -191,6 +190,7 @@ namespace FinalRush
             InPause.Add(new GUIElement(@"Sprites\Menu\Francais\Button_quitter"));
 
             HowToPlay.Add(new GUIElement(@"Sprites\Menu\Francais\Bouton_RetourToOptions"));
+            HowToPlay.Add(new GUIElement(@"Sprites\Menu\English\Bouton_RetourToOptions"));
 
             SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_NouvellePartie"));
             SelectionMap.Add(new GUIElement(@"Sprites\Menu\English\Bouton_Multijoueur"));
@@ -489,8 +489,16 @@ namespace FinalRush
                 element.CenterElement(480, 800);
                 element.clickEvent += OnClick;
             }
-
-            HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToOptions").MoveElement(-260, 210);
+            if (!english)
+            {
+                HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToOptions").MoveElement(-260, 210);
+                HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToOptions").MoveElement(0, 800);
+            }
+            else
+            {
+                HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\English\Bouton_RetourToOptions").MoveElement(-260, 210);
+                HowToPlay.Find(x => x.AssetName == @"Sprites\Menu\Francais\Bouton_RetourToOptions").MoveElement(0, 800);
+            }
 
             foreach (GUIElement element in SelectionMap)
             {
@@ -1882,7 +1890,7 @@ namespace FinalRush
                 TextScroll = 100f;
             }
 
-            if (element == @"Sprites\Menu\Francais\Bouton_RetourToOptions")
+            if (element == @"Sprites\Menu\Francais\Bouton_RetourToOptions" || element == @"Sprites\Menu\English\Bouton_RetourToOptions")
                 gameState = GameState.InOptions;
 
             if (element == @"Sprites\Menu\Francais\Bouton_RetourToJouer" || element == @"Sprites\Menu\English\Bouton_RetourToJouer")
