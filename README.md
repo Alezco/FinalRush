@@ -1,4 +1,4 @@
 FinalRush
 =========
 
-Great 2D platformer
+Solo and multiplayer 2D platformer. Works with C# and XNA.
